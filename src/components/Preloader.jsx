@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Terminal, Zap, Code2 } from 'lucide-react';
+import { ArrowRight, Terminal, Code2 } from 'lucide-react';
 
 export default function Preloader({ onComplete }) {
   const [percentage, setPercentage] = useState(0);
@@ -39,7 +39,7 @@ export default function Preloader({ onComplete }) {
           transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] }
         } : { opacity: 1, scale: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#06070a] text-white p-6 md:p-12 overflow-hidden select-none bg-noise"
+        className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#06070a] text-white p-4 md:p-10 overflow-hidden select-none bg-noise"
       >
         {/* Top Bar Info */}
         <div className="w-full flex items-center justify-between font-mono text-xs text-slate-400 border-b border-white/10 pb-4">
@@ -53,8 +53,8 @@ export default function Preloader({ onComplete }) {
           </div>
         </div>
 
-        {/* Center Name (Clean Single Line) & Loading Bar */}
-        <div className="flex flex-col items-center justify-center my-auto text-center max-w-5xl w-full px-4">
+        {/* Center Name (Fluid Responsive Single Line - 100% Fit Guarantee) */}
+        <div className="flex flex-col items-center justify-center my-auto text-center w-full max-w-6xl px-2">
           <motion.div 
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -64,8 +64,8 @@ export default function Preloader({ onComplete }) {
             <span>00 / FULL STACK DEVELOPER</span>
           </motion.div>
 
-          {/* Name - Forced Single Line with Responsive Scaling */}
-          <h1 className="font-syne font-black tracking-tight mb-4 text-gradient-purple whitespace-nowrap text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl w-full text-center">
+          {/* Dynamic Fluid Clamp Font Size - Never Cut Off */}
+          <h1 className="font-syne font-black tracking-tight text-gradient-purple whitespace-nowrap text-[clamp(1.4rem,5.2vw,4.5rem)] leading-none w-full text-center px-1">
             ALOK CHOUDHARY
           </h1>
 
@@ -73,7 +73,7 @@ export default function Preloader({ onComplete }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="font-mono text-xs md:text-sm text-slate-400 tracking-widest uppercase mb-10"
+            className="font-mono text-xs md:text-sm text-slate-400 tracking-widest uppercase mt-4 mb-10"
           >
             COMPUTER SCIENCE ENGINEER • MERN STACK DEVELOPER
           </motion.p>
