@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, Menu, X, ArrowUpRight, Compass } from 'lucide-react';
+import { Download, Menu, X, ArrowUpRight, Briefcase } from 'lucide-react';
 import profilePhoto from '../assets/alok-profile.jpg';
 
 export default function HeaderNav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isTouring, setIsTouring] = useState(false);
 
   const navLinks = [
     { label: 'Home', href: '#hero', active: true },
@@ -16,25 +15,16 @@ export default function HeaderNav() {
     { label: 'Contact', href: '#contact' },
   ];
 
-  const handleTrigger3DTour = () => {
-    setIsTouring(true);
-    const targetElement = document.querySelector('#toolbox');
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
-    }
-    setTimeout(() => setIsTouring(false), 1500);
-  };
-
   return (
     <header className="fixed top-0 left-0 right-0 z-40 px-4 md:px-12 py-4 bg-[#06070a]/85 backdrop-blur-md border-b border-white/5 transition-all">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         
-        {/* Left Logo with Alok's Photo Avatar */}
+        {/* Left Logo with Alok's Profile Avatar */}
         <a href="#" className="flex items-center gap-3 group">
           <div className="w-8 h-8 rounded-full overflow-hidden p-0.5 bg-gradient-to-tr from-purple-500 to-orange-500 shadow-md group-hover:scale-110 transition-transform">
             <img
               src={profilePhoto}
-              alt="Alok"
+              alt="Alok Choudhary"
               className="w-full h-full object-cover rounded-full"
             />
           </div>
@@ -66,15 +56,13 @@ export default function HeaderNav() {
 
         {/* Right CTA Actions */}
         <div className="flex items-center gap-3">
-          <button
-            onClick={handleTrigger3DTour}
-            className={`hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full border border-purple-500/40 font-mono text-xs text-purple-300 hover:text-white hover:bg-purple-600/20 transition-all ${
-              isTouring ? 'animate-spin' : ''
-            }`}
+          <a
+            href="#projects"
+            className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full border border-purple-500/40 font-mono text-xs text-purple-300 hover:text-white hover:bg-purple-600/20 transition-all"
           >
-            <Compass className="w-3.5 h-3.5 text-purple-400" />
-            <span>3D TOUR</span>
-          </button>
+            <Briefcase className="w-3.5 h-3.5 text-purple-400" />
+            <span>Explore Work</span>
+          </a>
 
           <a
             href="#"
@@ -115,16 +103,14 @@ export default function HeaderNav() {
               </a>
             ))}
 
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                handleTrigger3DTour();
-              }}
+            <a
+              href="#projects"
+              onClick={() => setMobileMenuOpen(false)}
               className="py-2.5 rounded-xl bg-purple-600/30 border border-purple-500/50 text-purple-300 font-bold flex items-center justify-center gap-2"
             >
-              <Compass className="w-4 h-4 text-purple-400" />
-              <span>START 3D TOUR</span>
-            </button>
+              <Briefcase className="w-4 h-4 text-purple-400" />
+              <span>EXPLORE WORK</span>
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
