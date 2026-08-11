@@ -77,7 +77,7 @@ export default function ContactSection() {
           </a>
 
           <a
-            href="https://github.com"
+            href="https://github.com/alokchoudhary885-coder"
             target="_blank"
             rel="noreferrer"
             className="interactive-card px-5 py-3.5 rounded-full glass-panel border border-white/15 hover:border-purple-400 text-white font-mono text-xs flex items-center gap-2 transition-all"
@@ -97,7 +97,8 @@ export default function ContactSection() {
           </a>
 
           <a
-            href="#"
+            href="/alok-choudhary-resume.pdf"
+            download="Alok_Choudhary_Resume.pdf"
             className="interactive-card px-5 py-3.5 rounded-full glass-panel border border-green-500/40 hover:border-green-400 text-green-400 font-mono text-xs flex items-center gap-2 transition-all"
           >
             <FileText className="w-4 h-4" />

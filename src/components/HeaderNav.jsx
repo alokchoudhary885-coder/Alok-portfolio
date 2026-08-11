@@ -65,7 +65,8 @@ export default function HeaderNav() {
           </a>
 
           <a
-            href="#"
+            href="/alok-choudhary-resume.pdf"
+            download="Alok_Choudhary_Resume.pdf"
             className="hidden sm:flex items-center gap-2 px-5 py-2 rounded-full bg-purple-600/20 border border-purple-500/40 hover:border-purple-400 text-purple-300 hover:text-white font-mono text-xs transition-all duration-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)] hover:scale-105"
           >
             <Download className="w-3.5 h-3.5" />
@@ -104,12 +105,13 @@ export default function HeaderNav() {
             ))}
 
             <a
-              href="#projects"
+              href="/alok-choudhary-resume.pdf"
+              download="Alok_Choudhary_Resume.pdf"
               onClick={() => setMobileMenuOpen(false)}
               className="py-2.5 rounded-xl bg-purple-600/30 border border-purple-500/50 text-purple-300 font-bold flex items-center justify-center gap-2"
             >
-              <Briefcase className="w-4 h-4 text-purple-400" />
-              <span>EXPLORE WORK</span>
+              <Download className="w-4 h-4 text-purple-400" />
+              <span>DOWNLOAD RESUME</span>
             </a>
           </motion.div>
         )}

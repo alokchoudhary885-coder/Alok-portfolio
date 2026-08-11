@@ -81,7 +81,7 @@ export default function Hero({ onOpenFoodRushModal }) {
 
       {/* Left Floating Social Bar */}
       <div className="hidden lg:flex fixed left-6 top-1/2 -translate-y-1/2 z-30 flex-col gap-4 p-3 rounded-full glass-panel border border-white/10 shadow-2xl">
-        <a href="https://github.com" target="_blank" rel="noreferrer" className="p-2.5 rounded-full text-slate-400 hover:text-purple-400 hover:bg-white/5 transition-all">
+        <a href="https://github.com/alokchoudhary885-coder" target="_blank" rel="noreferrer" className="p-2.5 rounded-full text-slate-400 hover:text-purple-400 hover:bg-white/5 transition-all">
           <Github className="w-4 h-4" />
         </a>
         <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="p-2.5 rounded-full text-slate-400 hover:text-purple-400 hover:bg-white/5 transition-all">
@@ -136,7 +136,7 @@ export default function Hero({ onOpenFoodRushModal }) {
             </a>
 
             <a
-              href="https://github.com"
+              href="https://github.com/alokchoudhary885-coder"
               target="_blank"
               rel="noreferrer"
               className="interactive-card px-6 py-3.5 rounded-full glass-panel border border-white/15 hover:border-purple-400 text-slate-200 font-mono text-xs flex items-center gap-2 hover:bg-white/5 transition-all"
