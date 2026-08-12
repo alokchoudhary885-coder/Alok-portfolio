@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Terminal, Code2 } from 'lucide-react';
+import { ArrowRight, Terminal, Code2, Volume2 } from 'lucide-react';
 
 export default function Preloader({ onComplete }) {
   const [percentage, setPercentage] = useState(0);
   const [isEntering, setIsEntering] = useState(false);
+  const [isPlayingVoice, setIsPlayingVoice] = useState(false);
 
   useEffect(() => {
+    // Pre-fetch voices on mount for instant availability
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.getVoices();
+      if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = () => {
+          window.speechSynthesis.getVoices();
+        };
+      }
+    }
+
     const interval = setInterval(() => {
       setPercentage((prev) => {
         if (prev >= 100) {
@@ -20,11 +31,85 @@ export default function Preloader({ onComplete }) {
     return () => clearInterval(interval);
   }, []);
 
+  const playCinematicVoiceAndSwell = () => {
+    // 1. Play subtle low-frequency ambient synth swell using Web Audio API
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) {
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(55, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(160, ctx.currentTime + 1.2);
+
+        gain.gain.setValueAtTime(0.01, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + 0.4);
+        gain.gain.linearRampToValueAtTime(0.001, ctx.currentTime + 1.8);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+        osc.stop(ctx.currentTime + 1.8);
+      }
+    } catch (err) {
+      // Ignore if web audio context restricted
+    }
+
+    // 2. Play Natural Female Cinematic Voice Welcome via SpeechSynthesis API
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel(); // Prevent duplicate speech overlap
+
+      const utterance = new SpeechSynthesisUtterance(
+        "Welcome to Alok Choudhary's portfolio. Enjoy the experience."
+      );
+
+      const voices = window.speechSynthesis.getVoices();
+      
+      // Dynamic detection for best female-sounding English voice
+      const femaleVoice = voices.find(
+        (v) =>
+          (v.lang.startsWith('en') &&
+            (v.name.includes('Female') ||
+             v.name.includes('Google UK English Female') ||
+             v.name.includes('Google US English') ||
+             v.name.includes('Zira') ||
+             v.name.includes('Samantha') ||
+             v.name.includes('Victoria') ||
+             v.name.includes('Karen') ||
+             v.name.includes('Natural'))) ||
+          v.lang === 'en-GB' ||
+          v.lang === 'en-US'
+      );
+
+      if (femaleVoice) {
+        utterance.voice = femaleVoice;
+      }
+
+      utterance.rate = 0.92; // Slightly calm, natural speaking speed
+      utterance.pitch = 1.05; // Clear, young, confident female pitch
+      utterance.volume = 1.0;
+
+      setIsPlayingVoice(true);
+      utterance.onend = () => setIsPlayingVoice(false);
+      utterance.onerror = () => setIsPlayingVoice(false);
+
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
   const handleEnterExperience = () => {
+    if (isEntering) return;
     setIsEntering(true);
+
+    // Play cinematic voice & swell immediately upon click
+    playCinematicVoiceAndSwell();
+
     setTimeout(() => {
       onComplete();
-    }, 700);
+    }, 750);
   };
 
   return (
@@ -73,9 +158,9 @@ export default function Preloader({ onComplete }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="font-mono text-xs md:text-sm text-slate-400 tracking-widest uppercase mt-4 mb-10"
+            className="font-mono text-xs md:text-sm text-slate-400 tracking-widest uppercase mt-4 mb-10 flex items-center justify-center gap-2"
           >
-            COMPUTER SCIENCE ENGINEER • MERN STACK DEVELOPER
+            <span>COMPUTER SCIENCE ENGINEER • MERN STACK DEVELOPER</span>
           </motion.p>
 
           {/* Progress Percentage Bar */}
@@ -99,10 +184,14 @@ export default function Preloader({ onComplete }) {
         <div className="w-full flex flex-col items-center justify-center pt-4 border-t border-white/10">
           <button
             onClick={handleEnterExperience}
-            className="interactive-card px-8 py-3.5 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-mono text-xs font-bold flex items-center gap-2 shadow-[0_0_25px_rgba(168,85,247,0.5)] hover:scale-105 active:scale-95 transition-all"
+            className="interactive-card px-8 py-3.5 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-mono text-xs font-bold flex items-center gap-2 shadow-[0_0_25px_rgba(168,85,247,0.5)] hover:scale-105 active:scale-95 transition-all group"
           >
             <span>ENTER PORTFOLIO</span>
-            <ArrowRight className="w-4 h-4" />
+            {isPlayingVoice ? (
+              <Volume2 className="w-4 h-4 text-purple-300 animate-pulse" />
+            ) : (
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            )}
           </button>
         </div>
       </motion.div>
