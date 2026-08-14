@@ -10,85 +10,77 @@ export default function ToolboxSection() {
       id: 'fullstack',
       title: 'Full-Stack Web Application',
       subtitle: 'Complete MERN Stack Ecosystems',
-      startingPrice: '$150',
+      startingPrice: '$150+',
       isPopular: true,
-      badge: 'MOST POPULAR',
+      badge: 'BEST FOR STARTUPS',
       icon: Server,
       accentColor: 'from-cyan-500 to-blue-600',
       glowShadow: 'shadow-[0_0_30px_rgba(0,240,255,0.25)]',
       features: [
-        'MERN Stack (MongoDB, Express, React, Node.js)',
-        'Authentication, JWT & Role-Based Access Control',
-        'Scalable RESTful APIs & Database Architecture',
-        'Payment Gateway (Razorpay) & Cloud Storage',
-        'Automated Cloud Deployment (Vercel / Render)'
+        'MERN architecture (MongoDB, Express, React, Node)',
+        'Authentication + RESTful APIs',
+        'Cloud deployment & third-party integrations'
       ]
     },
     {
       id: 'portfolio-site',
       title: 'Modern Portfolio Website',
-      subtitle: 'Interactive Developer & Personal Portfolios',
-      startingPrice: '$100',
+      subtitle: 'Interactive Personal & Developer Portfolios',
+      startingPrice: '$100+',
       badge: 'AWWWARDS STYLE',
       icon: Code2,
       accentColor: 'from-blue-500 to-purple-600',
       glowShadow: 'shadow-[0_0_25px_rgba(59,130,246,0.2)]',
       features: [
-        'Custom Personal & Developer Portfolio Design',
-        'Responsive UI/UX Across Desktop & Mobile',
-        'GSAP, Three.js WebGL 3D & Micro-Animations',
-        'Core Web Vitals & SEO Optimization',
-        'Automated Vercel Deployment & Custom Domain'
+        'Custom interactive portfolio design',
+        'GSAP, Three.js 3D & smooth animations',
+        'Vercel automated deployment & SEO setup'
       ]
     },
     {
       id: 'landing-page',
-      title: 'Business & Landing Page',
+      title: 'Business / Landing Page',
       subtitle: 'High-Converting Corporate & Startup Sites',
-      startingPrice: '$80',
+      startingPrice: '$80+',
       badge: 'FAST DELIVERY',
       icon: Layout,
       accentColor: 'from-purple-500 to-pink-600',
       glowShadow: 'shadow-[0_0_25px_rgba(168,85,247,0.2)]',
       features: [
-        'Modern Responsive Design (React / Next.js / Tailwind)',
-        'Conversion-Focused Layout & Clear CTAs',
-        'Interactive Contact Form & Lead Capture',
-        'Cross-Browser Tested & Mobile-First Layout',
-        'Fast Page Load Speeds & Performance Optimization'
+        'React / Next.js / Tailwind CSS design',
+        'Conversion-focused UI & lead forms',
+        'Cross-browser & mobile optimized'
       ]
     },
     {
       id: 'maintenance',
       title: 'Website Maintenance & Bug Fixing',
       subtitle: 'Performance Optimization & Code Cleanup',
-      startingPrice: '$40',
+      startingPrice: '$40+',
       badge: 'QUICK TURNAROUND',
       icon: ShieldCheck,
       accentColor: 'from-emerald-500 to-teal-600',
       glowShadow: 'shadow-[0_0_25px_rgba(16,185,129,0.2)]',
       features: [
-        'Comprehensive Bug Fixing & Code Refactoring',
-        'Core Web Vitals & Speed Optimization',
-        'REST API Integration & Endpoint Hookup',
-        'Database Optimization & Security Hardening',
-        'Deployment Support & Technical Assistance'
+        'Bug fixing & code refactoring',
+        'Core Web Vitals & speed optimization',
+        'API integration & endpoint hookup'
       ]
     }
   ];
 
   const techToolbox = [
-    { name: 'React.js', level: 'Advanced', category: 'Frontend', color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' },
-    { name: 'Node.js', level: 'Advanced', category: 'Backend', color: 'text-green-400 border-green-500/30 bg-green-500/10' },
-    { name: 'Express.js', level: 'Advanced', category: 'Backend', color: 'text-slate-200 border-slate-500/30 bg-slate-500/10' },
-    { name: 'MongoDB', level: 'Advanced', category: 'Database', color: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' },
-    { name: 'Java', level: 'Proficient', category: 'Languages', color: 'text-orange-400 border-orange-500/30 bg-orange-500/10' },
-    { name: 'JavaScript (ES6+)', level: 'Advanced', category: 'Frontend', color: 'text-yellow-400 border-yellow-500/30 bg-yellow-500/10' },
-    { name: 'Tailwind CSS', level: 'Advanced', category: 'Frontend', color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' },
-    { name: 'REST APIs', level: 'Advanced', category: 'Backend', color: 'text-purple-400 border-purple-500/30 bg-purple-500/10' },
+    { name: 'React.js', level: 'Strong', category: 'Frontend', color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' },
+    { name: 'Node.js', level: 'Strong', category: 'Backend', color: 'text-green-400 border-green-500/30 bg-green-500/10' },
+    { name: 'Express.js', level: 'Strong', category: 'Backend', color: 'text-slate-200 border-slate-500/30 bg-slate-500/10' },
+    { name: 'MongoDB', level: 'Strong', category: 'Database', color: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' },
+    { name: 'Java', level: 'Intermediate', category: 'Languages', color: 'text-orange-400 border-orange-500/30 bg-orange-500/10' },
+    { name: 'JavaScript (ES6+)', level: 'Strong', category: 'Frontend', color: 'text-yellow-400 border-yellow-500/30 bg-yellow-500/10' },
+    { name: 'Tailwind CSS', level: 'Strong', category: 'Frontend', color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' },
+    { name: 'REST APIs', level: 'Strong', category: 'Backend', color: 'text-purple-400 border-purple-500/30 bg-purple-500/10' },
     { name: 'Three.js / WebGL', level: 'Intermediate', category: 'Frontend', color: 'text-blue-400 border-blue-500/30 bg-blue-500/10' },
-    { name: 'Git & GitHub', level: 'Advanced', category: 'Tools', color: 'text-red-400 border-red-500/30 bg-red-500/10' },
-    { name: 'Vercel / Render', level: 'Advanced', category: 'Tools', color: 'text-white border-white/30 bg-white/10' },
+    { name: 'Git & GitHub', level: 'Strong', category: 'Tools', color: 'text-red-400 border-red-500/30 bg-red-500/10' },
+    { name: 'Vercel / Render', level: 'Strong', category: 'Tools', color: 'text-white border-white/30 bg-white/10' },
     { name: 'PostgreSQL / SQL', level: 'Intermediate', category: 'Database', color: 'text-blue-400 border-blue-500/30 bg-blue-500/10' }
   ];
 
@@ -114,7 +106,7 @@ export default function ToolboxSection() {
           </h2>
 
           <p className="font-mono text-xs sm:text-sm text-slate-400 mt-3 max-w-2xl leading-relaxed">
-            High-performance web development solutions tailored to startups, businesses, and personal brands with clear estimated starting rates.
+            High-performance web development solutions with transparent estimated starting rates.
           </p>
         </div>
 
@@ -170,7 +162,7 @@ export default function ToolboxSection() {
                   </div>
                 </div>
 
-                {/* Feature Bullets */}
+                {/* Feature Bullets (Strict 3 Bullets per Card) */}
                 <div className="space-y-2.5 border-t border-white/10 pt-5 font-mono text-xs text-slate-300">
                   {card.features.map((feat, idx) => (
                     <div key={idx} className="flex items-start gap-2">
@@ -219,10 +211,10 @@ export default function ToolboxSection() {
           </a>
         </div>
 
-        {/* Tech Stack Filter Pills */}
+        {/* Tech Stack Filter Pills (Recruiter Credibility Ratings) */}
         <div className="flex flex-col items-center">
           <div className="font-mono text-xs text-slate-400 font-bold uppercase tracking-widest mb-6">
-            MY TECHNICAL TOOLBOX
+            05 / MY TECHNICAL TOOLBOX
           </div>
 
           <div className="flex flex-wrap justify-center gap-2 mb-10 p-1.5 rounded-full glass-panel border border-white/10 bg-[#0b0f19]">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Mail, Phone, MapPin, Send, CheckCircle, Copy, Check, Github, Linkedin, FileText } from 'lucide-react';
+import { Sparkles, Mail, MapPin, Send, CheckCircle, Copy, Check, Github, Linkedin, FileText, Briefcase } from 'lucide-react';
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -32,28 +32,30 @@ export default function ContactSection() {
       <div className="max-w-6xl mx-auto">
         
         {/* Header */}
-        <div className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-cyan-500/30 text-cyan-400 font-mono text-xs mb-4">
+        <div className="flex flex-col items-center text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-cyan-500/30 text-cyan-400 font-mono text-xs mb-3">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>12 / GET IN TOUCH</span>
+            <span>13 / GET IN TOUCH</span>
           </div>
 
-          <h2 className="font-syne text-4xl sm:text-6xl font-black text-white tracking-tight">
+          <h2 className="font-syne text-4xl sm:text-6xl font-black text-white tracking-tight mb-4">
             Contact & <span className="text-gradient-purple">Collaboration</span>
           </h2>
 
-          <p className="font-mono text-xs sm:text-sm text-slate-400 mt-2 max-w-xl">
-            Have a project, full-stack role, or engineering challenge? Fill out the form or reach out directly.
-          </p>
+          {/* Open to Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 font-mono text-xs text-cyan-400">
+            <Briefcase className="w-3.5 h-3.5" />
+            <span>Open to: Full-time roles • Freelance • Collaborations</span>
+          </div>
         </div>
 
-        {/* 2-Column Grid (TheSiniySky Contact Layout) */}
+        {/* 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Send us a Message Form */}
           <div className="lg:col-span-7 p-7 sm:p-9 rounded-3xl glass-panel border border-white/10 bg-[#0b0f19]/90 backdrop-blur-2xl shadow-2xl">
             <h3 className="font-syne text-2xl font-bold text-white mb-1">
-              Send us a Message
+              Send a Message
             </h3>
             <p className="font-mono text-xs text-slate-400 mb-8">
               Fill out the form below and I'll get back to you shortly.
@@ -120,7 +122,7 @@ export default function ContactSection() {
                   type="submit"
                   className="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold font-mono text-xs flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(0,240,255,0.4)] transition-all"
                 >
-                  <span>Send Message</span>
+                  <span>Let's Build Something</span>
                   <Send className="w-4 h-4" />
                 </button>
               </form>
@@ -137,7 +139,7 @@ export default function ContactSection() {
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="font-mono text-[10px] text-slate-400 block">EMAIL US</span>
+                  <span className="font-mono text-[10px] text-slate-400 block">DIRECT EMAIL</span>
                   <span className="font-mono text-xs font-bold text-white block mt-0.5">{email}</span>
                 </div>
               </div>

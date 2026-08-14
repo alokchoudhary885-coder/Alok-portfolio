@@ -21,20 +21,23 @@ export default function Hero({ onOpenFoodRushModal }) {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-cyan-500/30 bg-[#0b0f19]/80 backdrop-blur-xl text-cyan-400 font-mono text-[11px] font-semibold mb-6 shadow-[0_0_20px_rgba(0,240,255,0.2)]"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-cyan-500/30 bg-[#0b0f19]/80 backdrop-blur-xl text-cyan-400 font-mono text-[11px] font-bold mb-6 shadow-[0_0_20px_rgba(0,240,255,0.2)] uppercase tracking-wider"
         >
           <Sparkles className="w-3.5 h-3.5 animate-pulse text-cyan-400" />
-          <span>FULL STACK MERN DEVELOPER • JAVA + DSA</span>
+          <span>FULL-STACK MERN DEVELOPER</span>
         </motion.div>
 
-        {/* Main Title (Clean, Proportioned, Elegant Typography) */}
+        {/* Main Name — Giant Visual Identity Block (Split in 2 Lines) */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="font-syne font-black text-4xl sm:text-6xl lg:text-7xl text-white tracking-tight leading-[1.05] mb-5 max-w-3xl"
+          className="font-syne font-black text-6xl sm:text-8xl lg:text-9xl text-white tracking-tight leading-[0.9] mb-6 text-center"
         >
-          ALOK <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(0,240,255,0.35)]">CHOUDHARY</span>
+          ALOK <br />
+          <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,240,255,0.35)]">
+            CHOUDHARY
+          </span>
         </motion.h1>
 
         {/* Clean Short Subtitle */}
@@ -44,7 +47,7 @@ export default function Hero({ onOpenFoodRushModal }) {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="font-mono text-slate-300 text-xs sm:text-sm max-w-xl leading-relaxed mb-8 font-light"
         >
-          Building high-performance web applications, scalable REST APIs, and modern digital products.
+          Building high-performance web applications, scalable APIs & digital products.
         </motion.p>
 
         {/* Action Buttons */}
@@ -71,7 +74,7 @@ export default function Hero({ onOpenFoodRushModal }) {
           </button>
         </motion.div>
 
-        {/* Compact Stats Grid Bar */}
+        {/* Compact Vertical Tile Stats Bar */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -79,20 +82,20 @@ export default function Hero({ onOpenFoodRushModal }) {
           className="w-full max-w-2xl grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-2xl glass-panel border border-white/10 bg-[#0b0f19]/70 backdrop-blur-xl font-mono"
         >
           <div className="flex flex-col items-center border-r border-white/10 pr-2">
-            <span className="font-syne text-xl sm:text-2xl font-black text-white">3+</span>
-            <span className="text-[10px] text-slate-400 mt-0.5">Projects Built</span>
+            <span className="font-syne text-2xl font-black text-white">03+</span>
+            <span className="text-[10px] text-slate-400 mt-0.5 uppercase tracking-wider">Projects</span>
           </div>
           <div className="flex flex-col items-center border-r border-white/10 pr-2">
-            <span className="font-syne text-xl sm:text-2xl font-black text-white">150+</span>
-            <span className="text-[10px] text-slate-400 mt-0.5">LeetCode Solved</span>
+            <span className="font-syne text-2xl font-black text-white">150+</span>
+            <span className="text-[10px] text-slate-400 mt-0.5 uppercase tracking-wider">Problems</span>
           </div>
           <div className="flex flex-col items-center border-r border-white/10 pr-2">
-            <span className="font-syne text-xl sm:text-2xl font-black text-cyan-400">MERN</span>
-            <span className="text-[10px] text-slate-400 mt-0.5">Stack Developer</span>
+            <span className="font-syne text-2xl font-black text-cyan-400">MERN</span>
+            <span className="text-[10px] text-slate-400 mt-0.5 uppercase tracking-wider">Stack</span>
           </div>
           <div className="flex flex-col items-center">
-            <span className="font-syne text-xl sm:text-2xl font-black text-purple-400">JAVA+DSA</span>
-            <span className="text-[10px] text-slate-400 mt-0.5">Problem Solving</span>
+            <span className="font-syne text-2xl font-black text-purple-400">JAVA</span>
+            <span className="text-[10px] text-slate-400 mt-0.5 uppercase tracking-wider">DSA</span>
           </div>
         </motion.div>
 
