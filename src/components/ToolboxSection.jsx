@@ -1,57 +1,58 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Code, Server, Database, Cpu, Wrench, CheckCircle2 } from 'lucide-react';
+import { Sparkles, Code, Server, Database, Cpu, Wrench, CheckCircle2, Layout, ShieldCheck, Zap, ArrowRight } from 'lucide-react';
 
 export default function ToolboxSection() {
   const [activeCategory, setActiveCategory] = useState('All');
 
   const services = [
     {
-      id: 'fullstack',
-      category: 'Backend',
+      id: 'fullstack-app',
+      category: 'Full-Stack',
       title: 'Full-Stack Web Application Development',
-      subtitle: 'MERN Stack & Scalable Systems',
-      price: 'Production Ready',
+      subtitle: 'Complete MERN Stack Ecosystems',
+      badge: 'Most Popular',
+      isPopular: true,
       icon: Server,
       accent: '#00f0ff',
       features: [
-        'React.js Frontend & Next.js SSR',
-        'Node.js & Express RESTful APIs',
-        'MongoDB Atlas & Database Optimization',
-        'JWT Auth & 6-Digit Mobile OTP',
-        'Razorpay & Cloudinary Integration'
+        'MERN Stack (MongoDB, Express, React, Node.js)',
+        '25+ RESTful API Endpoints & JWT Authentication',
+        'Payment Gateway Integration (Razorpay Checkout)',
+        'Gmail SMTP 6-Digit OTP Verification & Roles',
+        'Cloud Database (MongoDB Atlas) & Deployment'
       ]
     },
     {
-      id: 'frontend',
+      id: 'landing-page',
       category: 'Frontend',
-      title: 'Responsive UI / UX & WebGL Graphics',
-      subtitle: 'Modern Clean Frontend Interfaces',
-      price: 'High Performance',
-      icon: Code,
+      title: 'Modern Landing Page & UI/UX Development',
+      subtitle: 'High-Converting Web Experiences',
+      badge: 'Fast Delivery',
+      icon: Layout,
       accent: '#3b82f6',
       features: [
-        'Tailwind CSS & Custom Design Tokens',
-        'Three.js & WebGL 3D Particle Grids',
-        'Framer Motion & GSAP Animations',
+        'React.js, Next.js & Tailwind CSS Architecture',
+        'Three.js & WebGL 3D Interactive Backgrounds',
+        'Framer Motion & GSAP Smooth Micro-Animations',
         '100% Mobile & Cross-Browser Responsive',
-        'SEO Best Practices & Fast Load Times'
+        'Core Web Vitals & Fast Loading Speed'
       ]
     },
     {
-      id: 'dsa',
-      category: 'Languages',
-      title: 'Java & Data Structures Problem Solving',
-      subtitle: 'Clean Algorithms & OOPs Code',
-      price: '150+ Solved',
-      icon: Cpu,
+      id: 'maintenance',
+      category: 'Support',
+      title: 'Website Maintenance, Bug Fixing & Support',
+      subtitle: 'Performance Optimization & Code Audit',
+      badge: 'Reliable Support',
+      icon: ShieldCheck,
       accent: '#a855f7',
       features: [
-        'Object-Oriented Programming (OOPs)',
-        'Data Structures (Trees, Graphs, Dynamic Programming)',
-        'SQL & Relational Database Queries',
-        'Clean Modular Code Architecture',
-        'Git & GitHub Version Control'
+        'Bug Debugging, Refactoring & Code Cleanup',
+        'API Integration & Third-Party Service Hookup',
+        'SEO Best Practices & Meta Tag Optimization',
+        'Vercel & Render Cloud Hosting Setup',
+        'Continuous Technical Support & Updates'
       ]
     }
   ];
@@ -85,15 +86,15 @@ export default function ToolboxSection() {
         <div className="flex flex-col items-center text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-cyan-500/30 text-cyan-400 font-mono text-xs mb-4">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>04 / TECH STACK & SERVICES</span>
+            <span>04 / SERVICES & WHAT I CAN BUILD FOR YOU</span>
           </div>
 
           <h2 className="font-syne text-4xl sm:text-6xl font-black text-white tracking-tight">
-            Our <span className="text-gradient-purple">Services & Toolbox</span>
+            Our <span className="text-gradient-purple">Services & Technical Capabilities</span>
           </h2>
 
           <p className="font-mono text-xs sm:text-sm text-slate-400 mt-2 max-w-xl">
-            Comprehensive digital solutions and specialized technical capabilities to build robust web applications.
+            Comprehensive digital solutions to help startups, businesses, and clients build fast, modern, and scalable web products.
           </p>
         </div>
 
@@ -103,16 +104,28 @@ export default function ToolboxSection() {
             <motion.div
               key={srv.id}
               whileHover={{ y: -6 }}
-              className="rounded-3xl p-7 glass-panel border border-white/10 bg-[#0b0f19]/80 backdrop-blur-xl flex flex-col justify-between hover:border-cyan-500/50 transition-all duration-300 shadow-2xl group"
+              className={`rounded-3xl p-7 glass-panel backdrop-blur-xl flex flex-col justify-between transition-all duration-300 shadow-2xl relative group ${
+                srv.isPopular
+                  ? 'border-2 border-cyan-500/60 bg-[#0b0f19]/95 shadow-[0_0_30px_rgba(0,240,255,0.25)]'
+                  : 'border border-white/10 bg-[#0b0f19]/80 hover:border-cyan-500/50'
+              }`}
             >
+              {srv.isPopular && (
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-cyan-500 text-black font-mono text-[11px] font-extrabold tracking-wider uppercase shadow-[0_0_15px_rgba(0,240,255,0.6)]">
+                  {srv.badge}
+                </div>
+              )}
+
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-cyan-400 group-hover:bg-cyan-500/20 transition-colors">
+                  <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 text-cyan-400 group-hover:bg-cyan-500/20 transition-colors">
                     <srv.icon className="w-6 h-6" />
                   </div>
-                  <span className="font-mono text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">
-                    {srv.price}
-                  </span>
+                  {!srv.isPopular && (
+                    <span className="font-mono text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">
+                      {srv.badge}
+                    </span>
+                  )}
                 </div>
 
                 <h3 className="font-syne font-bold text-xl text-white mb-2 leading-tight">
@@ -135,9 +148,14 @@ export default function ToolboxSection() {
               <div className="mt-8 pt-5 border-t border-white/10">
                 <a
                   href="#contact"
-                  className="w-full py-2.5 rounded-xl glass-panel border border-white/15 hover:border-cyan-400 text-slate-200 hover:text-cyan-400 font-mono text-xs font-bold flex items-center justify-center gap-2 transition-all"
+                  className={`w-full py-3 rounded-xl font-mono text-xs font-bold flex items-center justify-center gap-2 transition-all ${
+                    srv.isPopular
+                      ? 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-[0_0_20px_rgba(0,240,255,0.4)]'
+                      : 'glass-panel border border-white/15 hover:border-cyan-400 text-slate-200 hover:text-cyan-400'
+                  }`}
                 >
-                  <span>INQUIRE SERVICE</span>
+                  <span>GET STARTED</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </div>
             </motion.div>
