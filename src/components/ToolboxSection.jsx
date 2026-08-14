@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Server, Layout, ShieldCheck, Code2, ArrowRight, CheckCircle2, Zap, HelpCircle } from 'lucide-react';
+import { Sparkles, Server, Layout, ShieldCheck, Code2, ArrowRight, CheckCircle2, Zap } from 'lucide-react';
 
 export default function ToolboxSection() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -157,14 +157,14 @@ export default function ToolboxSection() {
                   {card.subtitle}
                 </p>
 
-                {/* Prominent Starting Price Display */}
+                {/* Prominent Starting Price Display (Clean Mono Numbers - No Font Distortion) */}
                 <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 mb-6 flex flex-col items-start">
                   <span className="font-mono text-[10px] text-slate-400 uppercase tracking-widest font-semibold">
                     ESTIMATED PRICING
                   </span>
-                  <div className="flex items-baseline gap-1.5 mt-0.5">
-                    <span className="font-mono text-xs text-slate-400 font-medium">Starting at</span>
-                    <span className="font-syne font-extrabold text-2xl text-cyan-400 drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]">
+                  <div className="flex items-baseline gap-1.5 mt-0.5 font-mono">
+                    <span className="text-xs text-slate-400 font-medium">Starting at</span>
+                    <span className="font-extrabold text-2xl text-cyan-400 tracking-tight drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]">
                       {card.startingPrice}
                     </span>
                   </div>
