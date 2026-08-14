@@ -1,116 +1,183 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Check } from 'lucide-react';
+import { Sparkles, Code, Server, Database, Cpu, Wrench, CheckCircle2 } from 'lucide-react';
 
 export default function ToolboxSection() {
-  const [activeCategory, setActiveCategory] = useState('ALL');
+  const [activeCategory, setActiveCategory] = useState('All');
 
-  const categories = ['ALL', 'FRONTEND', 'BACKEND', 'DATABASE', 'LANGUAGES'];
-
-  const techStack = [
-    { name: 'React.js', category: 'FRONTEND', level: 'ADVANCED', icon: '⚛️', desc: 'Hooks, Context API, Zustand, Custom Hooks', color: '#00f0ff' },
-    { name: 'JavaScript (ES6+)', category: 'FRONTEND', level: 'ADVANCED', icon: '⚡', desc: 'Async/Await, Promises, Closures, DOM manipulation', color: '#f7df1e' },
-    { name: 'Tailwind CSS', category: 'FRONTEND', level: 'ADVANCED', icon: '🎨', desc: 'Modern responsive utility layouts & animations', color: '#38bdf8' },
-    { name: 'HTML5 & CSS3', category: 'FRONTEND', level: 'ADVANCED', icon: '🌐', desc: 'Semantic layouts, Flexbox, CSS Grid', color: '#e34f26' },
-    { name: 'Bootstrap', category: 'FRONTEND', level: 'INTERMEDIATE', icon: '🅱️', desc: 'Grid system & UI components', color: '#7952b3' },
-
-    { name: 'Node.js', category: 'BACKEND', level: 'ADVANCED', icon: '🟢', desc: 'Event loop, asynchronous server architecture', color: '#539e43' },
-    { name: 'Express.js', category: 'BACKEND', level: 'ADVANCED', icon: '🚂', desc: 'Middleware, RESTful routing, error handling', color: '#ffffff' },
-    { name: 'REST APIs', category: 'BACKEND', level: 'ADVANCED', icon: '🔌', desc: '25+ Endpoints, JSON payloads, HTTP protocols', color: '#ff5500' },
-    { name: 'JWT Auth', category: 'BACKEND', level: 'ADVANCED', icon: '🔒', desc: 'Token authorization & secure cookie management', color: '#a855f7' },
-    { name: 'CRUD Operations', category: 'BACKEND', level: 'ADVANCED', icon: '⚙️', desc: 'Complete data validation & lifecycle logic', color: '#3b82f6' },
-
-    { name: 'MongoDB', category: 'DATABASE', level: 'ADVANCED', icon: '🍃', desc: 'Mongoose ORM, Aggregations, Atlas Cloud', color: '#47a248' },
-    { name: 'MySQL', category: 'DATABASE', level: 'INTERMEDIATE', icon: '🐬', desc: 'Relational schemas, joins, indexing', color: '#00758f' },
-    { name: 'PostgreSQL', category: 'DATABASE', level: 'INTERMEDIATE', icon: '🐘', desc: 'Structured SQL queries & constraints', color: '#336791' },
-
-    { name: 'Java', category: 'LANGUAGES', level: 'ADVANCED', icon: '☕', desc: 'OOP, Collections framework, Data Structures', color: '#f89820' },
-    { name: 'C++', category: 'LANGUAGES', level: 'ADVANCED', icon: '🚀', desc: 'STL, Pointers, Memory management, Algorithms', color: '#00599c' },
-    { name: 'C', category: 'LANGUAGES', level: 'INTERMEDIATE', icon: '🔤', desc: 'Pointers, Arrays, Low-level programming', color: '#a8b9cc' },
-    { name: 'SQL', category: 'LANGUAGES', level: 'INTERMEDIATE', icon: '📊', desc: 'Queries, Aggregations, Table relations', color: '#f29111' },
+  const services = [
+    {
+      id: 'fullstack',
+      category: 'Backend',
+      title: 'Full-Stack Web Application Development',
+      subtitle: 'MERN Stack & Scalable Systems',
+      price: 'Production Ready',
+      icon: Server,
+      accent: '#00f0ff',
+      features: [
+        'React.js Frontend & Next.js SSR',
+        'Node.js & Express RESTful APIs',
+        'MongoDB Atlas & Database Optimization',
+        'JWT Auth & 6-Digit Mobile OTP',
+        'Razorpay & Cloudinary Integration'
+      ]
+    },
+    {
+      id: 'frontend',
+      category: 'Frontend',
+      title: 'Responsive UI / UX & WebGL Graphics',
+      subtitle: 'Modern Clean Frontend Interfaces',
+      price: 'High Performance',
+      icon: Code,
+      accent: '#3b82f6',
+      features: [
+        'Tailwind CSS & Custom Design Tokens',
+        'Three.js & WebGL 3D Particle Grids',
+        'Framer Motion & GSAP Animations',
+        '100% Mobile & Cross-Browser Responsive',
+        'SEO Best Practices & Fast Load Times'
+      ]
+    },
+    {
+      id: 'dsa',
+      category: 'Languages',
+      title: 'Java & Data Structures Problem Solving',
+      subtitle: 'Clean Algorithms & OOPs Code',
+      price: '150+ Solved',
+      icon: Cpu,
+      accent: '#a855f7',
+      features: [
+        'Object-Oriented Programming (OOPs)',
+        'Data Structures (Trees, Graphs, Dynamic Programming)',
+        'SQL & Relational Database Queries',
+        'Clean Modular Code Architecture',
+        'Git & GitHub Version Control'
+      ]
+    }
   ];
 
-  const filteredTech = activeCategory === 'ALL' 
-    ? techStack 
-    : techStack.filter(t => t.category === activeCategory);
+  const techToolbox = [
+    { name: 'React.js', level: 'Advanced', category: 'Frontend', color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' },
+    { name: 'Node.js', level: 'Advanced', category: 'Backend', color: 'text-green-400 border-green-500/30 bg-green-500/10' },
+    { name: 'Express.js', level: 'Advanced', category: 'Backend', color: 'text-slate-200 border-slate-500/30 bg-slate-500/10' },
+    { name: 'MongoDB', level: 'Advanced', category: 'Database', color: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' },
+    { name: 'Java', level: 'Proficient', category: 'Languages', color: 'text-orange-400 border-orange-500/30 bg-orange-500/10' },
+    { name: 'JavaScript (ES6+)', level: 'Advanced', category: 'Frontend', color: 'text-yellow-400 border-yellow-500/30 bg-yellow-500/10' },
+    { name: 'Tailwind CSS', level: 'Advanced', category: 'Frontend', color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' },
+    { name: 'REST APIs', level: 'Advanced', category: 'Backend', color: 'text-purple-400 border-purple-500/30 bg-purple-500/10' },
+    { name: 'Three.js / WebGL', level: 'Intermediate', category: 'Frontend', color: 'text-blue-400 border-blue-500/30 bg-blue-500/10' },
+    { name: 'Git & GitHub', level: 'Advanced', category: 'Tools', color: 'text-red-400 border-red-500/30 bg-red-500/10' },
+    { name: 'Vercel / Render', level: 'Advanced', category: 'Tools', color: 'text-white border-white/30 bg-white/10' },
+    { name: 'PostgreSQL / SQL', level: 'Intermediate', category: 'Database', color: 'text-blue-400 border-blue-500/30 bg-blue-500/10' }
+  ];
+
+  const categories = ['All', 'Frontend', 'Backend', 'Database', 'Languages', 'Tools'];
+
+  const filteredTools = activeCategory === 'All'
+    ? techToolbox
+    : techToolbox.filter(t => t.category === activeCategory);
 
   return (
-    <section id="toolbox" className="relative py-28 px-4 md:px-8 bg-[#06070a] bg-noise border-t border-white/10 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section id="toolbox" className="relative py-28 px-4 md:px-8 bg-[#030712] border-t border-white/10 overflow-hidden">
+      <div className="max-w-6xl mx-auto">
         
-        <div className="flex flex-col items-center text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-purple-500/30 font-mono text-xs text-purple-400 mb-4 shadow-neon-purple">
+        {/* Section Header */}
+        <div className="flex flex-col items-center text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-cyan-500/30 text-cyan-400 font-mono text-xs mb-4">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>04 / TECH STACK & TOOLBOX</span>
+            <span>04 / TECH STACK & SERVICES</span>
           </div>
 
-          <h2 className="font-syne text-4xl sm:text-6xl font-extrabold text-white tracking-tight">
-            THINGS I <span className="text-gradient-purple">BUILD WITH</span>
+          <h2 className="font-syne text-4xl sm:text-6xl font-black text-white tracking-tight">
+            Our <span className="text-gradient-purple">Services & Toolbox</span>
           </h2>
+
           <p className="font-mono text-xs sm:text-sm text-slate-400 mt-2 max-w-xl">
-            Battle-tested technologies & frameworks used across my full-stack MERN projects
+            Comprehensive digital solutions and specialized technical capabilities to build robust web applications.
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-5 py-2 rounded-full font-mono text-xs tracking-wider transition-all duration-300 ${
-                activeCategory === cat
-                  ? 'bg-purple-600 text-white font-bold shadow-neon-purple scale-105'
-                  : 'glass-panel border border-white/10 text-slate-300 hover:border-white/30 hover:text-white'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        <motion.div 
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-        >
-          {filteredTech.map((tech, idx) => (
+        {/* 3-Column Services Cards (TheSiniySky Style) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          {services.map((srv) => (
             <motion.div
-              layout
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3, delay: idx * 0.03 }}
-              key={tech.name}
-              className="p-5 rounded-2xl glass-card-purple border border-white/10 hover:border-purple-500/50 transition-all duration-300 group interactive-card flex flex-col justify-between"
+              key={srv.id}
+              whileHover={{ y: -6 }}
+              className="rounded-3xl p-7 glass-panel border border-white/10 bg-[#0b0f19]/80 backdrop-blur-xl flex flex-col justify-between hover:border-cyan-500/50 transition-all duration-300 shadow-2xl group"
             >
               <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-2xl group-hover:scale-125 transition-transform">{tech.icon}</span>
-                  <span className="font-mono text-[10px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-purple-400">
-                    {tech.category}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-cyan-400 group-hover:bg-cyan-500/20 transition-colors">
+                    <srv.icon className="w-6 h-6" />
+                  </div>
+                  <span className="font-mono text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">
+                    {srv.price}
                   </span>
                 </div>
 
-                <h3 className="font-syne font-bold text-lg text-white mb-1 group-hover:text-purple-400 transition-colors">
-                  {tech.name}
+                <h3 className="font-syne font-bold text-xl text-white mb-2 leading-tight">
+                  {srv.title}
                 </h3>
-
-                <p className="text-slate-400 text-xs font-light leading-relaxed">
-                  {tech.desc}
+                <p className="font-mono text-xs text-slate-400 mb-6">
+                  {srv.subtitle}
                 </p>
+
+                <div className="space-y-3 border-t border-white/10 pt-5 font-mono text-xs text-slate-300">
+                  {srv.features.map((feat, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                      <span>{feat}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between font-mono text-[10px] text-slate-400">
-                <span className="flex items-center gap-1 text-slate-300">
-                  <Check className="w-3 h-3 text-green-400" />
-                  {tech.level}
-                </span>
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-purple-400">
-                  READY
-                </span>
+              <div className="mt-8 pt-5 border-t border-white/10">
+                <a
+                  href="#contact"
+                  className="w-full py-2.5 rounded-xl glass-panel border border-white/15 hover:border-cyan-400 text-slate-200 hover:text-cyan-400 font-mono text-xs font-bold flex items-center justify-center gap-2 transition-all"
+                >
+                  <span>INQUIRE SERVICE</span>
+                </a>
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
+
+        {/* Tech Stack Filter Pills */}
+        <div className="flex flex-col items-center">
+          <div className="flex flex-wrap justify-center gap-2 mb-10 p-1.5 rounded-full glass-panel border border-white/10 bg-[#0b0f19]">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-4 py-1.5 rounded-full font-mono text-xs transition-all ${
+                  activeCategory === cat
+                    ? 'bg-cyan-500 text-black font-bold shadow-[0_0_15px_rgba(0,240,255,0.4)]'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full">
+            {filteredTools.map((tool, idx) => (
+              <div
+                key={idx}
+                className="p-4 rounded-2xl glass-panel border border-white/10 bg-[#0b0f19]/60 hover:border-cyan-500/40 transition-all flex flex-col items-start gap-1"
+              >
+                <span className={`px-2.5 py-0.5 rounded-md font-mono text-[10px] font-bold border ${tool.color}`}>
+                  {tool.name}
+                </span>
+                <span className="font-mono text-[11px] text-slate-400 mt-1">
+                  {tool.level} • {tool.category}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
 
       </div>
     </section>
