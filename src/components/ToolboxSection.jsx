@@ -70,18 +70,40 @@ export default function ToolboxSection() {
   ];
 
   const techToolbox = [
+    // Frontend Skills
     { name: 'React.js', level: 'Strong', category: 'Frontend', color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' },
-    { name: 'Node.js', level: 'Strong', category: 'Backend', color: 'text-green-400 border-green-500/30 bg-green-500/10' },
-    { name: 'Express.js', level: 'Strong', category: 'Backend', color: 'text-slate-200 border-slate-500/30 bg-slate-500/10' },
-    { name: 'MongoDB', level: 'Strong', category: 'Database', color: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' },
-    { name: 'Java', level: 'Intermediate', category: 'Languages', color: 'text-orange-400 border-orange-500/30 bg-orange-500/10' },
+    { name: 'Next.js', level: 'Intermediate', category: 'Frontend', color: 'text-white border-white/30 bg-white/10' },
     { name: 'JavaScript (ES6+)', level: 'Strong', category: 'Frontend', color: 'text-yellow-400 border-yellow-500/30 bg-yellow-500/10' },
     { name: 'Tailwind CSS', level: 'Strong', category: 'Frontend', color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' },
-    { name: 'REST APIs', level: 'Strong', category: 'Backend', color: 'text-purple-400 border-purple-500/30 bg-purple-500/10' },
+    { name: 'Redux / Zustand', level: 'Strong', category: 'Frontend', color: 'text-purple-400 border-purple-500/30 bg-purple-500/10' },
     { name: 'Three.js / WebGL', level: 'Intermediate', category: 'Frontend', color: 'text-blue-400 border-blue-500/30 bg-blue-500/10' },
+    { name: 'Framer Motion / GSAP', level: 'Strong', category: 'Frontend', color: 'text-pink-400 border-pink-500/30 bg-pink-500/10' },
+    { name: 'HTML5 & CSS3', level: 'Strong', category: 'Frontend', color: 'text-orange-400 border-orange-500/30 bg-orange-500/10' },
+
+    // Backend Skills
+    { name: 'Node.js', level: 'Strong', category: 'Backend', color: 'text-green-400 border-green-500/30 bg-green-500/10' },
+    { name: 'Express.js', level: 'Strong', category: 'Backend', color: 'text-slate-200 border-slate-500/30 bg-slate-500/10' },
+    { name: 'RESTful APIs', level: 'Strong', category: 'Backend', color: 'text-purple-400 border-purple-500/30 bg-purple-500/10' },
+    { name: 'JWT Authentication', level: 'Strong', category: 'Backend', color: 'text-yellow-400 border-yellow-500/30 bg-yellow-500/10' },
+    { name: 'Razorpay Checkout', level: 'Strong', category: 'Backend', color: 'text-blue-400 border-blue-500/30 bg-blue-500/10' },
+    { name: 'Gmail SMTP / OTP', level: 'Strong', category: 'Backend', color: 'text-red-400 border-red-500/30 bg-red-500/10' },
+
+    // Database & Cloud Storage
+    { name: 'MongoDB / Mongoose', level: 'Strong', category: 'Database', color: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' },
+    { name: 'MongoDB Atlas', level: 'Strong', category: 'Database', color: 'text-green-400 border-green-500/30 bg-green-500/10' },
+    { name: 'PostgreSQL / SQL', level: 'Intermediate', category: 'Database', color: 'text-blue-400 border-blue-500/30 bg-blue-500/10' },
+    { name: 'Cloudinary Media', level: 'Strong', category: 'Database', color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' },
+
+    // Languages
+    { name: 'Java (DSA)', level: 'Intermediate', category: 'Languages', color: 'text-orange-400 border-orange-500/30 bg-orange-500/10' },
+    { name: 'C++', level: 'Intermediate', category: 'Languages', color: 'text-blue-400 border-blue-500/30 bg-blue-500/10' },
+    { name: 'SQL', level: 'Intermediate', category: 'Languages', color: 'text-indigo-400 border-indigo-500/30 bg-indigo-500/10' },
+
+    // Tools & DevOps
     { name: 'Git & GitHub', level: 'Strong', category: 'Tools', color: 'text-red-400 border-red-500/30 bg-red-500/10' },
+    { name: 'Postman API Testing', level: 'Strong', category: 'Tools', color: 'text-orange-400 border-orange-500/30 bg-orange-500/10' },
     { name: 'Vercel / Render', level: 'Strong', category: 'Tools', color: 'text-white border-white/30 bg-white/10' },
-    { name: 'PostgreSQL / SQL', level: 'Intermediate', category: 'Database', color: 'text-blue-400 border-blue-500/30 bg-blue-500/10' }
+    { name: 'VS Code & Web Tools', level: 'Strong', category: 'Tools', color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' }
   ];
 
   const categories = ['All', 'Frontend', 'Backend', 'Database', 'Languages', 'Tools'];
@@ -162,7 +184,7 @@ export default function ToolboxSection() {
                   </div>
                 </div>
 
-                {/* Feature Bullets (Strict 3 Bullets per Card) */}
+                {/* Feature Bullets */}
                 <div className="space-y-2.5 border-t border-white/10 pt-5 font-mono text-xs text-slate-300">
                   {card.features.map((feat, idx) => (
                     <div key={idx} className="flex items-start gap-2">
@@ -211,10 +233,10 @@ export default function ToolboxSection() {
           </a>
         </div>
 
-        {/* Tech Stack Filter Pills (Recruiter Credibility Ratings) */}
+        {/* Full-Stack Technical Toolbox Grid */}
         <div className="flex flex-col items-center">
           <div className="font-mono text-xs text-slate-400 font-bold uppercase tracking-widest mb-6">
-            05 / MY TECHNICAL TOOLBOX
+            05 / MY FULL-STACK TECHNICAL TOOLBOX
           </div>
 
           <div className="flex flex-wrap justify-center gap-2 mb-10 p-1.5 rounded-full glass-panel border border-white/10 bg-[#0b0f19]">
@@ -233,16 +255,16 @@ export default function ToolboxSection() {
             ))}
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 w-full">
             {filteredTools.map((tool, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded-2xl glass-panel border border-white/10 bg-[#0b0f19]/60 hover:border-cyan-500/40 transition-all flex flex-col items-start gap-1"
+                className="p-3.5 rounded-2xl glass-panel border border-white/10 bg-[#0b0f19]/60 hover:border-cyan-500/40 transition-all flex flex-col items-start gap-1"
               >
                 <span className={`px-2.5 py-0.5 rounded-md font-mono text-[10px] font-bold border ${tool.color}`}>
                   {tool.name}
                 </span>
-                <span className="font-mono text-[11px] text-slate-400 mt-1">
+                <span className="font-mono text-[10px] text-slate-400 mt-1">
                   {tool.level} • {tool.category}
                 </span>
               </div>
