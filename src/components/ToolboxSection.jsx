@@ -12,38 +12,38 @@ export default function ToolboxSection() {
       subtitle: 'Complete MERN Stack Ecosystems',
       startingPrice: '$150',
       isPopular: true,
-      badge: 'POPULAR CHOICE',
+      badge: 'MOST POPULAR',
       icon: Server,
       accentColor: 'from-cyan-500 to-blue-600',
       glowShadow: 'shadow-[0_0_30px_rgba(0,240,255,0.25)]',
       features: [
         'MERN Stack (MongoDB, Express, React, Node.js)',
         'Authentication, JWT & Role-Based Access Control',
-        'Scalable REST APIs & Database Integration',
-        'Payment Gateway (Razorpay) & Cloud Uploads',
-        'Full Cloud Deployment (Vercel / Render)'
+        'Scalable RESTful APIs & Database Architecture',
+        'Payment Gateway (Razorpay) & Cloud Storage',
+        'Automated Cloud Deployment (Vercel / Render)'
       ]
     },
     {
       id: 'portfolio-site',
       title: 'Modern Portfolio Website',
-      subtitle: 'Interactive Personal & Developer Portfolios',
+      subtitle: 'Interactive Developer & Personal Portfolios',
       startingPrice: '$100',
       badge: 'AWWWARDS STYLE',
       icon: Code2,
       accentColor: 'from-blue-500 to-purple-600',
       glowShadow: 'shadow-[0_0_25px_rgba(59,130,246,0.2)]',
       features: [
-        'Premium Personal & Developer Portfolio Design',
+        'Custom Personal & Developer Portfolio Design',
         'Responsive UI/UX Across Desktop & Mobile',
-        'GSAP, Three.js 3D & Modern Micro-Animations',
-        'SEO Meta Tags & High Performance Scoring',
-        'Automated Vercel Deployment & Domain Setup'
+        'GSAP, Three.js WebGL 3D & Micro-Animations',
+        'Core Web Vitals & SEO Optimization',
+        'Automated Vercel Deployment & Custom Domain'
       ]
     },
     {
       id: 'landing-page',
-      title: 'Business / Landing Page',
+      title: 'Business & Landing Page',
       subtitle: 'High-Converting Corporate & Startup Sites',
       startingPrice: '$80',
       badge: 'FAST DELIVERY',
@@ -52,10 +52,10 @@ export default function ToolboxSection() {
       glowShadow: 'shadow-[0_0_25px_rgba(168,85,247,0.2)]',
       features: [
         'Modern Responsive Design (React / Next.js / Tailwind)',
-        'Conversion-Focused UI & Clear Call-To-Actions',
-        'Interactive Contact Form & Lead Generation',
-        'Cross-Browser Tested & Mobile Optimized',
-        'Fast Loading Speeds & Core Web Vitals'
+        'Conversion-Focused Layout & Clear CTAs',
+        'Interactive Contact Form & Lead Capture',
+        'Cross-Browser Tested & Mobile-First Layout',
+        'Fast Page Load Speeds & Performance Optimization'
       ]
     },
     {
@@ -69,10 +69,10 @@ export default function ToolboxSection() {
       glowShadow: 'shadow-[0_0_25px_rgba(16,185,129,0.2)]',
       features: [
         'Comprehensive Bug Fixing & Code Refactoring',
-        'LCP / CWV Speed & Performance Optimization',
+        'Core Web Vitals & Speed Optimization',
         'REST API Integration & Endpoint Hookup',
-        'Database Optimization & Security Patching',
-        'Deployment Support & Continuous Updates'
+        'Database Optimization & Security Hardening',
+        'Deployment Support & Technical Assistance'
       ]
     }
   ];
@@ -106,15 +106,15 @@ export default function ToolboxSection() {
         <div className="flex flex-col items-center text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-cyan-500/30 text-cyan-400 font-mono text-xs mb-4 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>04 / SELECTED WORK & SERVICES</span>
+            <span>04 / SERVICES & ESTIMATED PRICING</span>
           </div>
 
           <h2 className="font-syne text-4xl sm:text-6xl font-black text-white tracking-tight">
-            My Work & <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">Services Pricing</span>
+            Services & <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">Estimated Pricing</span>
           </h2>
 
           <p className="font-mono text-xs sm:text-sm text-slate-400 mt-3 max-w-2xl leading-relaxed">
-            Professional web development services tailored to startups, businesses, and personal brands with clear estimated starting pricing.
+            High-performance web development solutions tailored to startups, businesses, and personal brands with clear estimated starting rates.
           </p>
         </div>
 
@@ -157,12 +157,12 @@ export default function ToolboxSection() {
                   {card.subtitle}
                 </p>
 
-                {/* Prominent Starting Price Display (Clean Mono Numbers - No Font Distortion) */}
+                {/* Prominent Starting Price Display */}
                 <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 mb-6 flex flex-col items-start">
                   <span className="font-mono text-[10px] text-slate-400 uppercase tracking-widest font-semibold">
                     ESTIMATED PRICING
                   </span>
-                  <div className="flex items-baseline gap-1.5 mt-0.5 font-mono">
+                  <div className="flex items-baseline gap-1.5 mt-1 font-mono">
                     <span className="text-xs text-slate-400 font-medium">Starting at</span>
                     <span className="font-extrabold text-2xl text-cyan-400 tracking-tight drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]">
                       {card.startingPrice}
