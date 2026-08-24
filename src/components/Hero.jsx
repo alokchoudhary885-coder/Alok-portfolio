@@ -82,7 +82,7 @@ export default function Hero({ onOpenFoodRushModal }) {
           className="w-full max-w-2xl grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 p-3.5 sm:p-4 rounded-2xl glass-panel border border-white/10 bg-[#0b0f19]/70 backdrop-blur-xl font-mono"
         >
           <div className="flex flex-col items-center border-r border-white/10 pr-2">
-            <span className="font-syne text-xl sm:text-2xl font-black text-white">03+</span>
+            <span className="font-syne text-xl sm:text-2xl font-black text-white">05+</span>
             <span className="text-[9px] sm:text-[10px] text-slate-400 mt-0.5 uppercase tracking-wider">Projects</span>
           </div>
           <div className="flex flex-col items-center border-r sm:border-r border-white/10 pr-2">

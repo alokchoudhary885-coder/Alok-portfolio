@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, User, Utensils, Wrench, Briefcase, Mail, ArrowUpRight, Sparkles, Code } from 'lucide-react';
+import { ChevronLeft, ChevronRight, User, Utensils, Wrench, Briefcase, Mail, ArrowUpRight, Sparkles, Code, ShieldAlert, Cpu } from 'lucide-react';
 
 export default function DribbbleDeckNav({ onOpenFoodRushModal }) {
   const [activeIndex, setActiveIndex] = useState(1);
@@ -25,7 +25,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal }) {
       title: 'FOODRUSH',
       subtitle: 'Full-Stack Food Delivery Ecosystem',
       icon: Utensils,
-      category: 'KING PROJECT',
+      category: 'FLAGSHIP PROJECT',
       description: '25+ RESTful APIs, Razorpay checkout, Web Speech API voice search, and 6-digit OTP verification.',
       accent: '#ff5500',
       gradient: 'from-orange-500/25 via-red-600/15 to-transparent',
@@ -34,21 +34,36 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal }) {
       previewBg: 'bg-gradient-to-br from-orange-950/70 to-slate-950',
     },
     {
-      id: 'projects',
+      id: 'jobguard',
       num: '03',
-      title: 'SELECTED WORK',
-      subtitle: 'Production MERN Applications',
-      icon: Code,
-      category: 'PROJECTS',
-      description: 'High-performance web applications built with React, Vite, Node.js, Express, and Tailwind CSS.',
-      accent: '#a855f7',
-      gradient: 'from-purple-500/20 via-indigo-600/10 to-transparent',
+      title: 'JOBGUARD',
+      subtitle: 'Real-Time Job Risk & Scam Radar',
+      icon: ShieldAlert,
+      category: 'CYBERSECURITY EXTENSION',
+      description: 'Chrome Extension (Manifest V3) analyzing LinkedIn, Internshala, and Indeed offers against fee extortion & scams.',
+      accent: '#00f0ff',
+      gradient: 'from-cyan-500/25 via-blue-600/15 to-transparent',
+      isJobGuard: true,
       href: '#projects',
-      previewBg: 'bg-gradient-to-br from-purple-950/60 to-slate-950',
+      previewBg: 'bg-gradient-to-br from-cyan-950/70 to-slate-950',
+    },
+    {
+      id: 'devcommand',
+      num: '04',
+      title: 'DEV COMMAND CENTER',
+      subtitle: 'Enterprise Telemetry & Gemini AI PR Radar',
+      icon: Cpu,
+      category: 'ENTERPRISE AI PLATFORM',
+      description: 'DORA metrics, automated AI code reviewer, Socket.IO WebSockets streaming, and AES-256 OAuth 2.0.',
+      accent: '#a855f7',
+      gradient: 'from-purple-500/25 via-indigo-600/15 to-transparent',
+      isDevCommand: true,
+      href: '#projects',
+      previewBg: 'bg-gradient-to-br from-purple-950/70 to-slate-950',
     },
     {
       id: 'toolbox',
-      num: '04',
+      num: '05',
       title: 'MY TOOLBOX',
       subtitle: 'Tech Stack & Skills',
       icon: Wrench,
@@ -61,7 +76,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal }) {
     },
     {
       id: 'experience',
-      num: '05',
+      num: '06',
       title: 'EXPERIENCE',
       subtitle: 'Software Internships',
       icon: Briefcase,
@@ -74,7 +89,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal }) {
     },
     {
       id: 'contact',
-      num: '06',
+      num: '07',
       title: 'LET\'S TALK',
       subtitle: 'Start A Conversation',
       icon: Mail,
@@ -114,7 +129,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal }) {
         </p>
       </div>
 
-      {/* 4-Card Horizontal Deck Display */}
+      {/* Dynamic Deck Display */}
       <div className="relative max-w-6xl mx-auto min-h-[440px] sm:min-h-[490px] flex items-center justify-center py-2">
         
         {/* Navigation Arrows */}
@@ -168,6 +183,10 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal }) {
                   isActive
                     ? card.isSpecial
                       ? 'glass-card-orange border-2 shadow-2xl'
+                      : card.isJobGuard
+                      ? 'glass-panel border-2 border-cyan-500/80 bg-[#0b0f19]/95 shadow-[0_0_30px_rgba(0,240,255,0.3)]'
+                      : card.isDevCommand
+                      ? 'glass-card-purple border-2 border-purple-500/80 shadow-[0_0_30px_rgba(168,85,247,0.3)]'
                       : 'glass-card-purple border-2 shadow-2xl'
                     : 'glass-panel border border-white/10 hover:border-white/30'
                 }`}
@@ -233,6 +252,16 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal }) {
                             🍔 25+ REST APIs • Razorpay • Voice Search
                           </div>
                         )}
+                        {card.isJobGuard && (
+                          <div className="text-cyan-400 font-bold pt-0.5 truncate">
+                            🛡️ Real-Time Manifest V3 Extension • Gemini AI Radar
+                          </div>
+                        )}
+                        {card.isDevCommand && (
+                          <div className="text-purple-400 font-bold pt-0.5 truncate">
+                            ⚡ DORA Metrics • Gemini 1.5 Flash • Socket.IO
+                          </div>
+                        )}
                       </motion.div>
                     )}
                   </div>
@@ -251,6 +280,26 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal }) {
                           <span>VIEW TECHNICAL CASE STUDY</span>
                           <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
                         </button>
+                      ) : card.isJobGuard ? (
+                        <a
+                          href="https://alokchoudhary885-coder.github.io/JOBGAURD-EXTENSION/"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="w-full py-2.5 rounded-xl bg-cyan-500 text-black font-bold flex items-center justify-center gap-1.5 hover:bg-cyan-400 transition-colors shadow-[0_0_20px_rgba(0,240,255,0.4)] text-[11px] sm:text-xs"
+                        >
+                          <span>LAUNCH JOBGUARD DEMO</span>
+                          <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
+                        </a>
+                      ) : card.isDevCommand ? (
+                        <a
+                          href="https://developer-command-center-five.vercel.app"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="w-full py-2.5 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center gap-1.5 hover:bg-purple-500 transition-colors shadow-neon-purple text-[11px] sm:text-xs"
+                        >
+                          <span>OPEN DEV COMMAND CENTER</span>
+                          <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
+                        </a>
                       ) : (
                         <a
                           href={card.href}
