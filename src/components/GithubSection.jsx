@@ -19,46 +19,46 @@ export default function GithubSection() {
   };
 
   return (
-    <section className="relative py-28 px-4 md:px-8 bg-[#06070a] bg-noise border-t border-white/10 overflow-hidden">
+    <section className="relative py-20 sm:py-28 px-3.5 sm:px-8 bg-[#06070a] bg-noise border-t border-white/10 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
-        <div className="flex flex-col items-start mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-purple-500/30 font-mono text-xs text-purple-400 mb-4 shadow-neon-purple">
+        <div className="flex flex-col items-start mb-10 sm:mb-12">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full glass-panel border border-purple-500/30 font-mono text-[11px] sm:text-xs text-purple-400 mb-3 shadow-neon-purple">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>10 / GITHUB ACTIVITY</span>
+            <span>11 / GITHUB ACTIVITY</span>
           </div>
 
-          <h2 className="font-syne text-4xl sm:text-6xl font-extrabold text-white tracking-tight">
+          <h2 className="font-syne text-3xl sm:text-6xl font-extrabold text-white tracking-tight">
             OPEN SOURCE & <span className="text-gradient-purple">COMMITS</span>
           </h2>
         </div>
 
-        <div className="p-6 md:p-8 rounded-3xl glass-card-purple border border-white/10 relative overflow-hidden">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-white/10 mb-8">
+        <div className="p-5 sm:p-8 rounded-3xl glass-card-purple border border-white/10 relative overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10 mb-6 sm:mb-8">
             <div className="flex items-center gap-3">
-              <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-purple-400">
-                <Github className="w-6 h-6" />
+              <div className="p-2.5 sm:p-3 rounded-2xl bg-white/5 border border-white/10 text-purple-400 shrink-0">
+                <Github className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div>
-                <h3 className="font-syne text-xl font-bold text-white">Continuous Building</h3>
-                <span className="font-mono text-xs text-slate-400">Full-Stack MERN & Open Source Projects</span>
+                <h3 className="font-syne text-lg sm:text-xl font-bold text-white">Continuous Building</h3>
+                <span className="font-mono text-[11px] sm:text-xs text-slate-400">Full-Stack MERN & Open Source Projects</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-6 font-mono text-xs text-slate-300">
-              <div className="flex items-center gap-2">
-                <Flame className="w-4 h-4 text-orange-400" />
+            <div className="flex items-center gap-4 sm:gap-6 font-mono text-xs text-slate-300">
+              <div className="flex items-center gap-1.5">
+                <Flame className="w-4 h-4 text-orange-400 shrink-0" />
                 <span>350+ Commits</span>
               </div>
-              <div className="flex items-center gap-2">
-                <GitBranch className="w-4 h-4 text-purple-400" />
+              <div className="flex items-center gap-1.5">
+                <GitBranch className="w-4 h-4 text-purple-400 shrink-0" />
                 <span>12 Repositories</span>
               </div>
             </div>
           </div>
 
           <div className="overflow-x-auto pb-4">
-            <div className="grid grid-rows-7 grid-flow-col gap-1.5 min-w-[650px]">
+            <div className="grid grid-rows-7 grid-flow-col gap-1.5 min-w-[600px]">
               {days.map((d) => (
                 <div
                   key={d.id}
@@ -69,8 +69,8 @@ export default function GithubSection() {
             </div>
           </div>
 
-          <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between font-mono text-xs text-slate-400">
-            <div className="flex items-center gap-2">
+          <div className="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-xs text-slate-400">
+            <div className="flex items-center gap-1.5">
               <span>Less</span>
               <div className="w-2.5 h-2.5 rounded-sm bg-white/5" />
               <div className="w-2.5 h-2.5 rounded-sm bg-purple-950/40" />
@@ -81,7 +81,7 @@ export default function GithubSection() {
             </div>
 
             <a
-              href="https://github.com"
+              href="https://github.com/alokchoudhary885-coder"
               target="_blank"
               rel="noreferrer"
               className="text-purple-400 hover:text-white flex items-center gap-1 font-bold transition-colors"
