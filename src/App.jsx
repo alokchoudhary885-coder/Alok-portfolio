@@ -9,6 +9,7 @@ import AboutSection from './components/AboutSection';
 import ToolboxSection from './components/ToolboxSection';
 import ProjectsSection from './components/ProjectsSection';
 import FoodRushCaseStudyModal from './components/FoodRushCaseStudyModal';
+import JobGuardCaseStudyModal from './components/JobGuardCaseStudyModal';
 import ProcessSection from './components/ProcessSection';
 import ExperienceSection from './components/ExperienceSection';
 import DsaTerminalSection from './components/DsaTerminalSection';
@@ -20,6 +21,7 @@ import Footer from './components/Footer';
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [foodRushModalOpen, setFoodRushModalOpen] = useState(false);
+  const [jobGuardModalOpen, setJobGuardModalOpen] = useState(false);
 
   return (
     <div className="relative min-h-screen bg-[#08090C] text-slate-100 selection:bg-brandCyan selection:text-black">
@@ -35,11 +37,17 @@ export default function App() {
         <div className="flex flex-col w-full overflow-x-hidden">
           <HeaderNav />
           <main>
-            <Hero />
-            <DribbbleDeckNav onOpenFoodRushModal={() => setFoodRushModalOpen(true)} />
+            <Hero onOpenFoodRushModal={() => setFoodRushModalOpen(true)} />
+            <DribbbleDeckNav
+              onOpenFoodRushModal={() => setFoodRushModalOpen(true)}
+              onOpenJobGuardModal={() => setJobGuardModalOpen(true)}
+            />
             <AboutSection />
             <ToolboxSection />
-            <ProjectsSection onOpenFoodRushModal={() => setFoodRushModalOpen(true)} />
+            <ProjectsSection
+              onOpenFoodRushModal={() => setFoodRushModalOpen(true)}
+              onOpenJobGuardModal={() => setJobGuardModalOpen(true)}
+            />
             <ProcessSection />
             <ExperienceSection />
             <DsaTerminalSection />
@@ -55,6 +63,12 @@ export default function App() {
       <FoodRushCaseStudyModal
         isOpen={foodRushModalOpen}
         onClose={() => setFoodRushModalOpen(false)}
+      />
+
+      {/* JobGuard Full Screen Case Study Modal */}
+      <JobGuardCaseStudyModal
+        isOpen={jobGuardModalOpen}
+        onClose={() => setJobGuardModalOpen(false)}
       />
     </div>
   );

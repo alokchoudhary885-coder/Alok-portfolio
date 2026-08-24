@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, User, Utensils, Wrench, Briefcase, Mail, ArrowUpRight, Sparkles, Code, ShieldAlert, Cpu } from 'lucide-react';
+import { ChevronLeft, ChevronRight, User, Utensils, Wrench, Briefcase, Mail, ArrowUpRight, Sparkles, ShieldAlert, Cpu } from 'lucide-react';
 
-export default function DribbbleDeckNav({ onOpenFoodRushModal }) {
+export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardModal }) {
   const [activeIndex, setActiveIndex] = useState(1);
 
   const cards = [
@@ -184,9 +184,9 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal }) {
                     ? card.isSpecial
                       ? 'glass-card-orange border-2 shadow-2xl'
                       : card.isJobGuard
-                      ? 'glass-panel border-2 border-cyan-500/80 bg-[#0b0f19]/95 shadow-[0_0_30px_rgba(0,240,255,0.3)]'
+                      ? 'glass-panel border-2 border-cyan-500/80 bg-[#0b0f19]/95 shadow-[0_0_30px_rgba(0,240,255,0.35)]'
                       : card.isDevCommand
-                      ? 'glass-card-purple border-2 border-purple-500/80 shadow-[0_0_30px_rgba(168,85,247,0.3)]'
+                      ? 'glass-card-purple border-2 border-purple-500/80 shadow-[0_0_30px_rgba(168,85,247,0.35)]'
                       : 'glass-card-purple border-2 shadow-2xl'
                     : 'glass-panel border border-white/10 hover:border-white/30'
                 }`}
@@ -281,15 +281,16 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal }) {
                           <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
                         </button>
                       ) : card.isJobGuard ? (
-                        <a
-                          href="https://alokchoudhary885-coder.github.io/JOBGAURD-EXTENSION/"
-                          target="_blank"
-                          rel="noreferrer"
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onOpenJobGuardModal();
+                          }}
                           className="w-full py-2.5 rounded-xl bg-cyan-500 text-black font-bold flex items-center justify-center gap-1.5 hover:bg-cyan-400 transition-colors shadow-[0_0_20px_rgba(0,240,255,0.4)] text-[11px] sm:text-xs"
                         >
-                          <span>LAUNCH JOBGUARD DEMO</span>
+                          <span>VIEW EXTENSION CASE STUDY</span>
                           <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
-                        </a>
+                        </button>
                       ) : card.isDevCommand ? (
                         <a
                           href="https://developer-command-center-five.vercel.app"
