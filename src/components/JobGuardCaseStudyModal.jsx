@@ -1,9 +1,30 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Github, CheckCircle2, ShieldAlert, Download, Layers, Lock, Cpu } from 'lucide-react';
+import { X, ExternalLink, Github, CheckCircle2, ShieldAlert, Download, Layers, Lock, Sparkles, AlertTriangle, FileText } from 'lucide-react';
 
 export default function JobGuardCaseStudyModal({ isOpen, onClose }) {
   if (!isOpen) return null;
+
+  const demoHighlights = [
+    {
+      title: 'Interactive Demo Presets',
+      desc: 'Test 🔴 Registration Fee Scam, 🟡 Startup WhatsApp, Hinglish "Ghar Baithe" Lure, and 🟢 Stripe SDE for instant mathematical risk scoring.',
+      icon: Sparkles,
+      color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10'
+    },
+    {
+      title: 'Custom Text Analysis',
+      desc: 'Paste any suspicious job email, WhatsApp message, or offer letter to analyze live risk meter scoring in real-time.',
+      icon: FileText,
+      color: 'text-purple-400 border-purple-500/30 bg-purple-500/10'
+    },
+    {
+      title: '1-Click Extension Download (ZIP)',
+      desc: 'Direct ZIP package for instant 1-click installation on Chrome, Brave, Edge & Manifest V3 browsers.',
+      icon: Download,
+      color: 'text-green-400 border-green-500/30 bg-green-500/10'
+    }
+  ];
 
   const features = [
     'Real-Time Job Risk & Scam Detection Engine',
@@ -92,6 +113,30 @@ export default function JobGuardCaseStudyModal({ isOpen, onClose }) {
               <Download className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
               <span>ZIP Download</span>
             </a>
+          </div>
+
+          {/* Live Interactive Features Box */}
+          <div className="mb-8 sm:mb-10">
+            <h3 className="font-syne text-lg sm:text-xl font-bold text-white mb-3.5 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 shrink-0" />
+              <span>LIVE WEB DEMO HIGHLIGHTS</span>
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 font-mono text-xs">
+              {demoHighlights.map((item, idx) => (
+                <div key={idx} className="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between space-y-2">
+                  <div className="flex items-center gap-2">
+                    <div className={`p-2 rounded-xl border ${item.color}`}>
+                      <item.icon className="w-4 h-4 shrink-0" />
+                    </div>
+                    <span className="font-syne font-bold text-sm text-white">{item.title}</span>
+                  </div>
+                  <p className="text-slate-300 text-[11px] font-light leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* System Architecture */}
