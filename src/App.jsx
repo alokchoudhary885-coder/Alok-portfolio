@@ -24,13 +24,28 @@ export default function App() {
   const [jobGuardModalOpen, setJobGuardModalOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-[#08090C] text-slate-100 selection:bg-brandCyan selection:text-black">
+    <div className="relative min-h-screen bg-[#030712] text-slate-100 selection:bg-cyan-500 selection:text-black">
       {/* 01 / Preloader Boot Sequence */}
       {loading && <Preloader onComplete={() => setLoading(false)} />}
 
       {/* Global Interactive Utilities */}
       <CustomCursor />
       <AudioController />
+
+      {/* Syahril-Style Sticky Side Badge: Available For Opportunity */}
+      {!loading && (
+        <div className="fixed left-0 top-1/2 z-40 hidden md:flex items-center transform -translate-y-1/2 pointer-events-auto">
+          <a
+            href="#contact"
+            className="bg-[#0b0f19]/90 border-y border-r border-cyan-500/40 hover:border-cyan-400 backdrop-blur-xl text-cyan-400 py-6 px-2.5 text-[9px] font-mono font-bold uppercase tracking-[0.4em] shadow-[0_0_20px_rgba(0,240,255,0.2)] rounded-r-2xl cursor-pointer hover:bg-cyan-500/15 transition-all duration-300 group"
+          >
+            <span className="[writing-mode:vertical-rl] rotate-180 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping inline-block" />
+              AVAILABLE FOR OPPORTUNITY
+            </span>
+          </a>
+        </div>
+      )}
 
       {/* Main Website Viewports */}
       {!loading && (

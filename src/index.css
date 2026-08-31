@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Syne:wght@600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Syne:wght@600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -21,6 +21,31 @@
     width: 100%;
     -webkit-tap-highlight-color: transparent;
   }
+}
+
+/* Shiny Shimmer Text Gradient Animation */
+@keyframes shiny-text {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.text-shiny {
+  background: linear-gradient(
+    110deg,
+    #ffffff 20%,
+    #00f0ff 40%,
+    #a855f7 60%,
+    #ffffff 80%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shiny-text 6s linear infinite;
 }
 
 /* Glassmorphism Design Tokens */
