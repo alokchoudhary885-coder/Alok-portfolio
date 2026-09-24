@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, ArrowRight, Utensils, FileText, Code2, Link as LinkIcon } from 'lucide-react';
-import ThreeCanvas from './ThreeCanvas';
+import Spline from '@splinetool/react-spline';
 
 const RESUME_URL = "https://drive.google.com/file/d/1A7Sh87nIZzc_rbCZIfaIYYFvXSlIInc_/view?usp=drivesdk";
 
@@ -21,7 +21,7 @@ export default function Hero({ onOpenFoodRushModal }) {
       {/* Main Dual-Column Container */}
       <div className="max-w-6xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10 my-auto">
         
-        {/* Left Column (60% ~ 7 cols) */}
+        {/* Left Column (60% ~ 7 cols): Existing Hero Content */}
         <div className="lg:col-span-7 flex flex-col items-start gap-6">
           
           {/* Status Indicator Pill */}
@@ -73,7 +73,7 @@ export default function Hero({ onOpenFoodRushModal }) {
             {/* Primary Button */}
             <button
               onClick={scrollToProjects}
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-semibold transition-all duration-200 shadow-md shadow-blue-500/20 hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-semibold transition-all duration-200 shadow-md shadow-blue-500/20 hover:-translate-y-0.5 cursor-pointer"
             >
               <span>Explore Work</span>
               <ArrowRight className="w-4 h-4" />
@@ -93,7 +93,7 @@ export default function Hero({ onOpenFoodRushModal }) {
             {/* Featured Tag / Case Study Button */}
             <button
               onClick={onOpenFoodRushModal}
-              className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-slate-900/50 hover:bg-slate-800/80 border border-slate-800/80 text-slate-300 hover:text-white text-xs font-medium transition-all"
+              className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-slate-900/50 hover:bg-slate-800/80 border border-slate-800/80 text-slate-300 hover:text-white text-xs font-medium transition-all cursor-pointer"
             >
               <Utensils className="w-3.5 h-3.5 text-blue-400" />
               <span>FoodRush Case Study</span>
@@ -149,32 +149,35 @@ export default function Hero({ onOpenFoodRushModal }) {
 
         </div>
 
-        {/* Right Column (40% ~ 5 cols) Interactive 3D Canvas */}
+        {/* Right Column (40% ~ 5 cols): Interactive 3D Spline Globe */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="lg:col-span-5 relative w-full mt-4 lg:mt-0"
+          className="lg:col-span-5 relative w-full mt-6 lg:mt-0 flex items-center justify-center"
         >
-          <div className="relative w-full rounded-2xl bg-slate-900/40 border border-slate-800/80 p-2 shadow-xl shadow-black/30">
+          <div className="relative w-full rounded-2xl bg-slate-900/40 border border-slate-800/80 p-2 shadow-xl shadow-black/30 overflow-hidden">
             
-            {/* Embedded 3D Scene */}
-            <div className="w-full h-[340px] sm:h-[420px] lg:h-[460px] rounded-xl bg-slate-950/60 relative overflow-hidden block">
-              <ThreeCanvas />
+            {/* Embedded Spline 3D Scene */}
+            <div className="w-full h-[360px] sm:h-[440px] lg:h-[480px] rounded-xl bg-slate-950/70 relative overflow-hidden flex items-center justify-center">
+              <Spline
+                scene="https://prod.spline.design/wpbAVYS8OeLwxS3e/scene.splinecode"
+                className="w-full h-full cursor-grab active:cursor-grabbing"
+              />
             </div>
 
             {/* Floating Telemetry Badges */}
-            <div className="absolute top-5 left-5 px-3 py-1.5 rounded-lg bg-slate-900/90 backdrop-blur-md border border-slate-800 shadow-sm flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-blue-400"></span>
-              <span className="text-xs text-slate-200 font-medium">Three.js &amp; WebGL</span>
+            <div className="absolute top-5 left-5 px-3 py-1.5 rounded-lg bg-slate-900/90 backdrop-blur-md border border-slate-800 shadow-sm flex items-center gap-2 pointer-events-none">
+              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+              <span className="text-xs text-slate-200 font-medium">Spline 3D &amp; WebGL</span>
             </div>
 
-            <div className="absolute bottom-5 left-5 px-3 py-1.5 rounded-lg bg-slate-900/90 backdrop-blur-md border border-slate-800 shadow-sm flex items-center gap-2">
+            <div className="absolute bottom-5 left-5 px-3 py-1.5 rounded-lg bg-slate-900/90 backdrop-blur-md border border-slate-800 shadow-sm flex items-center gap-2 pointer-events-none">
               <span className="w-2 h-2 rounded-full bg-indigo-400"></span>
-              <span className="text-xs text-slate-200 font-medium">React.js &amp; Node.js</span>
+              <span className="text-xs text-slate-200 font-medium">Interactive Orb</span>
             </div>
 
-            <div className="absolute top-1/2 -right-3 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-slate-900/95 backdrop-blur-md border border-blue-500/30 shadow-md hidden sm:flex items-center gap-2">
+            <div className="absolute top-1/2 -right-3 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-slate-900/95 backdrop-blur-md border border-blue-500/30 shadow-md hidden sm:flex items-center gap-2 pointer-events-none">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
               <span className="text-xs font-medium text-blue-400">Full-Stack MERN</span>
             </div>
