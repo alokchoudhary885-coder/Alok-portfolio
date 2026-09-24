@@ -156,13 +156,13 @@ export default function Hero({ onOpenFoodRushModal }) {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="lg:col-span-5 relative w-full mt-6 lg:mt-0"
         >
-          <div className="relative w-full h-[360px] sm:h-[440px] lg:h-[480px] overflow-hidden">
+          {/* spline-wrapper class lets index.css suppress the Spline watermark badge */}
+          <div className="spline-wrapper relative w-full h-[440px] sm:h-[540px] lg:h-[580px] overflow-hidden">
             <Spline
               scene="https://prod.spline.design/kOb8SDOF-SGGifT2/scene.splinecode"
-              className="w-full h-full cursor-grab active:cursor-grabbing"
+              className="w-full h-full scale-125 cursor-grab active:cursor-grabbing"
+              style={{ transformOrigin: 'center center' }}
             />
-            {/* Watermark cover — masks the "Built with Spline" text at bottom */}
-            <div className="absolute bottom-0 left-0 right-0 h-8 bg-[#090d16] pointer-events-none z-10" />
           </div>
         </motion.div>
 

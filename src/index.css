@@ -108,3 +108,15 @@
     letter-spacing: -0.02em;
   }
 }
+
+/* Hide Spline "Built with Spline" watermark badge */
+.spline-wrapper a[href*="spline.design"],
+.spline-wrapper a[target="_blank"],
+.spline-wrapper > div > a {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+}
