@@ -186,14 +186,16 @@ export default function Hero({ onOpenFoodRushModal }) {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="lg:col-span-5 relative w-full mt-6 lg:mt-0"
         >
-          {/* spline-wrapper: onLoad JS removes the watermark element directly */}
+          {/* spline-wrapper: outer overflow-hidden container clips the bottom 70px where watermark is drawn */}
           <div ref={splineRef} className="spline-wrapper relative w-full h-[440px] sm:h-[540px] lg:h-[580px] overflow-hidden">
-            <Spline
-              scene="https://prod.spline.design/kOb8SDOF-SGGifT2/scene.splinecode"
-              className="w-full h-full scale-125 cursor-grab active:cursor-grabbing"
-              style={{ transformOrigin: 'center center' }}
-              onLoad={onSplineLoad}
-            />
+            <div className="w-full h-[calc(100%+70px)] -mb-[70px]">
+              <Spline
+                scene="https://prod.spline.design/kOb8SDOF-SGGifT2/scene.splinecode"
+                className="w-full h-full scale-120 cursor-grab active:cursor-grabbing"
+                style={{ transformOrigin: 'center 45%' }}
+                onLoad={onSplineLoad}
+              />
+            </div>
           </div>
         </motion.div>
 

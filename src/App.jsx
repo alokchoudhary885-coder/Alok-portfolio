@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Preloader from './components/Preloader';
 import CustomCursor from './components/CustomCursor';
 import AudioController from './components/AudioController';
@@ -24,6 +24,18 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [foodRushModalOpen, setFoodRushModalOpen] = useState(false);
   const [jobGuardModalOpen, setJobGuardModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = 'hidden';
+      window.scrollTo(0, 0);
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [loading]);
 
   return (
     <div className="relative min-h-screen bg-[#090d16] text-slate-100 selection:bg-blue-500 selection:text-white">
@@ -52,33 +64,36 @@ export default function App() {
         </div>
       )}
 
-      {/* Main Website Viewports */}
-      {!loading && (
-        <div className="relative z-10 flex flex-col w-full overflow-x-hidden">
-          <HeaderNav />
-          <main>
-            <Hero onOpenFoodRushModal={() => setFoodRushModalOpen(true)} />
-            <DribbbleDeckNav
-              onOpenFoodRushModal={() => setFoodRushModalOpen(true)}
-              onOpenJobGuardModal={() => setJobGuardModalOpen(true)}
-            />
-            <AboutSection />
-            <TypographyStatement />
-            <ProjectsSection
-              onOpenFoodRushModal={() => setFoodRushModalOpen(true)}
-              onOpenJobGuardModal={() => setJobGuardModalOpen(true)}
-            />
-            <ToolboxSection />
-            <ProcessSection />
-            <ExperienceSection />
-            <DsaTerminalSection />
-            <GithubSection />
-            <CertificationsSection />
-            <ContactSection />
-          </main>
-          <Footer />
-        </div>
-      )}
+      {/* Main Website Viewports — mounted immediately so Spline 3D preloads during preloader, instantly visible on Enter */}
+      <div
+        className={`relative z-10 flex flex-col w-full overflow-x-hidden transition-opacity duration-700 ${
+          loading ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        }`}
+        aria-hidden={loading}
+      >
+        <HeaderNav />
+        <main>
+          <Hero onOpenFoodRushModal={() => setFoodRushModalOpen(true)} />
+          <DribbbleDeckNav
+            onOpenFoodRushModal={() => setFoodRushModalOpen(true)}
+            onOpenJobGuardModal={() => setJobGuardModalOpen(true)}
+          />
+          <AboutSection />
+          <TypographyStatement />
+          <ProjectsSection
+            onOpenFoodRushModal={() => setFoodRushModalOpen(true)}
+            onOpenJobGuardModal={() => setJobGuardModalOpen(true)}
+          />
+          <ToolboxSection />
+          <ProcessSection />
+          <ExperienceSection />
+          <DsaTerminalSection />
+          <GithubSection />
+          <CertificationsSection />
+          <ContactSection />
+        </main>
+        <Footer />
+      </div>
 
       {/* FoodRush Full Screen Case Study Modal */}
       <FoodRushCaseStudyModal
