@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Mail, MapPin, Send, CheckCircle, Copy, Check, Github, Linkedin, FileText, Briefcase, ArrowRight } from 'lucide-react';
+import { Sparkles, Mail, MapPin, Send, CheckCircle, Copy, Check, Github, Linkedin, FileText, Briefcase, ArrowRight, Loader2 } from 'lucide-react';
 
 const RESUME_URL = "https://drive.google.com/file/d/1A7Sh87nIZzc_rbCZIfaIYYFvXSlIInc_/view?usp=drivesdk";
+const TARGET_EMAIL = "alokkumar23574@gmail.com";
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -14,19 +16,48 @@ export default function ContactSection() {
     message: ''
   });
 
-  const email = 'alokchoudhary.dev@gmail.com';
-
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(email);
+    navigator.clipboard.writeText(TARGET_EMAIL);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => setFormSubmitted(false), 4000);
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _subject: `New Portfolio Message from ${formData.name}: ${formData.subject || 'Inquiry'}`,
+          _template: 'table'
+        })
+      });
+
+      if (response.ok) {
+        setFormSubmitted(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (err) {
+      // Fallback: If network or adblocker blocks FormSubmit, launch mailto
+      window.location.href = `mailto:${TARGET_EMAIL}?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+      setFormSubmitted(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setFormSubmitted(false), 6000);
+    }
   };
 
   const inputCls = "w-full px-4 py-3 rounded-lg bg-slate-950/70 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all text-xs sm:text-sm";
@@ -71,14 +102,16 @@ export default function ContactSection() {
               Send a Direct Message
             </h3>
             <p className="text-xs sm:text-sm text-slate-400 mb-6 font-normal leading-relaxed">
-              Fill out the details below and I'll respond within 24 hours.
+              Fill out the details below and the message will be delivered directly to my inbox ({TARGET_EMAIL}).
             </p>
 
             {formSubmitted ? (
               <div className="p-6 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs sm:text-sm text-center space-y-2">
                 <CheckCircle className="w-7 h-7 mx-auto text-blue-400" />
-                <p className="font-semibold text-white text-base">Message Dispatched Successfully!</p>
-                <p className="text-slate-300 text-xs">Thank you for reaching out. I'll get back to you shortly.</p>
+                <p className="font-semibold text-white text-base">Message Sent Successfully!</p>
+                <p className="text-slate-300 text-xs">
+                  Your message has been sent to <span className="text-blue-400 font-mono font-medium">{TARGET_EMAIL}</span>. I'll get back to you shortly.
+                </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -95,7 +128,7 @@ export default function ContactSection() {
                     />
                   </div>
                   <div>
-                    <label className="block text-slate-300 text-xs mb-1.5 font-medium">Email Address *</label>
+                    <label className="block text-slate-300 text-xs mb-1.5 font-medium">Your Email Address *</label>
                     <input
                       type="email"
                       required
@@ -133,10 +166,20 @@ export default function ContactSection() {
 
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-blue-500/20 transition-all cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-500 disabled:opacity-70 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-blue-500/20 transition-all cursor-pointer"
                 >
-                  <span>Submit Inquiry</span>
-                  <Send className="w-3.5 h-3.5" />
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Sending message...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Submit Inquiry</span>
+                      <Send className="w-3.5 h-3.5" />
+                    </>
+                  )}
                 </button>
               </form>
             )}
@@ -159,7 +202,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <span className="text-[10px] text-slate-400 block uppercase tracking-wider font-medium">Direct Inbox</span>
-                  <span className="text-xs sm:text-sm font-semibold text-white block mt-0.5 truncate max-w-[180px] sm:max-w-none">{email}</span>
+                  <span className="text-xs sm:text-sm font-semibold text-white block mt-0.5 truncate max-w-[180px] sm:max-w-none">{TARGET_EMAIL}</span>
                 </div>
               </div>
               <button
