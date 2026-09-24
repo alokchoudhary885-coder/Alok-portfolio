@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Mail, MapPin, Send, CheckCircle, Copy, Check, Github, Linkedin, FileText, Briefcase, ArrowRight, Loader2 } from 'lucide-react';
+import { Sparkles, Mail, MapPin, Send, CheckCircle, Copy, Check, Github, Linkedin, FileText, Briefcase, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
 
 const RESUME_URL = "https://drive.google.com/file/d/1A7Sh87nIZzc_rbCZIfaIYYFvXSlIInc_/view?usp=drivesdk";
 const TARGET_EMAIL = "alokkumar23574@gmail.com";
@@ -8,7 +8,8 @@ const TARGET_EMAIL = "alokkumar23574@gmail.com";
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,8 +23,39 @@ export default function ContactSection() {
     setTimeout(() => setCopied(false), 2500);
   };
 
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage('');
+    setSuccessMessage('');
+
+    // Form field validation
+    if (!formData.name.trim()) {
+      setErrorMessage('Please enter your name.');
+      return;
+    }
+    if (!formData.email.trim()) {
+      setErrorMessage('Please enter your email address.');
+      return;
+    }
+    if (!validateEmail(formData.email.trim())) {
+      setErrorMessage('Please enter a valid email address.');
+      return;
+    }
+    if (!formData.subject.trim()) {
+      setErrorMessage('Please enter a subject.');
+      return;
+    }
+    if (!formData.message.trim()) {
+      setErrorMessage('Please enter your message.');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -34,29 +66,49 @@ export default function ContactSection() {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          _subject: `New Portfolio Message from ${formData.name}: ${formData.subject || 'Inquiry'}`,
-          _template: 'table'
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: formData.subject.trim(),
+          message: formData.message.trim(),
+          _subject: "New Portfolio Contact",
+          _captcha: "false",
+          _template: "table"
         })
       });
 
-      if (response.ok) {
-        setFormSubmitted(true);
+      const data = await response.json().catch(() => null);
+
+      if (response.ok || (data && (data.success === "true" || data.success === true))) {
+        setSuccessMessage("Message sent successfully! I'll get back to you soon.");
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        throw new Error('Form submission failed');
+        throw new Error(data?.message || 'Submission failed');
       }
     } catch (err) {
-      // Fallback: If network or adblocker blocks FormSubmit, launch mailto
-      window.location.href = `mailto:${TARGET_EMAIL}?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
-      setFormSubmitted(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      // Fallback submission if AJAX mode encounters CORS or ad-blocker
+      try {
+        const formDataPayload = new FormData();
+        formDataPayload.append('name', formData.name.trim());
+        formDataPayload.append('email', formData.email.trim());
+        formDataPayload.append('subject', formData.subject.trim());
+        formDataPayload.append('message', formData.message.trim());
+        formDataPayload.append('_subject', 'New Portfolio Contact');
+        formDataPayload.append('_captcha', 'false');
+        formDataPayload.append('_template', 'table');
+
+        await fetch(`https://formsubmit.co/${TARGET_EMAIL}`, {
+          method: 'POST',
+          body: formDataPayload,
+          mode: 'no-cors'
+        });
+
+        setSuccessMessage("Message sent successfully! I'll get back to you soon.");
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } catch (fallbackErr) {
+        setErrorMessage('Failed to send message. Please try again or reach out directly via email.');
+      }
     } finally {
       setIsSubmitting(false);
-      setTimeout(() => setFormSubmitted(false), 6000);
     }
   };
 
@@ -102,87 +154,103 @@ export default function ContactSection() {
               Send a Direct Message
             </h3>
             <p className="text-xs sm:text-sm text-slate-400 mb-6 font-normal leading-relaxed">
-              Fill out the details below and the message will be delivered directly to my inbox ({TARGET_EMAIL}).
+              Fill out the details below and I'll respond within 24 hours.
             </p>
 
-            {formSubmitted ? (
-              <div className="p-6 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs sm:text-sm text-center space-y-2">
-                <CheckCircle className="w-7 h-7 mx-auto text-blue-400" />
-                <p className="font-semibold text-white text-base">Message Sent Successfully!</p>
-                <p className="text-slate-300 text-xs">
-                  Your message has been sent to <span className="text-blue-400 font-mono font-medium">{TARGET_EMAIL}</span>. I'll get back to you shortly.
-                </p>
+            {successMessage && (
+              <div className="p-4 mb-4 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs sm:text-sm text-center flex items-center justify-center gap-2">
+                <CheckCircle className="w-5 h-5 text-blue-400 shrink-0" />
+                <span className="font-medium">{successMessage}</span>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-slate-300 text-xs mb-1.5 font-medium">Full Name *</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="John Doe"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className={inputCls}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-slate-300 text-xs mb-1.5 font-medium">Your Email Address *</label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="john@example.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className={inputCls}
-                    />
-                  </div>
-                </div>
+            )}
 
+            {errorMessage && (
+              <div className="p-4 mb-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs sm:text-sm text-center flex items-center justify-center gap-2">
+                <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />
+                <span className="font-medium">{errorMessage}</span>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-300 text-xs mb-1.5 font-medium">Subject *</label>
+                  <label className="block text-slate-300 text-xs mb-1.5 font-medium">Full Name *</label>
                   <input
                     type="text"
                     required
-                    placeholder="Project Inquiry / Job Opportunity"
-                    value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    placeholder="John Doe"
+                    value={formData.name}
+                    onChange={(e) => {
+                      setFormData({ ...formData, name: e.target.value });
+                      if (errorMessage) setErrorMessage('');
+                    }}
                     className={inputCls}
                   />
                 </div>
-
                 <div>
-                  <label className="block text-slate-300 text-xs mb-1.5 font-medium">Message *</label>
-                  <textarea
-                    rows="4"
+                  <label className="block text-slate-300 text-xs mb-1.5 font-medium">Your Email Address *</label>
+                  <input
+                    type="email"
                     required
-                    placeholder="Tell me about your project, timeline, or requirement..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className={`${inputCls} resize-none`}
+                    placeholder="john@example.com"
+                    value={formData.email}
+                    onChange={(e) => {
+                      setFormData({ ...formData, email: e.target.value });
+                      if (errorMessage) setErrorMessage('');
+                    }}
+                    className={inputCls}
                   />
                 </div>
+              </div>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-500 disabled:opacity-70 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-blue-500/20 transition-all cursor-pointer"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Sending message...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Submit Inquiry</span>
-                      <Send className="w-3.5 h-3.5" />
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
+              <div>
+                <label className="block text-slate-300 text-xs mb-1.5 font-medium">Subject *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Project Inquiry / Job Opportunity"
+                  value={formData.subject}
+                  onChange={(e) => {
+                    setFormData({ ...formData, subject: e.target.value });
+                    if (errorMessage) setErrorMessage('');
+                  }}
+                  className={inputCls}
+                />
+              </div>
+
+              <div>
+                <label className="block text-slate-300 text-xs mb-1.5 font-medium">Message *</label>
+                <textarea
+                  rows="4"
+                  required
+                  placeholder="Tell me about your project, timeline, or requirement..."
+                  value={formData.message}
+                  onChange={(e) => {
+                    setFormData({ ...formData, message: e.target.value });
+                    if (errorMessage) setErrorMessage('');
+                  }}
+                  className={`${inputCls} resize-none`}
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-500 disabled:opacity-70 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-blue-500/20 transition-all cursor-pointer"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Sending message...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Submit Inquiry</span>
+                    <Send className="w-3.5 h-3.5" />
+                  </>
+                )}
+              </button>
+            </form>
           </motion.div>
 
           {/* Right: Direct Info & Social */}
