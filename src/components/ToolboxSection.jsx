@@ -105,7 +105,7 @@ export default function ToolboxSection() {
     : techToolbox.filter(item => item.category === activeCategory);
 
   return (
-    <section id="toolbox" className="relative py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#090d16] border-t border-slate-800/80 overflow-hidden">
+    <section id="toolbox" className="relative py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-transparent border-t border-slate-800/80 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         
         {/* ======================================================== */}

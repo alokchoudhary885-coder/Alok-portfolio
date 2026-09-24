@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export default function TypographyStatement() {
   return (
-    <section className="relative py-16 sm:py-24 bg-[#090d16] border-y border-slate-800/80 overflow-hidden select-none">
+    <section className="relative py-16 sm:py-24 bg-transparent border-y border-slate-800/80 overflow-hidden select-none">
       {/* Background ambient gradient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[250px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none" />
 

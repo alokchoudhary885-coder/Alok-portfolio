@@ -74,7 +74,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
   };
 
   return (
-    <section id="deck" className="relative w-full py-20 sm:py-24 overflow-hidden border-t border-slate-800/80 bg-[#070b14]">
+    <section id="deck" className="relative w-full py-20 sm:py-24 overflow-hidden border-t border-slate-800/80 bg-transparent">
       <div className="dot-grid absolute inset-0 opacity-30 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-16 relative z-10">

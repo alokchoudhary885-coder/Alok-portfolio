@@ -6,7 +6,7 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
   const [expandedDevCommand, setExpandedDevCommand] = useState(false);
 
   return (
-    <section id="projects" className="relative py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#090d16] border-t border-slate-800/80 overflow-hidden">
+    <section id="projects" className="relative py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-transparent border-t border-slate-800/80 overflow-hidden">
       {/* Ambient soft glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none" />
 

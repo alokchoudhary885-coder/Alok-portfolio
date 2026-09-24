@@ -42,7 +42,7 @@ export default function Hero({ onOpenFoodRushModal }) {
   }, []);
 
   return (
-    <section id="hero" className="relative min-h-[92vh] pt-28 sm:pt-36 pb-16 px-4 sm:px-8 lg:px-16 flex flex-col justify-between items-center overflow-hidden bg-[#090d16] dot-grid">
+    <section id="hero" className="relative min-h-[92vh] pt-28 sm:pt-36 pb-16 px-4 sm:px-8 lg:px-16 flex flex-col justify-between items-center overflow-hidden bg-transparent dot-grid">
       
       {/* Subtle Ambient Spatial Glow Blobs */}
       <div className="pointer-events-none absolute -top-40 left-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[140px]" />

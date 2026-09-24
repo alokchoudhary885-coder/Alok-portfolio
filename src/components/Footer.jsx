@@ -26,7 +26,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative py-12 px-4 sm:px-8 lg:px-16 bg-[#060a12] border-t border-slate-800/80 text-xs text-slate-400">
+    <footer className="relative py-12 px-4 sm:px-8 lg:px-16 bg-transparent border-t border-slate-800/80 text-xs text-slate-400">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         
         {/* Brand & Location Info */}
