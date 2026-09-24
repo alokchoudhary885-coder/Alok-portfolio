@@ -119,7 +119,7 @@ export default function Preloader({ onComplete }) {
           transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] }
         } : { opacity: 1, scale: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#090d16] text-white p-6 md:p-10 overflow-hidden select-none"
+        className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-transparent text-white p-6 md:p-10 overflow-hidden select-none"
       >
         {/* Top Bar Info */}
         <div className="w-full max-w-5xl flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-4 font-mono">
