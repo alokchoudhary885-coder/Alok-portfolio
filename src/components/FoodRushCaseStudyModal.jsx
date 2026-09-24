@@ -29,26 +29,24 @@ export default function FoodRushCaseStudyModal({ isOpen, onClose }) {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 overflow-y-auto bg-black/90 backdrop-blur-xl">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/80 backdrop-blur-md">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 40 }}
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 40 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-5xl bg-[#121212] border border-[#CCFF00]/25 rounded-3xl p-4 sm:p-8 md:p-10 shadow-[0_0_50px_rgba(204,255,0,0.1)] my-auto text-white overflow-hidden max-h-[88vh] overflow-y-auto"
+          exit={{ opacity: 0, scale: 0.95, y: 20 }}
+          transition={{ duration: 0.3 }}
+          className="relative w-full max-w-4xl bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-8 shadow-2xl my-auto text-white overflow-hidden max-h-[86vh] overflow-y-auto"
         >
-          <div className="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-[#CCFF00]/5 rounded-full blur-[100px] pointer-events-none" />
-
           {/* Modal Header */}
-          <div className="flex items-center justify-between border-b border-[#CCFF00]/15 pb-4 sm:pb-6 mb-6 sm:mb-8">
-            <div className="flex items-center gap-2.5 sm:gap-3">
+          <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+            <div className="flex items-center gap-3">
               <span className="text-2xl sm:text-3xl">🍔</span>
               <div>
-                <span className="font-mono text-[10px] sm:text-xs text-[#CCFF00] font-bold tracking-wider block">
-                  06 / FOODRUSH TECHNICAL CASE STUDY
+                <span className="text-xs text-blue-400 font-mono font-medium block">
+                  TECHNICAL CASE STUDY
                 </span>
-                <h2 className="font-syne text-xl sm:text-3xl md:text-4xl font-extrabold text-white">
-                  FOODRUSH ENGINEERING
+                <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  FoodRush Platform Engineering
                 </h2>
               </div>
             </div>
@@ -56,76 +54,76 @@ export default function FoodRushCaseStudyModal({ isOpen, onClose }) {
             <button
               onClick={onClose}
               aria-label="Close Case Study"
-              className="p-2 sm:p-3 rounded-full bg-white/5 border border-white/10 hover:border-[#CCFF00] text-stone-300 hover:text-[#CCFF00] transition-all shrink-0 ml-2"
+              className="p-2 rounded-lg bg-slate-800/80 border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white transition-all shrink-0 ml-2 cursor-pointer"
             >
-              <X className="w-5 h-5 sm:w-6 sm:h-6" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Quick Links */}
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <div className="flex flex-wrap items-center gap-3 mb-6">
             <a
               href="https://github.com/alokchoudhary885-coder"
               target="_blank"
               rel="noreferrer"
-              className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#CCFF00] text-black font-bold font-mono text-xs flex items-center gap-2 shadow-[0_0_20px_rgba(204,255,0,0.35)] hover:bg-[#d4ff1a] transition-all"
+              className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs flex items-center gap-2 shadow-sm transition-all"
             >
               <span>Live Project Demo</span>
-              <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 text-black" />
+              <ExternalLink className="w-3.5 h-3.5" />
             </a>
 
             <a
               href="https://github.com/alokchoudhary885-coder"
               target="_blank"
               rel="noreferrer"
-              className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-white/5 border border-white/15 hover:border-[#CCFF00] text-stone-200 hover:text-white font-mono text-xs flex items-center gap-2 transition-all"
+              className="px-4 py-2 rounded-lg bg-slate-800/80 border border-slate-700 hover:border-slate-600 text-slate-200 text-xs font-medium flex items-center gap-2 transition-all"
             >
-              <Github className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#CCFF00] shrink-0" />
+              <Github className="w-3.5 h-3.5 text-blue-400" />
               <span>Source Code</span>
             </a>
           </div>
 
           {/* System Architecture */}
-          <div className="mb-8 sm:mb-10">
-            <h3 className="font-syne text-lg sm:text-xl font-bold text-white mb-2.5 flex items-center gap-2">
-              <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-[#CCFF00] shrink-0" />
-              <span>SYSTEM ARCHITECTURE</span>
+          <div className="mb-6">
+            <h3 className="text-base font-semibold text-white mb-2 flex items-center gap-2">
+              <Zap className="w-4 h-4 text-blue-400 shrink-0" />
+              <span>System Architecture</span>
             </h3>
-            <p className="text-[#A0A0A0] text-xs sm:text-sm font-light leading-relaxed mb-5">
+            <p className="text-slate-300 text-xs sm:text-sm font-normal leading-relaxed mb-4">
               A full-stack food delivery ecosystem connecting customers with local restaurant owners. Built for high concurrency, real-time status updates, and secure payment processing.
             </p>
 
-            <div className="p-4 sm:p-6 rounded-2xl bg-black/60 border border-[#CCFF00]/15 flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4 font-mono text-xs">
-              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-center w-full md:w-auto">
-                <span className="text-[#CCFF00] font-bold block mb-0.5">FRONTEND LAYER</span>
-                <span className="text-stone-300 text-[11px]">React.js + Zustand + Tailwind</span>
+            <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
+              <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-center w-full md:w-auto">
+                <span className="text-blue-400 font-semibold block mb-0.5">Frontend Layer</span>
+                <span className="text-slate-300 text-xs">React.js + Zustand + Tailwind</span>
               </div>
-              <ArrowDown className="w-4 h-4 text-[#CCFF00] md:hidden my-1" />
-              <ArrowRight className="w-5 h-5 text-[#CCFF00] hidden md:block" />
-              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-center w-full md:w-auto">
-                <span className="text-[#CCFF00] font-bold block mb-0.5">REST API GATEWAY</span>
-                <span className="text-stone-300 text-[11px]">25+ Express.js Routes & JWT</span>
+              <ArrowDown className="w-4 h-4 text-blue-400 md:hidden my-1" />
+              <ArrowRight className="w-4 h-4 text-blue-400 hidden md:block" />
+              <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-center w-full md:w-auto">
+                <span className="text-indigo-400 font-semibold block mb-0.5">REST API Gateway</span>
+                <span className="text-slate-300 text-xs">25+ Express.js Routes &amp; JWT</span>
               </div>
-              <ArrowDown className="w-4 h-4 text-[#CCFF00] md:hidden my-1" />
-              <ArrowRight className="w-5 h-5 text-[#CCFF00] hidden md:block" />
-              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-center w-full md:w-auto">
-                <span className="text-[#CCFF00] font-bold block mb-0.5">DATABASE & CLOUD</span>
-                <span className="text-stone-300 text-[11px]">MongoDB Atlas + Cloudinary</span>
+              <ArrowDown className="w-4 h-4 text-blue-400 md:hidden my-1" />
+              <ArrowRight className="w-4 h-4 text-blue-400 hidden md:block" />
+              <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-center w-full md:w-auto">
+                <span className="text-emerald-400 font-semibold block mb-0.5">Database &amp; Cloud</span>
+                <span className="text-slate-300 text-xs">MongoDB Atlas + Cloudinary</span>
               </div>
             </div>
           </div>
 
           {/* Tech Stack */}
-          <div className="mb-8 sm:mb-10">
-            <h3 className="font-syne text-lg sm:text-xl font-bold text-white mb-3 flex items-center gap-2">
-              <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-[#CCFF00] shrink-0" />
-              <span>TECHNOLOGIES LEVERAGED</span>
+          <div className="mb-6">
+            <h3 className="text-base font-semibold text-white mb-2.5 flex items-center gap-2">
+              <Layers className="w-4 h-4 text-blue-400 shrink-0" />
+              <span>Technologies Leveraged</span>
             </h3>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {techStackBadges.map((badge, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-lg bg-[#CCFF00]/5 border border-[#CCFF00]/20 text-[#CCFF00] font-mono text-[11px] sm:text-xs"
+                  className="px-3 py-1 rounded-md bg-slate-950/80 border border-slate-800 text-blue-300 font-mono text-xs"
                 >
                   {badge}
                 </span>
@@ -135,28 +133,28 @@ export default function FoodRushCaseStudyModal({ isOpen, onClose }) {
 
           {/* Engineering Features */}
           <div>
-            <h3 className="font-syne text-lg sm:text-xl font-bold text-white mb-3.5 flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-[#CCFF00] shrink-0" />
-              <span>KEY ENGINEERING HIGHLIGHTS (14+)</span>
+            <h3 className="text-base font-semibold text-white mb-2.5 flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-blue-400 shrink-0" />
+              <span>Key Engineering Highlights (14+)</span>
             </h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               {features.map((feat, idx) => (
                 <div
                   key={idx}
-                  className="p-3 sm:p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-center gap-2.5 font-mono text-[11px] sm:text-xs text-stone-200"
+                  className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800/80 flex items-center gap-2.5 text-xs text-slate-200"
                 >
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#CCFF00] shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
                   <span>{feat}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="mt-8 sm:mt-10 pt-5 sm:pt-6 border-t border-[#CCFF00]/15 flex justify-end">
+          <div className="mt-6 pt-4 border-t border-slate-800 flex justify-end">
             <button
               onClick={onClose}
-              className="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-white/10 hover:bg-[#CCFF00] hover:text-black text-white font-mono text-xs font-bold transition-all"
+              className="px-5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold transition-all cursor-pointer"
             >
               Close Case Study
             </button>

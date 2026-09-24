@@ -6,61 +6,58 @@ export default function ProcessSection() {
   const steps = [
     {
       num: '01',
-      title: 'IDEA & SCOPE',
+      title: 'Idea & Scope',
       desc: 'Defining core architecture, target user flows, and product requirements.',
       icon: Lightbulb,
     },
     {
       num: '02',
-      title: 'DESIGN SYSTEM',
+      title: 'Design System',
       desc: 'Crafting responsive UI wireframes, color tokens, and micro-interactions.',
       icon: Palette,
     },
     {
       num: '03',
-      title: 'FRONTEND DEV',
+      title: 'Frontend Dev',
       desc: 'Building high-performance React & Next.js interfaces with WebGL & Tailwind.',
       icon: Code,
     },
     {
       num: '04',
-      title: 'BACKEND & APIs',
+      title: 'Backend & APIs',
       desc: 'Engineering Node & Express REST APIs with JWT authentication and payment gateways.',
       icon: Server,
     },
     {
       num: '05',
-      title: 'DATABASE OPTIMIZATION',
+      title: 'Database Optimization',
       desc: 'Structuring MongoDB Atlas schemas, aggregation pipelines, and indexing.',
       icon: Database,
     },
     {
       num: '06',
-      title: 'DEPLOY & SHIP',
+      title: 'Deploy & Ship',
       desc: 'Shipping automated CI/CD builds to Vercel & Render with custom domain setup.',
       icon: Rocket,
     }
   ];
 
   return (
-    <section className="relative py-24 sm:py-32 px-4 sm:px-8 bg-[#0A0A0A] border-t border-[#CCFF00]/10 overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#CCFF00]/2 rounded-full blur-[200px] pointer-events-none" />
-
+    <section className="relative py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#090d16] border-t border-slate-800/80 overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
 
         {/* Section Header */}
-        <div className="flex flex-col items-start mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#CCFF00]/30 text-[#CCFF00] font-mono text-[11px] sm:text-xs mb-3 bg-[#CCFF00]/5">
+        <div className="flex flex-col items-start mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-800 text-blue-400 font-mono text-xs mb-3 bg-blue-500/5">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>08 / DEVELOPMENT PIPELINE</span>
+            <span>08 / Development Pipeline</span>
           </div>
 
-          <h2 className="font-syne text-4xl sm:text-7xl font-black text-white tracking-tight">
-            ENGINEERING <span className="text-shiny">PROCESS</span>
+          <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
+            Engineering <span className="text-shiny">Process</span>
           </h2>
 
-          <p className="font-mono text-xs sm:text-sm text-[#A0A0A0] mt-3 max-w-xl font-light">
+          <p className="text-slate-400 text-xs sm:text-sm mt-2.5 max-w-xl font-normal leading-relaxed">
             A structured 6-step engineering pipeline for delivering production-ready web products.
           </p>
         </div>
@@ -70,27 +67,27 @@ export default function ProcessSection() {
           {steps.map((step, idx) => (
             <motion.div
               key={step.num}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.08 }}
-              whileHover={{ y: -5 }}
-              className="p-6 sm:p-7 rounded-2xl border border-[#CCFF00]/12 bg-[#141414] flex flex-col justify-between hover:border-[#CCFF00]/35 hover:shadow-[0_0_25px_rgba(204,255,0,0.06)] transition-all duration-300 shadow-xl group"
+              transition={{ duration: 0.5, delay: idx * 0.06 }}
+              whileHover={{ y: -4 }}
+              className="p-6 rounded-2xl border border-slate-800/80 bg-slate-900/40 flex flex-col justify-between hover:border-blue-500/30 transition-all duration-200 shadow-sm group"
             >
               <div>
-                <div className="flex items-center justify-between mb-5 border-b border-[#CCFF00]/10 pb-4">
-                  <div className="p-2.5 rounded-xl bg-[#CCFF00]/8 border border-[#CCFF00]/20 text-[#CCFF00] group-hover:bg-[#CCFF00]/15 transition-colors">
+                <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-3.5">
+                  <div className="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 group-hover:bg-blue-500/20 transition-colors">
                     <step.icon className="w-5 h-5" />
                   </div>
-                  <span className="font-syne font-black text-2xl text-[#2A2A2A] group-hover:text-[#CCFF00] transition-colors">
+                  <span className="font-mono font-bold text-xl text-slate-600 group-hover:text-blue-400 transition-colors">
                     {step.num}
                   </span>
                 </div>
 
-                <h3 className="font-syne font-bold text-base sm:text-lg text-white mb-2 tracking-wide">
+                <h3 className="font-semibold text-base sm:text-lg text-white mb-1.5 tracking-tight">
                   {step.title}
                 </h3>
-                <p className="font-mono text-xs text-[#A0A0A0] leading-relaxed font-light">
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
                   {step.desc}
                 </p>
               </div>

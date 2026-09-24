@@ -25,7 +25,7 @@ export default function App() {
   const [jobGuardModalOpen, setJobGuardModalOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-[#0A0A0A] text-slate-100 selection:bg-[#CCFF00] selection:text-black">
+    <div className="relative min-h-screen bg-[#090d16] text-slate-100 selection:bg-blue-500 selection:text-white">
       {/* 01 / Preloader Boot Sequence */}
       {loading && <Preloader onComplete={() => setLoading(false)} />}
 
@@ -38,11 +38,11 @@ export default function App() {
         <div className="fixed left-0 top-1/2 z-40 hidden md:flex items-center transform -translate-y-1/2 pointer-events-auto">
           <a
             href="#contact"
-            className="bg-[#0F0F0F]/90 border-y border-r border-[#CCFF00]/30 hover:border-[#CCFF00]/60 backdrop-blur-xl text-[#CCFF00] py-6 px-2.5 text-[9px] font-mono font-bold uppercase tracking-[0.4em] shadow-[0_0_20px_rgba(204,255,0,0.15)] rounded-r-2xl cursor-pointer hover:bg-[#CCFF00]/8 transition-all duration-300 group"
+            className="bg-slate-900/90 border-y border-r border-slate-800 hover:border-blue-500/50 backdrop-blur-xl text-blue-400 py-5 px-2 text-[9px] font-mono font-semibold uppercase tracking-[0.3em] shadow-md shadow-black/20 rounded-r-xl cursor-pointer hover:bg-slate-850 transition-all duration-200 group"
           >
             <span className="[writing-mode:vertical-rl] rotate-180 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00] animate-ping inline-block" />
-              AVAILABLE FOR OPPORTUNITY
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
+              AVAILABLE FOR HIRE
             </span>
           </a>
         </div>

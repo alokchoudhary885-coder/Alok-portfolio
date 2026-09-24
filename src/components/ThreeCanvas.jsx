@@ -21,15 +21,15 @@ export default function ThreeCanvas() {
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    // Lighting: Modern Soft Indigo & Ocean Blue
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
     scene.add(ambientLight);
 
-    const pointLight1 = new THREE.PointLight(0xccff00, 4, 30);
+    const pointLight1 = new THREE.PointLight(0x3b82f6, 3.5, 30);
     pointLight1.position.set(4, 5, 4);
     scene.add(pointLight1);
 
-    const pointLight2 = new THREE.PointLight(0x00ffcc, 2.5, 30);
+    const pointLight2 = new THREE.PointLight(0x6366f1, 2.5, 30);
     pointLight2.position.set(-4, -4, -2);
     scene.add(pointLight2);
 
@@ -37,25 +37,25 @@ export default function ThreeCanvas() {
     const group = new THREE.Group();
     scene.add(group);
 
-    // 1. Icosahedron core with glossy deep cyber surface & neon lime specular
+    // 1. Icosahedron core with glossy deep navy surface & soft blue specular
     const innerGeo = new THREE.IcosahedronGeometry(1.6, 2);
     const innerMat = new THREE.MeshPhongMaterial({
-      color: 0x0f1710,
-      emissive: 0x112905,
-      specular: 0xccff00,
-      shininess: 90,
+      color: 0x0f172a,
+      emissive: 0x0c1e3d,
+      specular: 0x60a5fa,
+      shininess: 85,
       wireframe: false,
       flatShading: true,
       transparent: true,
-      opacity: 0.88,
+      opacity: 0.9,
     });
     const coreMesh = new THREE.Mesh(innerGeo, innerMat);
     group.add(coreMesh);
 
-    // 2. Wireframe outer shell glowing neon lime
+    // 2. Wireframe outer shell glowing soft blue
     const wireGeo = new THREE.IcosahedronGeometry(1.85, 2);
     const wireMat = new THREE.MeshBasicMaterial({
-      color: 0xccff00,
+      color: 0x3b82f6,
       wireframe: true,
       transparent: true,
       opacity: 0.35,
@@ -65,18 +65,18 @@ export default function ThreeCanvas() {
 
     // 3. Floating orbit rings
     const ringMat1 = new THREE.MeshBasicMaterial({
-      color: 0xccff00,
+      color: 0x60a5fa,
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.5,
+      opacity: 0.45,
     });
-    const ringGeo1 = new THREE.TorusGeometry(2.4, 0.018, 16, 100);
+    const ringGeo1 = new THREE.TorusGeometry(2.4, 0.016, 16, 100);
     const ringMesh1 = new THREE.Mesh(ringGeo1, ringMat1);
     ringMesh1.rotation.x = Math.PI / 3;
     group.add(ringMesh1);
 
     const ringMat2 = new THREE.MeshBasicMaterial({
-      color: 0x00ffcc,
+      color: 0x818cf8,
       side: THREE.DoubleSide,
       transparent: true,
       opacity: 0.3,
@@ -101,10 +101,10 @@ export default function ThreeCanvas() {
     }
     particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     const particleMat = new THREE.PointsMaterial({
-      color: 0xccff00,
-      size: 0.05,
+      color: 0x93c5fd,
+      size: 0.045,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.75,
     });
     const particleSystem = new THREE.Points(particleGeo, particleMat);
     group.add(particleSystem);
@@ -189,7 +189,7 @@ export default function ThreeCanvas() {
     <div
       ref={containerRef}
       className="w-full h-full relative"
-      style={{ minHeight: '440px' }}
+      style={{ minHeight: '340px' }}
     />
   );
 }

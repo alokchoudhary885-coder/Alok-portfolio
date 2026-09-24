@@ -12,75 +12,72 @@ export default function DsaTerminalSection() {
   ];
 
   const statusColor = (s) => {
-    if (s === 'COMPLETED') return 'text-[#CCFF00] border-[#CCFF00]/40 bg-[#CCFF00]/8';
-    if (s === 'VERIFIED')  return 'text-white border-white/30 bg-white/5';
-    return 'text-[#A0A0A0] border-white/20 bg-white/3';
+    if (s === 'COMPLETED') return 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10';
+    if (s === 'VERIFIED')  return 'text-blue-400 border-blue-500/30 bg-blue-500/10';
+    return 'text-slate-300 border-slate-700 bg-slate-800/50';
   };
 
   return (
-    <section className="relative py-24 sm:py-32 px-4 sm:px-8 bg-[#0A0A0A] border-t border-[#CCFF00]/10 overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute top-1/2 right-0 w-[500px] h-[400px] bg-[#CCFF00]/3 rounded-full blur-[180px] pointer-events-none" />
-
+    <section className="relative py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#090d16] border-t border-slate-800/80 overflow-hidden">
       <div className="max-w-5xl mx-auto relative z-10">
 
         {/* Section Header */}
-        <div className="flex flex-col items-start mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#CCFF00]/30 text-[#CCFF00] font-mono text-[11px] sm:text-xs mb-3 bg-[#CCFF00]/5">
+        <div className="flex flex-col items-start mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-800 text-blue-400 font-mono text-xs mb-3 bg-blue-500/5">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>09 / PROBLEM SOLVING & ALGORITHMS</span>
+            <span>09 / Problem Solving &amp; Algorithms</span>
           </div>
 
-          <h2 className="font-syne text-4xl sm:text-7xl font-black text-white tracking-tight">
-            JAVA & <span className="text-shiny">DSA PRACTICE</span>
+          <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
+            Java &amp; <span className="text-shiny">DSA Practice</span>
           </h2>
-          <p className="font-mono text-xs sm:text-sm text-[#A0A0A0] mt-3 font-light">
-            Core algorithmic foundations, time complexity optimization & data structure problem solving.
+          <p className="text-slate-400 text-xs sm:text-sm mt-2.5 font-normal leading-relaxed">
+            Core algorithmic foundations, time complexity optimization &amp; data structure problem solving.
           </p>
         </div>
 
         {/* CLI Terminal Container */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="rounded-2xl overflow-hidden border border-[#CCFF00]/20 bg-[#0F0F0F] shadow-[0_0_40px_rgba(204,255,0,0.06)] font-mono text-xs"
+          transition={{ duration: 0.6 }}
+          className="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 shadow-xl font-mono text-xs"
         >
           {/* Terminal Top Bar */}
-          <div className="px-5 py-3.5 bg-[#141414] border-b border-[#CCFF00]/10 flex items-center justify-between select-none">
+          <div className="px-5 py-3.5 bg-slate-900 border-b border-slate-800 flex items-center justify-between select-none">
             <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-red-500/80" />
-              <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-              <span className="w-3 h-3 rounded-full bg-[#CCFF00]/80" />
-              <span className="ml-3 text-[#A0A0A0] text-xs font-semibold">alok@developer-terminal:~</span>
+              <span className="w-3 h-3 rounded-full bg-rose-500/80" />
+              <span className="w-3 h-3 rounded-full bg-amber-500/80" />
+              <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
+              <span className="ml-3 text-slate-400 text-xs">alok@developer-terminal:~</span>
             </div>
 
-            <div className="flex items-center gap-2 text-xs text-[#A0A0A0]">
-              <Terminal className="w-3.5 h-3.5 text-[#CCFF00]" />
+            <div className="flex items-center gap-2 text-xs text-slate-400">
+              <Terminal className="w-3.5 h-3.5 text-blue-400" />
               <span>bash v5.2</span>
             </div>
           </div>
 
           {/* Terminal Body */}
-          <div className="p-6 sm:p-8 space-y-5">
-            <div className="text-[#A0A0A0]">
-              <span className="text-[#CCFF00] font-bold">$ </span>
+          <div className="p-6 sm:p-8 space-y-4">
+            <div className="text-slate-300">
+              <span className="text-blue-400 font-bold">$ </span>
               <span className="text-white font-medium">java problem-solving --suite=dsa-core-track</span>
             </div>
 
-            <div className="space-y-3 pt-1">
+            <div className="space-y-2.5 pt-1">
               {dsaSuites.map((item, i) => (
                 <div
                   key={i}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-xl bg-[#1A1A1A] border border-[#CCFF00]/8 hover:border-[#CCFF00]/25 transition-all gap-2 group"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 transition-all gap-2"
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="text-[#CCFF00] font-bold text-[10px] opacity-50">▸</span>
-                    <span className="text-white font-medium">{item.name}</span>
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-blue-400 text-xs">▸</span>
+                    <span className="text-slate-200 font-medium">{item.name}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-[#A0A0A0] text-xs">{item.count}</span>
+                    <span className="text-slate-400 text-xs">{item.count}</span>
                     <span className={`px-2.5 py-0.5 rounded text-[10px] font-bold border ${statusColor(item.status)}`}>
                       {item.status}
                     </span>
@@ -90,13 +87,13 @@ export default function DsaTerminalSection() {
             </div>
 
             {/* Footer Summary */}
-            <div className="pt-4 border-t border-[#CCFF00]/10 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs gap-3">
-              <span className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#CCFF00] shrink-0" />
-                <span className="text-white font-medium">150+ Total LeetCode & Coding Problems Practiced</span>
+            <div className="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs gap-3">
+              <span className="flex items-center gap-2 text-slate-300">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span className="text-white font-medium">150+ Total LeetCode &amp; Coding Problems Practiced</span>
               </span>
-              <span className="text-[#CCFF00] font-bold px-3 py-1 rounded bg-[#CCFF00]/10 border border-[#CCFF00]/30">
-                JAVA 17 LTS
+              <span className="text-blue-400 font-semibold px-3 py-1 rounded-lg bg-blue-500/10 border border-blue-500/30">
+                Java 17 LTS
               </span>
             </div>
           </div>

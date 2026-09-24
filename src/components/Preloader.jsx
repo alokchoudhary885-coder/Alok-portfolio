@@ -8,7 +8,6 @@ export default function Preloader({ onComplete }) {
   const [isPlayingVoice, setIsPlayingVoice] = useState(false);
 
   useEffect(() => {
-    // Pre-fetch voices on mount for instant availability
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.getVoices();
       if (window.speechSynthesis.onvoiceschanged !== undefined) {
@@ -32,7 +31,6 @@ export default function Preloader({ onComplete }) {
   }, []);
 
   const playCinematicVoiceAndSwell = () => {
-    // 1. Play subtle low-frequency ambient synth swell using Web Audio API
     try {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       if (AudioCtx) {
@@ -55,10 +53,9 @@ export default function Preloader({ onComplete }) {
         osc.stop(ctx.currentTime + 1.8);
       }
     } catch (err) {
-      // Ignore if web audio context restricted
+      // Ignore audio error
     }
 
-    // 2. Play Natural Female Cinematic Voice Welcome via SpeechSynthesis API
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
 
@@ -116,78 +113,78 @@ export default function Preloader({ onComplete }) {
         key="preloader"
         initial={{ opacity: 1, scale: 1 }}
         animate={isEntering ? {
-          scale: 1.08,
+          scale: 1.05,
           opacity: 0,
-          filter: "blur(12px)",
-          transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] }
+          filter: "blur(10px)",
+          transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] }
         } : { opacity: 1, scale: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#0A0A0A] text-white p-4 md:p-10 overflow-hidden select-none bg-noise"
+        className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#090d16] text-white p-6 md:p-10 overflow-hidden select-none"
       >
         {/* Top Bar Info */}
-        <div className="w-full flex items-center justify-between font-mono text-xs text-[#A0A0A0] border-b border-[#CCFF00]/15 pb-4">
+        <div className="w-full max-w-5xl flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-4 font-mono">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#CCFF00] animate-ping" />
-            <span className="text-[#CCFF00] font-semibold">PORTFOLIO ENVIRONMENT</span>
+            <span className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
+            <span className="text-blue-400 font-medium">Portfolio Environment</span>
           </div>
           <div className="flex items-center gap-2">
-            <Terminal className="w-3.5 h-3.5 text-[#CCFF00]" />
+            <Terminal className="w-3.5 h-3.5 text-slate-400" />
             <span>v2.026</span>
           </div>
         </div>
 
         {/* Center Name */}
-        <div className="flex flex-col items-center justify-center my-auto text-center w-full max-w-6xl px-2">
+        <div className="flex flex-col items-center justify-center my-auto text-center w-full max-w-4xl px-4">
           <motion.div 
-            initial={{ opacity: 0, y: -15 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-mono text-xs tracking-widest text-[#CCFF00] bg-[#CCFF00]/10 border border-[#CCFF00]/30 px-3.5 py-1.5 rounded-full mb-6 flex items-center gap-2 shadow-[0_0_15px_rgba(204,255,0,0.2)]"
+            className="font-mono text-xs tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/25 px-3.5 py-1.5 rounded-full mb-6 flex items-center gap-2"
           >
             <Code2 className="w-3.5 h-3.5" />
-            <span>00 / FULL STACK DEVELOPER</span>
+            <span>FULL STACK DEVELOPER</span>
           </motion.div>
 
-          <h1 className="font-syne font-black tracking-tight text-white whitespace-nowrap text-[clamp(1.4rem,5.2vw,4.5rem)] leading-none w-full text-center px-1">
-            ALOK <span className="text-shiny">CHOUDHARY</span>
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white">
+            Alok <span className="text-shiny">Choudhary</span>
           </h1>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="font-mono text-xs md:text-sm text-[#A0A0A0] tracking-widest uppercase mt-4 mb-10 flex items-center justify-center gap-2"
+            transition={{ delay: 0.3, duration: 0.4 }}
+            className="text-xs sm:text-sm text-slate-400 tracking-wider uppercase mt-4 mb-8 font-normal"
           >
-            <span>COMPUTER SCIENCE ENGINEER • MERN STACK DEVELOPER</span>
+            Computer Science Engineer • MERN Stack Developer
           </motion.p>
 
           {/* Progress Percentage Bar */}
-          <div className="w-64 md:w-80 flex flex-col items-center gap-3">
-            <div className="w-full bg-[#1A1A1A] h-1.5 rounded-full overflow-hidden border border-[#CCFF00]/20 p-0.5">
+          <div className="w-64 sm:w-80 flex flex-col items-center gap-2.5">
+            <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden border border-slate-800 p-0.5">
               <motion.div
-                className="h-full bg-gradient-to-r from-[#88FF00] to-[#CCFF00] rounded-full shadow-[0_0_10px_#CCFF00]"
+                className="h-full bg-gradient-to-r from-blue-600 to-indigo-500 rounded-full"
                 style={{ width: `${Math.min(percentage, 100)}%` }}
                 transition={{ ease: "easeOut" }}
               />
             </div>
 
-            <div className="w-full flex items-center justify-between font-mono text-xs text-[#A0A0A0]">
+            <div className="w-full flex items-center justify-between text-xs text-slate-400 font-mono">
               <span>SYSTEM READY</span>
-              <span className="text-[#CCFF00] font-bold text-sm">{Math.min(percentage, 100)}%</span>
+              <span className="text-blue-400 font-bold">{Math.min(percentage, 100)}%</span>
             </div>
           </div>
         </div>
 
         {/* Bottom CTA Button */}
-        <div className="w-full flex flex-col items-center justify-center pt-4 border-t border-[#CCFF00]/15">
+        <div className="w-full max-w-5xl flex flex-col items-center justify-center pt-4 border-t border-slate-800">
           <button
             onClick={handleEnterExperience}
-            className="interactive-card px-8 py-3.5 rounded-full bg-[#CCFF00] hover:bg-[#d4ff1a] text-black font-mono text-xs font-bold flex items-center gap-2 shadow-[0_0_25px_rgba(204,255,0,0.4)] hover:scale-105 active:scale-95 transition-all group"
+            className="px-8 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-md shadow-blue-500/20 hover:scale-105 active:scale-95 transition-all group cursor-pointer"
           >
-            <span>ENTER PORTFOLIO</span>
+            <span>Enter Portfolio</span>
             {isPlayingVoice ? (
-              <Volume2 className="w-4 h-4 text-black animate-pulse" />
+              <Volume2 className="w-4 h-4 text-blue-200 animate-pulse" />
             ) : (
-              <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             )}
           </button>
         </div>
