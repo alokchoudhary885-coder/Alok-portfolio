@@ -154,34 +154,15 @@ export default function Hero({ onOpenFoodRushModal }) {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="lg:col-span-5 relative w-full mt-6 lg:mt-0 flex items-center justify-center"
+          className="lg:col-span-5 relative w-full mt-6 lg:mt-0"
         >
-          <div className="relative w-full rounded-2xl bg-slate-900/40 border border-slate-800/80 p-2 shadow-xl shadow-black/30 overflow-hidden">
-            
-            {/* Embedded Spline 3D Scene */}
-            <div className="w-full h-[360px] sm:h-[440px] lg:h-[480px] rounded-xl bg-slate-950/70 relative overflow-hidden flex items-center justify-center">
-              <Spline
-                scene="https://prod.spline.design/wpbAVYS8OeLwxS3e/scene.splinecode"
-                className="w-full h-full cursor-grab active:cursor-grabbing"
-              />
-            </div>
-
-            {/* Floating Telemetry Badges */}
-            <div className="absolute top-5 left-5 px-3 py-1.5 rounded-lg bg-slate-900/90 backdrop-blur-md border border-slate-800 shadow-sm flex items-center gap-2 pointer-events-none">
-              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-              <span className="text-xs text-slate-200 font-medium">Spline 3D &amp; WebGL</span>
-            </div>
-
-            <div className="absolute bottom-5 left-5 px-3 py-1.5 rounded-lg bg-slate-900/90 backdrop-blur-md border border-slate-800 shadow-sm flex items-center gap-2 pointer-events-none">
-              <span className="w-2 h-2 rounded-full bg-indigo-400"></span>
-              <span className="text-xs text-slate-200 font-medium">Interactive Orb</span>
-            </div>
-
-            <div className="absolute top-1/2 -right-3 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-slate-900/95 backdrop-blur-md border border-blue-500/30 shadow-md hidden sm:flex items-center gap-2 pointer-events-none">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-              <span className="text-xs font-medium text-blue-400">Full-Stack MERN</span>
-            </div>
-
+          <div className="relative w-full h-[360px] sm:h-[440px] lg:h-[480px] overflow-hidden">
+            <Spline
+              scene="https://prod.spline.design/kOb8SDOF-SGGifT2/scene.splinecode"
+              className="w-full h-full cursor-grab active:cursor-grabbing"
+            />
+            {/* Watermark cover — masks the "Built with Spline" text at bottom */}
+            <div className="absolute bottom-0 left-0 right-0 h-8 bg-[#090d16] pointer-events-none z-10" />
           </div>
         </motion.div>
 
