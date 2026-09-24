@@ -8,19 +8,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        bgDark: "#08090C",
-        cardDark: "rgba(18, 20, 29, 0.7)",
-        cardBorder: "rgba(255, 255, 255, 0.08)",
+        bgDark: "#0A0A0A",
+        bgVoid: "#050505",
+        cardDark: "#141414",
+        cardBorder: "rgba(204, 255, 0, 0.15)",
+        cardBorderSubtle: "rgba(255, 255, 255, 0.08)",
+        neonLime: "#CCFF00",
+        neonAccent: "#C3F400",
+        brandNeon: "#CCFF00",
+        brandGreen: "#CCFF00",
         brandCyan: "#00f0ff",
-        brandOrange: "#ff5500",
-        brandPurple: "#8a2be2",
-        brandGreen: "#00ff66",
-        textMuted: "#8e95a5",
+        textMuted: "#A0A0A0",
+        surfaceLow: "#111111",
+        surfaceHigh: "#1C1C1C",
       },
       fontFamily: {
         sans: ['Space Grotesk', 'Inter', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-        display: ['Syne', 'Space Grotesk', 'sans-serif'],
+        display: ['Space Grotesk', 'Syne', 'sans-serif'],
+        syne: ['Space Grotesk', 'Syne', 'sans-serif'],
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -35,14 +41,14 @@ export default {
         },
         glowPulse: {
           '0%, 100%': { opacity: '0.4' },
-          '50%': { opacity: '0.8' },
+          '50%': { opacity: '0.9' },
         }
       },
       boxShadow: {
-        'neon-cyan': '0 0 25px rgba(0, 240, 255, 0.25)',
-        'neon-orange': '0 0 25px rgba(255, 85, 0, 0.25)',
-        'neon-purple': '0 0 25px rgba(138, 43, 226, 0.25)',
-        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+        'neon-lime': '0 0 30px rgba(204, 255, 0, 0.35)',
+        'neon-glow': '0 0 25px rgba(204, 255, 0, 0.25)',
+        'neon-hover': '0 0 40px rgba(204, 255, 0, 0.5)',
+        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.5)',
       }
     },
   },

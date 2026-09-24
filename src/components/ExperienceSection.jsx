@@ -11,6 +11,7 @@ export default function ExperienceSection() {
       role: 'FULL-STACK DEVELOPMENT INTERN',
       company: 'Aurika Infotech',
       location: 'Remote',
+      isCurrent: true,
       tags: ['React.js', 'Node.js', 'Express.js', 'MongoDB'],
       highlights: [
         'Developing MERN stack web applications using React.js, Node.js, Express.js, and MongoDB.',
@@ -23,6 +24,7 @@ export default function ExperienceSection() {
       role: 'WEB DEVELOPMENT INTERN',
       company: 'Aeonaxy Technologies Pvt. Ltd.',
       location: 'Remote',
+      isCurrent: false,
       tags: ['React.js', 'JavaScript', 'HTML5', 'CSS3'],
       highlights: [
         'Contributed to responsive web interface development using React.js, JavaScript, HTML, and CSS.',
@@ -33,12 +35,15 @@ export default function ExperienceSection() {
   ];
 
   return (
-    <section id="experience" className="relative py-24 sm:py-32 px-4 sm:px-8 bg-[#04060b] border-t border-white/5 overflow-hidden">
-      <div className="max-w-5xl mx-auto">
-        
+    <section id="experience" className="relative py-24 sm:py-32 px-4 sm:px-8 bg-[#0A0A0A] border-t border-[#CCFF00]/10 overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute bottom-0 left-1/4 w-[600px] h-[300px] bg-[#CCFF00]/3 rounded-full blur-[160px] pointer-events-none" />
+
+      <div className="max-w-5xl mx-auto relative z-10">
+
         {/* Section Header */}
         <div className="flex flex-col items-start mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 text-cyan-400 font-mono text-[11px] sm:text-xs mb-3 bg-cyan-500/5">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#CCFF00]/30 text-[#CCFF00] font-mono text-[11px] sm:text-xs mb-3 bg-[#CCFF00]/5">
             <Sparkles className="w-3.5 h-3.5" />
             <span>06 / PROFESSIONAL TIMELINE</span>
           </div>
@@ -46,12 +51,12 @@ export default function ExperienceSection() {
           <h2 className="font-syne text-4xl sm:text-7xl font-black text-white tracking-tight">
             WORK <span className="text-shiny">EXPERIENCE</span>
           </h2>
-          <p className="font-mono text-xs sm:text-sm text-slate-400 mt-3 font-light">
-            Software development internships &amp; engineering contributions.
+          <p className="font-mono text-xs sm:text-sm text-[#A0A0A0] mt-3 font-light">
+            Software development internships & engineering contributions.
           </p>
         </div>
 
-        {/* Editorial Timeline Items */}
+        {/* Timeline Items */}
         <div className="space-y-6 sm:space-y-8">
           {experiences.map((exp, idx) => (
             <motion.div
@@ -60,25 +65,39 @@ export default function ExperienceSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#090d16] hover:border-white/20 transition-all"
+              className={`p-6 sm:p-8 rounded-2xl border bg-[#141414] hover:border-[#CCFF00]/30 transition-all duration-300 ${
+                exp.isCurrent ? 'border-[#CCFF00]/30 shadow-[0_0_30px_rgba(204,255,0,0.06)]' : 'border-[#CCFF00]/10'
+              }`}
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#CCFF00]/10 pb-5">
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-cyan-400 shrink-0 mt-1">
+                  <div className={`p-3 rounded-xl border shrink-0 mt-1 ${
+                    exp.isCurrent
+                      ? 'bg-[#CCFF00]/10 border-[#CCFF00]/30 text-[#CCFF00]'
+                      : 'bg-white/5 border-white/10 text-[#A0A0A0]'
+                  }`}>
                     <Briefcase className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="font-mono text-xs text-cyan-400 font-bold tracking-wider block">
-                      {exp.period}
-                    </span>
-                    <h3 className="font-syne font-bold text-xl sm:text-2xl text-white mt-1">
+                    <div className="flex items-center gap-2.5 mb-1">
+                      <span className="font-mono text-xs text-[#CCFF00] font-bold tracking-wider">
+                        {exp.period}
+                      </span>
+                      {exp.isCurrent && (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#CCFF00]/10 border border-[#CCFF00]/30 font-mono text-[9px] text-[#CCFF00] font-bold">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00] animate-pulse inline-block" />
+                          ACTIVE
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="font-syne font-bold text-xl sm:text-2xl text-white">
                       {exp.role}
                     </h3>
-                    <div className="flex items-center gap-2 font-mono text-xs text-slate-300 mt-1">
-                      <span className="font-semibold text-slate-200">{exp.company}</span>
+                    <div className="flex items-center gap-2 font-mono text-xs text-[#A0A0A0] mt-1">
+                      <span className="font-semibold text-white">{exp.company}</span>
                       <span>•</span>
-                      <span className="flex items-center gap-1 text-slate-400">
-                        <MapPin className="w-3 h-3 text-cyan-400" />
+                      <span className="flex items-center gap-1">
+                        <MapPin className="w-3 h-3 text-[#CCFF00]" />
                         {exp.location}
                       </span>
                     </div>
@@ -87,7 +106,7 @@ export default function ExperienceSection() {
 
                 <button
                   onClick={() => setExpandedIndex(expandedIndex === idx ? -1 : idx)}
-                  className="px-4 py-2 rounded-xl border border-white/15 hover:border-cyan-400 text-slate-300 hover:text-white font-mono text-xs flex items-center justify-center gap-2 transition-all self-start sm:self-center bg-white/5"
+                  className="px-4 py-2 rounded-xl border border-[#CCFF00]/20 hover:border-[#CCFF00]/50 text-[#A0A0A0] hover:text-[#CCFF00] font-mono text-xs flex items-center justify-center gap-2 transition-all self-start sm:self-center bg-[#CCFF00]/5"
                 >
                   <span>{expandedIndex === idx ? 'Hide Highlights' : 'View Highlights'}</span>
                   {expandedIndex === idx ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -97,24 +116,24 @@ export default function ExperienceSection() {
               {/* Tech Tags */}
               <div className="flex flex-wrap gap-2 pt-4">
                 {exp.tags.map((t, i) => (
-                  <span key={i} className="px-3 py-1 rounded-md font-mono text-xs bg-white/5 border border-white/10 text-slate-300">
+                  <span key={i} className="px-3 py-1 rounded-md font-mono text-xs bg-[#CCFF00]/5 border border-[#CCFF00]/15 text-[#A0A0A0]">
                     {t}
                   </span>
                 ))}
               </div>
 
-              {/* Expandable Technical Highlights */}
+              {/* Expandable Highlights */}
               <AnimatePresence>
                 {expandedIndex === idx && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="mt-4 pt-4 border-t border-white/10 space-y-2.5 font-mono text-xs text-slate-300"
+                    className="mt-4 pt-4 border-t border-[#CCFF00]/10 space-y-2.5 font-mono text-xs text-[#A0A0A0]"
                   >
                     {exp.highlights.map((item, i) => (
                       <div key={i} className="flex items-start gap-2.5">
-                        <span className="text-cyan-400 font-bold shrink-0">▹</span>
+                        <span className="text-[#CCFF00] font-bold shrink-0">▹</span>
                         <span className="leading-relaxed font-light">{item}</span>
                       </div>
                     ))}

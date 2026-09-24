@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Award, ExternalLink, CheckCircle } from 'lucide-react';
+import { Sparkles, CheckCircle, ExternalLink } from 'lucide-react';
 
 export default function CertificationsSection() {
   const credentials = [
@@ -10,7 +10,6 @@ export default function CertificationsSection() {
       issuer: 'Web Development Certification',
       year: '2026',
       badge: 'VERIFIED CREDENTIAL',
-      accent: 'text-cyan-400 border-cyan-500/30',
       tags: ['React.js', 'Node.js', 'Express', 'MongoDB'],
     },
     {
@@ -19,7 +18,6 @@ export default function CertificationsSection() {
       issuer: 'Computer Science Fundamentals',
       year: '2026',
       badge: 'CORE DSA',
-      accent: 'text-purple-400 border-purple-500/30',
       tags: ['Java', 'Algorithms', 'OOPs', 'Problem Solving'],
     },
     {
@@ -28,31 +26,33 @@ export default function CertificationsSection() {
       issuer: 'Developer Tools & Workflows',
       year: '2026',
       badge: 'DEVOPS WORKFLOW',
-      accent: 'text-green-400 border-green-500/30',
       tags: ['Git', 'GitHub', 'CI/CD', 'Collaboration'],
     }
   ];
 
   return (
-    <section className="relative py-24 sm:py-32 px-4 sm:px-8 bg-[#04060b] border-t border-white/5 overflow-hidden">
-      <div className="max-w-5xl mx-auto">
-        
+    <section className="relative py-24 sm:py-32 px-4 sm:px-8 bg-[#0A0A0A] border-t border-[#CCFF00]/10 overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[300px] bg-[#CCFF00]/3 rounded-full blur-[160px] pointer-events-none" />
+
+      <div className="max-w-5xl mx-auto relative z-10">
+
         {/* Section Header */}
         <div className="flex flex-col items-start mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 text-cyan-400 font-mono text-[11px] sm:text-xs mb-3 bg-cyan-500/5">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#CCFF00]/30 text-[#CCFF00] font-mono text-[11px] sm:text-xs mb-3 bg-[#CCFF00]/5">
             <Sparkles className="w-3.5 h-3.5" />
             <span>07 / VERIFIED CREDENTIALS</span>
           </div>
 
           <h2 className="font-syne text-4xl sm:text-7xl font-black text-white tracking-tight">
-            LEARNING &amp; <span className="text-shiny">CREDENTIALS</span>
+            LEARNING & <span className="text-shiny">CREDENTIALS</span>
           </h2>
-          <p className="font-mono text-xs sm:text-sm text-slate-400 mt-3 font-light">
-            Continuous technical learning, computer science foundations &amp; verified certifications.
+          <p className="font-mono text-xs sm:text-sm text-[#A0A0A0] mt-3 font-light">
+            Continuous technical learning, computer science foundations & verified certifications.
           </p>
         </div>
 
-        {/* 3 Credential Cards in Editorial Composition */}
+        {/* 3 Credential Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {credentials.map((item, idx) => (
             <motion.div
@@ -62,45 +62,45 @@ export default function CertificationsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
               whileHover={{ y: -6 }}
-              className="p-6 sm:p-7 rounded-2xl border border-white/10 bg-[#090d16] flex flex-col justify-between hover:border-white/20 transition-all duration-300 shadow-xl group"
+              className="p-6 sm:p-7 rounded-2xl border border-[#CCFF00]/15 bg-[#141414] flex flex-col justify-between hover:border-[#CCFF00]/40 hover:shadow-[0_0_30px_rgba(204,255,0,0.08)] transition-all duration-300 shadow-xl group"
             >
               <div>
-                <div className="flex items-center justify-between mb-5 border-b border-white/10 pb-4 font-mono">
-                  <span className="font-syne font-black text-3xl text-white group-hover:text-cyan-400 transition-colors">
+                <div className="flex items-center justify-between mb-5 border-b border-[#CCFF00]/10 pb-4 font-mono">
+                  <span className="font-syne font-black text-3xl text-white group-hover:text-[#CCFF00] transition-colors">
                     {item.id}
                   </span>
-                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400 font-semibold">
-                    {item.year}
+                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#CCFF00]/8 border border-[#CCFF00]/20 text-[#CCFF00] font-semibold">
+                    [{item.year}]
                   </span>
                 </div>
 
-                <div className={`inline-block px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider mb-3 border ${item.accent} bg-white/5`}>
+                <div className="inline-block px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider mb-3 border border-[#CCFF00]/30 text-[#CCFF00] bg-[#CCFF00]/8">
                   {item.badge}
                 </div>
 
                 <h3 className="font-syne font-bold text-lg text-white mb-2 leading-snug">
                   {item.title}
                 </h3>
-                <p className="font-mono text-xs text-slate-400 mb-5 font-light">
+                <p className="font-mono text-xs text-[#A0A0A0] mb-5 font-light">
                   {item.issuer}
                 </p>
 
                 <div className="flex flex-wrap gap-1.5 font-mono text-[10px]">
                   {item.tags.map((t, i) => (
-                    <span key={i} className="px-2.5 py-0.5 rounded-md bg-white/5 border border-white/10 text-slate-300">
+                    <span key={i} className="px-2.5 py-0.5 rounded-md bg-[#CCFF00]/5 border border-[#CCFF00]/15 text-[#A0A0A0]">
                       {t}
                     </span>
                   ))}
                 </div>
               </div>
 
-              <div className="mt-8 pt-4 border-t border-white/10 font-mono text-xs">
+              <div className="mt-8 pt-4 border-t border-[#CCFF00]/10 font-mono text-xs">
                 <a
                   href="#contact"
-                  className="text-cyan-400 hover:text-white flex items-center justify-between font-bold transition-colors"
+                  className="text-[#CCFF00] hover:text-white flex items-center justify-between font-bold transition-colors"
                 >
                   <span className="flex items-center gap-1.5">
-                    <CheckCircle className="w-3.5 h-3.5 text-cyan-400" />
+                    <CheckCircle className="w-3.5 h-3.5 text-[#CCFF00]" />
                     <span>ACCREDITED</span>
                   </span>
                   <ExternalLink className="w-3.5 h-3.5" />

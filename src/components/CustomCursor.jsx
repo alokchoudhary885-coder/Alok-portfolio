@@ -59,35 +59,36 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Dynamic Cursor Torch Background Spotlight */}
-      <div 
+      {/* Dynamic Cursor Torch Background Spotlight — Neon Lime */}
+      <div
         className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 hidden md:block"
         style={{
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(0, 240, 255, 0.04), transparent 80%)`
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(204, 255, 0, 0.04), transparent 80%)`
         }}
       />
 
-      {/* Main Sharp Dot */}
-      <div 
-        className="pointer-events-none fixed top-0 left-0 z-50 rounded-full bg-cyan-400 transition-transform duration-75 hidden md:block"
+      {/* Main Sharp Dot — Neon Lime #CCFF00 */}
+      <div
+        className="pointer-events-none fixed top-0 left-0 z-50 rounded-full transition-transform duration-75 hidden md:block"
         style={{
           transform: `translate3d(${position.x - 4}px, ${position.y - 4}px, 0) scale(${isClicking ? 0.7 : isHovered ? 1.5 : 1})`,
           width: '8px',
           height: '8px',
-          boxShadow: '0 0 10px #00f0ff, 0 0 20px rgba(0, 240, 255, 0.5)'
+          backgroundColor: '#CCFF00',
+          boxShadow: '0 0 10px #CCFF00, 0 0 20px rgba(204, 255, 0, 0.5)'
         }}
       />
 
-      {/* Trailing Ring */}
-      <div 
-        className="pointer-events-none fixed top-0 left-0 z-40 rounded-full border border-cyan-400/50 transition-all duration-100 ease-out hidden md:block"
+      {/* Trailing Ring — Neon Lime */}
+      <div
+        className="pointer-events-none fixed top-0 left-0 z-40 rounded-full transition-all duration-100 ease-out hidden md:block"
         style={{
           transform: `translate3d(${trailingPos.x - 18}px, ${trailingPos.y - 18}px, 0) scale(${isHovered ? 1.7 : 1})`,
           width: '36px',
           height: '36px',
-          backgroundColor: isHovered ? 'rgba(0, 240, 255, 0.08)' : 'transparent',
-          borderColor: isHovered ? '#00f0ff' : 'rgba(255, 255, 255, 0.2)',
-          boxShadow: isHovered ? '0 0 16px rgba(0, 240, 255, 0.25)' : 'none'
+          backgroundColor: isHovered ? 'rgba(204, 255, 0, 0.08)' : 'transparent',
+          border: `1px solid ${isHovered ? '#CCFF00' : 'rgba(255, 255, 255, 0.2)'}`,
+          boxShadow: isHovered ? '0 0 16px rgba(204, 255, 0, 0.25)' : 'none'
         }}
       />
     </>

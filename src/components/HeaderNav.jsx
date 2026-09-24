@@ -9,7 +9,7 @@ export default function HeaderNav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'projects', 'toolbox', 'experience', 'contact'];
+      const sections = ['hero', 'deck', 'about', 'services', 'toolbox', 'projects', 'process', 'experience', 'dsa', 'github', 'credentials', 'contact'];
       const scrollPosition = window.scrollY + 200;
 
       for (const section of sections) {
@@ -30,48 +30,47 @@ export default function HeaderNav() {
   }, []);
 
   const navLinks = [
-    { label: 'HOME', href: '#hero', id: 'hero' },
-    { label: 'ABOUT', href: '#about', id: 'about' },
+    { label: 'OVERVIEW', href: '#hero', id: 'hero' },
     { label: 'PROJECTS', href: '#projects', id: 'projects' },
-    { label: 'SERVICES', href: '#toolbox', id: 'toolbox' },
+    { label: 'TECH STACK', href: '#toolbox', id: 'toolbox' },
     { label: 'EXPERIENCE', href: '#experience', id: 'experience' },
     { label: 'CONTACT', href: '#contact', id: 'contact' },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 py-3 sm:py-5 transition-all duration-300 pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 py-3.5 sm:py-4 transition-all duration-300 pointer-events-none">
       <div className="max-w-6xl mx-auto flex items-center justify-between pointer-events-auto">
         
         {/* Left Brand Logo & Avatar */}
         <a href="#hero" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-full overflow-hidden p-0.5 bg-gradient-to-tr from-cyan-400 via-blue-500 to-purple-500 shadow-[0_0_12px_rgba(0,240,255,0.3)] group-hover:scale-105 transition-transform">
+          <div className="w-8 h-8 rounded-sm overflow-hidden p-0.5 bg-gradient-to-tr from-[#CCFF00] via-[#88FF00] to-white shadow-[0_0_14px_rgba(204,255,0,0.35)] group-hover:scale-105 transition-transform">
             <img
               src={profilePhoto}
               alt="Alok Choudhary"
-              className="w-full h-full object-cover rounded-full"
+              className="w-full h-full object-cover rounded-sm grayscale contrast-125 group-hover:grayscale-0 transition-all"
             />
           </div>
-          <span className="font-syne font-extrabold text-base sm:text-lg tracking-tight text-white group-hover:text-cyan-400 transition-colors">
-            ALOK<span className="text-cyan-400">.</span>
+          <span className="font-mono font-bold text-sm tracking-wider text-white group-hover:text-[#CCFF00] transition-colors">
+            [AC<span className="text-[#CCFF00]">.DEV</span>]
           </span>
         </a>
 
         {/* Center Floating Glass Pill Container (Desktop Only) */}
-        <nav className="hidden md:flex items-center gap-1 px-3.5 py-1.5 rounded-full border border-white/10 bg-[#0b0f19]/80 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+        <nav className="hidden md:flex items-center gap-1 px-3.5 py-1.5 rounded-sm border border-[rgba(204,255,0,0.18)] bg-[#0c0c0c]/85 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.7)]">
           {navLinks.map((link) => {
-            const isActive = activeSection === link.id;
+            const isActive = activeSection === link.id || (link.id === 'hero' && activeSection === 'deck');
             return (
               <a
                 key={link.label}
                 href={link.href}
-                className={`relative px-3.5 py-1 rounded-full font-mono text-[11px] transition-all uppercase tracking-wider font-semibold ${
-                  isActive ? 'text-white' : 'text-slate-400 hover:text-slate-200'
+                className={`relative px-3.5 py-1 rounded-sm font-mono text-[11px] transition-all uppercase tracking-wider font-semibold ${
+                  isActive ? 'text-[#CCFF00]' : 'text-stone-400 hover:text-white'
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="activeNavIndicator"
-                    className="absolute inset-0 bg-white/10 rounded-full border border-white/10"
+                    className="absolute inset-0 bg-[#CCFF00]/10 rounded-sm border border-[#CCFF00]/30 shadow-[0_0_12px_rgba(204,255,0,0.2)]"
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -83,30 +82,35 @@ export default function HeaderNav() {
 
         {/* Right CTA Actions */}
         <div className="flex items-center gap-2 sm:gap-3">
+          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-sm bg-[#161616] border border-[#CCFF00]/20">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00] animate-pulse shadow-[0_0_8px_#CCFF00]"></span>
+            <span className="font-mono text-[10px] text-stone-300 uppercase tracking-wider font-semibold">Available for Roles</span>
+          </div>
+
           <a
             href="/alok-choudhary-resume.pdf"
             target="_blank"
             rel="noreferrer"
-            className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-mono text-[11px] sm:text-xs font-bold transition-all shadow-[0_0_15px_rgba(0,240,255,0.25)] hover:scale-105"
+            className="hidden sm:flex items-center gap-1.5 px-4 py-1.5 sm:py-2 rounded-sm bg-[#CCFF00] hover:bg-[#d4ff1a] text-black font-mono text-[11px] sm:text-xs font-bold transition-all shadow-[0_0_20px_rgba(204,255,0,0.35)] hover:shadow-[0_0_30px_rgba(204,255,0,0.55)] hover:scale-105"
           >
-            <Download className="w-3.5 h-3.5" />
+            <Download className="w-3.5 h-3.5 text-black" />
             <span>Resume</span>
           </a>
 
           <a
             href="#contact"
-            className="hidden lg:flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/15 hover:border-cyan-400 text-slate-300 hover:text-cyan-400 bg-white/5 font-mono text-[11px] sm:text-xs transition-all"
+            className="hidden lg:flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-sm border border-[#CCFF00]/30 hover:border-[#CCFF00] text-stone-300 hover:text-[#CCFF00] bg-[#161616]/70 font-mono text-[11px] sm:text-xs font-semibold transition-all"
           >
-            <Send className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Contact</span>
+            <Send className="w-3.5 h-3.5 text-[#CCFF00]" />
+            <span>Let's Build</span>
           </a>
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Navigation Menu"
-            className="md:hidden p-2 rounded-full border border-white/15 bg-[#0b0f19]/80 backdrop-blur-md text-slate-200"
+            className="md:hidden p-2 rounded-sm border border-[rgba(204,255,0,0.2)] bg-[#121212]/90 backdrop-blur-md text-stone-200"
           >
-            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            {mobileMenuOpen ? <X className="w-4 h-4 text-[#CCFF00]" /> : <Menu className="w-4 h-4 text-white" />}
           </button>
         </div>
       </div>
@@ -118,17 +122,17 @@ export default function HeaderNav() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden mt-2 p-4 rounded-2xl border border-white/15 bg-[#0b0f19]/95 backdrop-blur-2xl flex flex-col gap-2 font-mono text-xs pointer-events-auto shadow-2xl"
+            className="md:hidden mt-2 p-4 rounded-sm border border-[rgba(204,255,0,0.25)] bg-[#0c0c0c]/98 backdrop-blur-2xl flex flex-col gap-2 font-mono text-xs pointer-events-auto shadow-2xl"
           >
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-2.5 px-3.5 rounded-xl hover:bg-white/10 text-slate-300 hover:text-white flex items-center justify-between"
+                className="py-2.5 px-3.5 rounded-sm hover:bg-[#CCFF00]/10 text-stone-300 hover:text-[#CCFF00] flex items-center justify-between transition-colors"
               >
                 <span>{link.label}</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-cyan-400" />
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#CCFF00]" />
               </a>
             ))}
 
@@ -137,7 +141,7 @@ export default function HeaderNav() {
               target="_blank"
               rel="noreferrer"
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-1 py-2.5 rounded-xl bg-cyan-400 text-slate-950 font-bold flex items-center justify-center gap-2"
+              className="mt-2 py-2.5 px-3.5 rounded-sm bg-[#CCFF00] text-black font-bold flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(204,255,0,0.3)]"
             >
               <Download className="w-3.5 h-3.5" />
               <span>VIEW RESUME PDF</span>

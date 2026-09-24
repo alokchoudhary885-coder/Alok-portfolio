@@ -60,7 +60,7 @@ export default function Preloader({ onComplete }) {
 
     // 2. Play Natural Female Cinematic Voice Welcome via SpeechSynthesis API
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      window.speechSynthesis.cancel(); // Prevent duplicate speech overlap
+      window.speechSynthesis.cancel();
 
       const utterance = new SpeechSynthesisUtterance(
         "Welcome to Alok Choudhary's portfolio. Enjoy the experience."
@@ -68,7 +68,6 @@ export default function Preloader({ onComplete }) {
 
       const voices = window.speechSynthesis.getVoices();
       
-      // Dynamic detection for best female-sounding English voice
       const femaleVoice = voices.find(
         (v) =>
           (v.lang.startsWith('en') &&
@@ -88,8 +87,8 @@ export default function Preloader({ onComplete }) {
         utterance.voice = femaleVoice;
       }
 
-      utterance.rate = 0.92; // Slightly calm, natural speaking speed
-      utterance.pitch = 1.05; // Clear, young, confident female pitch
+      utterance.rate = 0.92;
+      utterance.pitch = 1.05;
       utterance.volume = 1.0;
 
       setIsPlayingVoice(true);
@@ -104,7 +103,6 @@ export default function Preloader({ onComplete }) {
     if (isEntering) return;
     setIsEntering(true);
 
-    // Play cinematic voice & swell immediately upon click
     playCinematicVoiceAndSwell();
 
     setTimeout(() => {
@@ -124,73 +122,72 @@ export default function Preloader({ onComplete }) {
           transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] }
         } : { opacity: 1, scale: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#06070a] text-white p-4 md:p-10 overflow-hidden select-none bg-noise"
+        className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#0A0A0A] text-white p-4 md:p-10 overflow-hidden select-none bg-noise"
       >
         {/* Top Bar Info */}
-        <div className="w-full flex items-center justify-between font-mono text-xs text-slate-400 border-b border-white/10 pb-4">
+        <div className="w-full flex items-center justify-between font-mono text-xs text-[#A0A0A0] border-b border-[#CCFF00]/15 pb-4">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-purple-500 animate-ping" />
-            <span className="text-purple-400 font-semibold">PORTFOLIO ENVIRONMENT</span>
+            <span className="w-2 h-2 rounded-full bg-[#CCFF00] animate-ping" />
+            <span className="text-[#CCFF00] font-semibold">PORTFOLIO ENVIRONMENT</span>
           </div>
           <div className="flex items-center gap-2">
-            <Terminal className="w-3.5 h-3.5 text-slate-400" />
+            <Terminal className="w-3.5 h-3.5 text-[#CCFF00]" />
             <span>v2.026</span>
           </div>
         </div>
 
-        {/* Center Name (Fluid Responsive Single Line - 100% Fit Guarantee) */}
+        {/* Center Name */}
         <div className="flex flex-col items-center justify-center my-auto text-center w-full max-w-6xl px-2">
           <motion.div 
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-mono text-xs tracking-widest text-purple-400 bg-purple-500/10 border border-purple-500/30 px-3.5 py-1.5 rounded-full mb-6 flex items-center gap-2 shadow-neon-purple"
+            className="font-mono text-xs tracking-widest text-[#CCFF00] bg-[#CCFF00]/10 border border-[#CCFF00]/30 px-3.5 py-1.5 rounded-full mb-6 flex items-center gap-2 shadow-[0_0_15px_rgba(204,255,0,0.2)]"
           >
             <Code2 className="w-3.5 h-3.5" />
             <span>00 / FULL STACK DEVELOPER</span>
           </motion.div>
 
-          {/* Dynamic Fluid Clamp Font Size - Never Cut Off */}
-          <h1 className="font-syne font-black tracking-tight text-gradient-purple whitespace-nowrap text-[clamp(1.4rem,5.2vw,4.5rem)] leading-none w-full text-center px-1">
-            ALOK CHOUDHARY
+          <h1 className="font-syne font-black tracking-tight text-white whitespace-nowrap text-[clamp(1.4rem,5.2vw,4.5rem)] leading-none w-full text-center px-1">
+            ALOK <span className="text-shiny">CHOUDHARY</span>
           </h1>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="font-mono text-xs md:text-sm text-slate-400 tracking-widest uppercase mt-4 mb-10 flex items-center justify-center gap-2"
+            className="font-mono text-xs md:text-sm text-[#A0A0A0] tracking-widest uppercase mt-4 mb-10 flex items-center justify-center gap-2"
           >
             <span>COMPUTER SCIENCE ENGINEER • MERN STACK DEVELOPER</span>
           </motion.p>
 
           {/* Progress Percentage Bar */}
           <div className="w-64 md:w-80 flex flex-col items-center gap-3">
-            <div className="w-full bg-white/5 h-1.5 rounded-full overflow-hidden border border-white/10 p-0.5">
+            <div className="w-full bg-[#1A1A1A] h-1.5 rounded-full overflow-hidden border border-[#CCFF00]/20 p-0.5">
               <motion.div
-                className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-orange-500 rounded-full"
+                className="h-full bg-gradient-to-r from-[#88FF00] to-[#CCFF00] rounded-full shadow-[0_0_10px_#CCFF00]"
                 style={{ width: `${Math.min(percentage, 100)}%` }}
                 transition={{ ease: "easeOut" }}
               />
             </div>
 
-            <div className="w-full flex items-center justify-between font-mono text-xs text-slate-400">
+            <div className="w-full flex items-center justify-between font-mono text-xs text-[#A0A0A0]">
               <span>SYSTEM READY</span>
-              <span className="text-purple-400 font-bold text-sm">{Math.min(percentage, 100)}%</span>
+              <span className="text-[#CCFF00] font-bold text-sm">{Math.min(percentage, 100)}%</span>
             </div>
           </div>
         </div>
 
-        {/* Bottom Professional CTA Button */}
-        <div className="w-full flex flex-col items-center justify-center pt-4 border-t border-white/10">
+        {/* Bottom CTA Button */}
+        <div className="w-full flex flex-col items-center justify-center pt-4 border-t border-[#CCFF00]/15">
           <button
             onClick={handleEnterExperience}
-            className="interactive-card px-8 py-3.5 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-mono text-xs font-bold flex items-center gap-2 shadow-[0_0_25px_rgba(168,85,247,0.5)] hover:scale-105 active:scale-95 transition-all group"
+            className="interactive-card px-8 py-3.5 rounded-full bg-[#CCFF00] hover:bg-[#d4ff1a] text-black font-mono text-xs font-bold flex items-center gap-2 shadow-[0_0_25px_rgba(204,255,0,0.4)] hover:scale-105 active:scale-95 transition-all group"
           >
             <span>ENTER PORTFOLIO</span>
             {isPlayingVoice ? (
-              <Volume2 className="w-4 h-4 text-purple-300 animate-pulse" />
+              <Volume2 className="w-4 h-4 text-black animate-pulse" />
             ) : (
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
             )}
           </button>
         </div>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Syne:wght@600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=Syne:wght@600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,23 +7,28 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-family: 'Outfit', sans-serif;
-    background-color: #030712;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    background-color: #0A0A0A;
     color: #f8fafc;
     overflow-x: hidden;
   }
 
   body {
-    background-color: #030712;
+    background-color: #0A0A0A;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
     width: 100%;
     -webkit-tap-highlight-color: transparent;
   }
+
+  ::selection {
+    background-color: #CCFF00;
+    color: #000000;
+  }
 }
 
-/* Shiny Shimmer Text Gradient Animation */
+/* Vibrant Neon Shimmer Text */
 @keyframes shiny-text {
   0% {
     background-position: 200% 0;
@@ -37,8 +42,8 @@
   background: linear-gradient(
     110deg,
     #ffffff 20%,
-    #00f0ff 40%,
-    #a855f7 60%,
+    #CCFF00 45%,
+    #C3F400 55%,
     #ffffff 80%
   );
   background-size: 200% auto;
@@ -48,49 +53,56 @@
   animation: shiny-text 6s linear infinite;
 }
 
+.text-neon {
+  color: #CCFF00;
+  text-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
+}
+
+/* Dot grid background pattern */
+.dot-grid {
+  background-image: radial-gradient(rgba(204, 255, 0, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.dot-grid-subtle {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
 /* Glassmorphism Design Tokens */
 .glass-panel {
-  background: rgba(11, 15, 25, 0.75);
+  background: rgba(18, 18, 18, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(204, 255, 0, 0.15);
 }
 
-.glass-card-purple {
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, rgba(11, 15, 25, 0.85) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+.glass-card-neon {
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(204, 255, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
-
-.glass-card-orange {
-  background: linear-gradient(135deg, rgba(255, 85, 0, 0.15) 0%, rgba(11, 15, 25, 0.85) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-.text-gradient-purple {
-  background: linear-gradient(135deg, #00f0ff 0%, #3b82f6 50%, #a855f7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.bg-noise {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
-  background-size: 24px 24px;
+.glass-card-neon:hover {
+  border-color: rgba(204, 255, 0, 0.45);
+  box-shadow: 0 0 35px -5px rgba(204, 255, 0, 0.2);
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #030712;
+  background: #0A0A0A;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 4px;
+  background: #222222;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00f0ff;
+  background: #CCFF00;
+  box-shadow: 0 0 10px #CCFF00;
 }
 
 /* Responsive Utilities */
