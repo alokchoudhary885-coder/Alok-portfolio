@@ -15,9 +15,9 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
       category: 'BACKGROUND',
       description: 'B.Tech Computer Science student & Full Stack MERN Developer based in Jaipur.',
       accent: '#00f0ff',
-      gradient: 'from-cyan-500/20 via-blue-600/10 to-transparent',
+      gradient: 'from-cyan-500/10 via-blue-600/5 to-transparent',
       href: '#about',
-      previewBg: 'bg-gradient-to-br from-cyan-950/60 to-slate-950',
+      previewBg: 'bg-gradient-to-br from-cyan-950/40 to-[#090d16]',
     },
     {
       id: 'foodrush',
@@ -28,10 +28,10 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
       category: 'FLAGSHIP PROJECT',
       description: '25+ RESTful APIs, Razorpay checkout, Web Speech API voice search, and 6-digit OTP verification.',
       accent: '#ff5500',
-      gradient: 'from-orange-500/25 via-red-600/15 to-transparent',
+      gradient: 'from-orange-500/15 via-red-600/10 to-transparent',
       isSpecial: true,
       href: '#projects',
-      previewBg: 'bg-gradient-to-br from-orange-950/70 to-slate-950',
+      previewBg: 'bg-gradient-to-br from-orange-950/50 to-[#090d16]',
     },
     {
       id: 'jobguard',
@@ -42,10 +42,10 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
       category: 'CYBERSECURITY EXTENSION',
       description: 'Chrome Extension (Manifest V3) analyzing LinkedIn, Internshala, and Indeed offers against fee extortion & scams.',
       accent: '#00f0ff',
-      gradient: 'from-cyan-500/25 via-blue-600/15 to-transparent',
+      gradient: 'from-cyan-500/15 via-blue-600/10 to-transparent',
       isJobGuard: true,
       href: '#projects',
-      previewBg: 'bg-gradient-to-br from-cyan-950/70 to-slate-950',
+      previewBg: 'bg-gradient-to-br from-cyan-950/50 to-[#090d16]',
     },
     {
       id: 'devcommand',
@@ -56,10 +56,10 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
       category: 'ENTERPRISE AI PLATFORM',
       description: 'DORA metrics, automated AI code reviewer, Socket.IO WebSockets streaming, and AES-256 OAuth 2.0.',
       accent: '#a855f7',
-      gradient: 'from-purple-500/25 via-indigo-600/15 to-transparent',
+      gradient: 'from-purple-500/15 via-indigo-600/10 to-transparent',
       isDevCommand: true,
       href: '#projects',
-      previewBg: 'bg-gradient-to-br from-purple-950/70 to-slate-950',
+      previewBg: 'bg-gradient-to-br from-purple-950/50 to-[#090d16]',
     },
     {
       id: 'toolbox',
@@ -70,9 +70,9 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
       category: 'SKILLSET',
       description: 'MERN Stack, REST APIs, JWT Auth, MongoDB, Java & Data Structures.',
       accent: '#00ff66',
-      gradient: 'from-green-500/20 via-emerald-600/10 to-transparent',
+      gradient: 'from-green-500/10 via-emerald-600/5 to-transparent',
       href: '#toolbox',
-      previewBg: 'bg-gradient-to-br from-emerald-950/60 to-slate-950',
+      previewBg: 'bg-gradient-to-br from-emerald-950/40 to-[#090d16]',
     },
     {
       id: 'experience',
@@ -83,9 +83,9 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
       category: 'TIMELINE',
       description: 'Full Stack & Web Dev Internships at Aurika Infotech & Aeonaxy Technologies.',
       accent: '#3b82f6',
-      gradient: 'from-blue-500/20 via-indigo-600/10 to-transparent',
+      gradient: 'from-blue-500/10 via-indigo-600/5 to-transparent',
       href: '#experience',
-      previewBg: 'bg-gradient-to-br from-blue-950/60 to-slate-950',
+      previewBg: 'bg-gradient-to-br from-blue-950/40 to-[#090d16]',
     },
     {
       id: 'contact',
@@ -96,9 +96,9 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
       category: 'CONTACT',
       description: 'Available for full-stack developer roles, freelance projects & collaboration.',
       accent: '#ec4899',
-      gradient: 'from-pink-500/20 via-rose-600/10 to-transparent',
+      gradient: 'from-pink-500/10 via-rose-600/5 to-transparent',
       href: '#contact',
-      previewBg: 'bg-gradient-to-br from-pink-950/60 to-slate-950',
+      previewBg: 'bg-gradient-to-br from-pink-950/40 to-[#090d16]',
     }
   ];
 
@@ -111,21 +111,21 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
   };
 
   return (
-    <section className="relative py-16 sm:py-24 px-3 sm:px-8 bg-[#06070a] bg-noise border-y border-white/10 overflow-hidden">
+    <section className="relative py-20 sm:py-28 px-4 sm:px-8 bg-[#04060b] border-y border-white/5 overflow-hidden">
       
       {/* Header */}
-      <div className="max-w-7xl mx-auto flex flex-col items-center text-center mb-8 sm:mb-12">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full glass-panel border border-purple-500/30 font-mono text-[11px] sm:text-xs text-purple-400 mb-3 shadow-neon-purple">
+      <div className="max-w-6xl mx-auto flex flex-col items-center text-center mb-10 sm:mb-14">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 font-mono text-[11px] sm:text-xs text-cyan-400 mb-3 bg-cyan-500/5">
           <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-          <span>02 / SIGNATURE HORIZONTAL DECK CAROUSEL</span>
+          <span>02 / INTERACTIVE 3D DECK</span>
         </div>
         
-        <h2 className="font-syne text-3xl sm:text-6xl font-extrabold text-white tracking-tight">
-          CINEMATIC <span className="text-gradient-purple">INTERACTIVE CARDS</span>
+        <h2 className="font-syne text-3xl sm:text-6xl font-black text-white tracking-tight">
+          CINEMATIC <span className="text-shiny">PORTFOLIO DECK</span>
         </h2>
 
-        <p className="font-mono text-xs sm:text-sm text-slate-400 mt-2 max-w-xl px-2">
-          Click neighbor cards or navigation arrows to expand active projects with live UI previews & 3D depth
+        <p className="font-mono text-xs sm:text-sm text-slate-400 mt-2 max-w-xl px-2 font-light">
+          Navigate neighbor cards or use arrow controls to explore active projects with 3D depth.
         </p>
       </div>
 
@@ -136,7 +136,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
         <button
           onClick={handlePrev}
           aria-label="Previous Card"
-          className="absolute left-1 sm:left-4 z-30 p-2.5 sm:p-3.5 rounded-full glass-panel border border-white/15 text-white hover:border-purple-400 hover:text-purple-400 transition-all shadow-2xl hover:scale-110 active:scale-95"
+          className="absolute left-1 sm:left-4 z-30 p-2.5 sm:p-3.5 rounded-full border border-white/15 bg-[#0b0f19]/80 backdrop-blur-md text-white hover:border-cyan-400 hover:text-cyan-400 transition-all shadow-xl hover:scale-105 active:scale-95"
         >
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
@@ -144,7 +144,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
         <button
           onClick={handleNext}
           aria-label="Next Card"
-          className="absolute right-1 sm:right-4 z-30 p-2.5 sm:p-3.5 rounded-full glass-panel border border-white/15 text-white hover:border-purple-400 hover:text-purple-400 transition-all shadow-2xl hover:scale-110 active:scale-95"
+          className="absolute right-1 sm:right-4 z-30 p-2.5 sm:p-3.5 rounded-full border border-white/15 bg-[#0b0f19]/80 backdrop-blur-md text-white hover:border-cyan-400 hover:text-cyan-400 transition-all shadow-xl hover:scale-105 active:scale-95"
         >
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
@@ -179,20 +179,20 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
                 }}
                 onClick={() => setActiveIndex(idx)}
                 style={{ zIndex: 20 - Math.abs(offset) }}
-                className={`absolute w-[86vw] max-w-[300px] sm:max-w-[420px] h-[410px] sm:h-[430px] rounded-3xl p-5 sm:p-8 cursor-pointer preserve-3d transition-all duration-300 flex flex-col justify-between overflow-hidden ${
+                className={`absolute w-[86vw] max-w-[300px] sm:max-w-[420px] h-[410px] sm:h-[430px] rounded-3xl p-6 sm:p-8 cursor-pointer preserve-3d transition-all duration-300 flex flex-col justify-between overflow-hidden ${
                   isActive
                     ? card.isSpecial
-                      ? 'glass-card-orange border-2 shadow-2xl'
+                      ? 'border-2 border-orange-500/60 bg-[#0c101c] shadow-[0_0_30px_rgba(255,85,0,0.2)]'
                       : card.isJobGuard
-                      ? 'glass-panel border-2 border-cyan-500/80 bg-[#0b0f19]/95 shadow-[0_0_30px_rgba(0,240,255,0.35)]'
+                      ? 'border-2 border-cyan-500/60 bg-[#0c101c] shadow-[0_0_30px_rgba(0,240,255,0.2)]'
                       : card.isDevCommand
-                      ? 'glass-card-purple border-2 border-purple-500/80 shadow-[0_0_30px_rgba(168,85,247,0.35)]'
-                      : 'glass-card-purple border-2 shadow-2xl'
-                    : 'glass-panel border border-white/10 hover:border-white/30'
+                      ? 'border-2 border-purple-500/60 bg-[#0c101c] shadow-[0_0_30px_rgba(168,85,247,0.2)]'
+                      : 'border-2 border-white/20 bg-[#0c101c] shadow-2xl'
+                    : 'border border-white/10 bg-[#090d16]/90 hover:border-white/20'
                 }`}
               >
                 {/* Background Ambient Gradient */}
-                <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${card.gradient} opacity-60 pointer-events-none`} />
+                <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${card.gradient} opacity-50 pointer-events-none`} />
 
                 <div className="relative h-full flex flex-col justify-between z-10">
                   
@@ -200,7 +200,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
                   <div className="flex items-start justify-between border-b border-white/10 pb-3 sm:pb-4">
                     <div className="flex items-center gap-2.5 sm:gap-3">
                       <div
-                        className="p-2 sm:p-2.5 rounded-xl bg-white/10 border border-white/15 shrink-0"
+                        className="p-2 sm:p-2.5 rounded-xl bg-white/5 border border-white/10 shrink-0"
                         style={{ color: card.accent }}
                       >
                         <card.icon className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -242,9 +242,9 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
                         <div className="flex items-center justify-between text-slate-300">
                           <span className="flex items-center gap-1.5 truncate">
                             <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: card.accent }} />
-                            <span className="truncate">LIVE PREVIEW ACTIVE</span>
+                            <span className="truncate">INTERACTIVE READY</span>
                           </span>
-                          <span className="font-bold text-white shrink-0 ml-1">READY</span>
+                          <span className="font-bold text-white shrink-0 ml-1">ACTIVE</span>
                         </div>
 
                         {card.isSpecial && (
@@ -275,7 +275,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
                             e.stopPropagation();
                             onOpenFoodRushModal();
                           }}
-                          className="w-full py-2.5 rounded-xl bg-orange-500 text-black font-bold flex items-center justify-center gap-1.5 hover:bg-orange-400 transition-colors shadow-[0_0_20px_rgba(255,85,0,0.5)] text-[11px] sm:text-xs"
+                          className="w-full py-2.5 rounded-xl bg-orange-500 hover:bg-orange-400 text-black font-bold flex items-center justify-center gap-1.5 transition-colors shadow-sm text-[11px] sm:text-xs"
                         >
                           <span>VIEW TECHNICAL CASE STUDY</span>
                           <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
@@ -286,7 +286,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
                             e.stopPropagation();
                             onOpenJobGuardModal();
                           }}
-                          className="w-full py-2.5 rounded-xl bg-cyan-500 text-black font-bold flex items-center justify-center gap-1.5 hover:bg-cyan-400 transition-colors shadow-[0_0_20px_rgba(0,240,255,0.4)] text-[11px] sm:text-xs"
+                          className="w-full py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold flex items-center justify-center gap-1.5 transition-colors shadow-sm text-[11px] sm:text-xs"
                         >
                           <span>VIEW EXTENSION CASE STUDY</span>
                           <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
@@ -296,7 +296,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
                           href="https://developer-command-center-five.vercel.app"
                           target="_blank"
                           rel="noreferrer"
-                          className="w-full py-2.5 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center gap-1.5 hover:bg-purple-500 transition-colors shadow-neon-purple text-[11px] sm:text-xs"
+                          className="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold flex items-center justify-center gap-1.5 transition-colors text-[11px] sm:text-xs"
                         >
                           <span>OPEN DEV COMMAND CENTER</span>
                           <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
@@ -304,7 +304,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
                       ) : (
                         <a
                           href={card.href}
-                          className="w-full py-2.5 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center gap-1.5 hover:bg-purple-500 transition-colors shadow-neon-purple text-[11px] sm:text-xs"
+                          className="w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold flex items-center justify-center gap-1.5 transition-colors text-[11px] sm:text-xs"
                         >
                           <span>EXPLORE SECTION</span>
                           <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
@@ -329,8 +329,8 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
             key={i}
             onClick={() => setActiveIndex(i)}
             aria-label={`Jump to card ${i + 1}`}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === activeIndex ? 'w-8 bg-purple-500 shadow-neon-purple' : 'w-2 bg-white/20 hover:bg-white/40'
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              i === activeIndex ? 'w-8 bg-cyan-400' : 'w-2 bg-white/20 hover:bg-white/40'
             }`}
           />
         ))}

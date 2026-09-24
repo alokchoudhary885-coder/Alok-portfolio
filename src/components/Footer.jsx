@@ -26,35 +26,37 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative py-8 sm:py-10 px-4 md:px-8 bg-[#040507] border-t border-white/10 font-mono text-xs text-slate-400">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6">
+    <footer className="relative py-12 px-4 sm:px-8 bg-[#020306] border-t border-white/5 font-mono text-xs text-slate-400">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         
-        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-center sm:text-left">
+        {/* Brand & Location Info */}
+        <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
-            <span className="text-white font-syne font-bold text-sm">14 / ALOK CHOUDHARY</span>
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="text-white font-syne font-bold text-sm">ALOK CHOUDHARY</span>
           </div>
 
-          <div className="hidden sm:block text-slate-600">|</div>
+          <div className="hidden sm:block text-slate-700">|</div>
 
-          <div className="flex items-center gap-2 text-slate-400 text-[11px] sm:text-xs">
-            <MapPin className="w-3.5 h-3.5 text-purple-400 shrink-0" />
-            <span>JAIPUR, INDIA (IST)</span>
-            <Clock className="w-3.5 h-3.5 text-purple-400 ml-1 sm:ml-2 shrink-0" />
-            <span className="text-purple-400 font-semibold">{time || '01:29 AM'}</span>
+          <div className="flex items-center gap-2 text-slate-400 text-xs">
+            <MapPin className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+            <span>JAIPUR, INDIA</span>
+            <Clock className="w-3.5 h-3.5 text-cyan-400 ml-2 shrink-0" />
+            <span className="text-cyan-400 font-semibold">{time || '01:29 AM'} (IST)</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-1 text-[11px] sm:text-xs text-center">
-          <span>© {new Date().getFullYear()} CRAFTED WITH</span>
-          <Heart className="w-3.5 h-3.5 text-purple-400 fill-purple-400 mx-1 inline animate-pulse shrink-0" />
-          <span>BY ALOK CHOUDHARY</span>
+        {/* Copyright */}
+        <div className="flex items-center gap-1 text-xs text-center text-slate-400">
+          <span>© {new Date().getFullYear()} CRAFTED BY</span>
+          <span className="text-white font-bold ml-1">ALOK CHOUDHARY</span>
         </div>
 
+        {/* Back to Top Button */}
         <button
           onClick={scrollToTop}
           aria-label="Scroll back to top"
-          className="flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-white/10 hover:border-purple-400 text-slate-300 hover:text-purple-400 transition-all duration-300 hover:scale-105 active:scale-95 text-xs"
+          className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 hover:border-cyan-400 text-slate-300 hover:text-cyan-400 transition-all duration-300 hover:scale-105 active:scale-95 text-xs bg-white/5"
         >
           <span>BACK TO TOP</span>
           <ArrowUp className="w-3.5 h-3.5" />

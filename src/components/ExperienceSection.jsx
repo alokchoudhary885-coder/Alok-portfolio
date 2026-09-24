@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Briefcase, Calendar, ChevronDown, ChevronUp } from 'lucide-react';
+import { Sparkles, Briefcase, ChevronDown, ChevronUp, MapPin } from 'lucide-react';
 
 export default function ExperienceSection() {
   const [expandedIndex, setExpandedIndex] = useState(0);
@@ -33,51 +33,63 @@ export default function ExperienceSection() {
   ];
 
   return (
-    <section id="experience" className="relative py-24 px-4 md:px-8 bg-[#030712] border-t border-white/10 overflow-hidden">
-      <div className="max-w-4xl mx-auto">
+    <section id="experience" className="relative py-24 sm:py-32 px-4 sm:px-8 bg-[#04060b] border-t border-white/5 overflow-hidden">
+      <div className="max-w-5xl mx-auto">
         
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-cyan-500/30 text-cyan-400 font-mono text-xs mb-3">
+        <div className="flex flex-col items-start mb-16 sm:mb-20">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 text-cyan-400 font-mono text-[11px] sm:text-xs mb-3 bg-cyan-500/5">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>09 / SOFTWARE INTERNSHIPS</span>
+            <span>06 / PROFESSIONAL TIMELINE</span>
           </div>
 
-          <h2 className="font-syne text-4xl sm:text-6xl font-black text-white tracking-tight">
-            Work <span className="text-gradient-purple">Experience</span>
+          <h2 className="font-syne text-4xl sm:text-7xl font-black text-white tracking-tight">
+            WORK <span className="text-shiny">EXPERIENCE</span>
           </h2>
+          <p className="font-mono text-xs sm:text-sm text-slate-400 mt-3 font-light">
+            Software development internships &amp; engineering contributions.
+          </p>
         </div>
 
-        {/* Timeline List */}
-        <div className="space-y-6">
+        {/* Editorial Timeline Items */}
+        <div className="space-y-6 sm:space-y-8">
           {experiences.map((exp, idx) => (
             <motion.div
               key={idx}
-              className="p-6 sm:p-7 rounded-3xl glass-panel border border-white/10 bg-[#0b0f19]/80 backdrop-blur-xl transition-all"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              className="p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#090d16] hover:border-white/20 transition-all"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-cyan-400">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-cyan-400 shrink-0 mt-1">
                     <Briefcase className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="font-mono text-[10px] text-cyan-400 font-bold block">
+                    <span className="font-mono text-xs text-cyan-400 font-bold tracking-wider block">
                       {exp.period}
                     </span>
-                    <h3 className="font-syne font-bold text-lg text-white">
+                    <h3 className="font-syne font-bold text-xl sm:text-2xl text-white mt-1">
                       {exp.role}
                     </h3>
-                    <span className="font-mono text-xs text-slate-300">
-                      {exp.company} • {exp.location}
-                    </span>
+                    <div className="flex items-center gap-2 font-mono text-xs text-slate-300 mt-1">
+                      <span className="font-semibold text-slate-200">{exp.company}</span>
+                      <span>•</span>
+                      <span className="flex items-center gap-1 text-slate-400">
+                        <MapPin className="w-3 h-3 text-cyan-400" />
+                        {exp.location}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
                 <button
                   onClick={() => setExpandedIndex(expandedIndex === idx ? -1 : idx)}
-                  className="px-4 py-2 rounded-xl glass-panel border border-white/15 text-slate-300 hover:text-white font-mono text-xs flex items-center justify-center gap-1.5 transition-all self-start sm:self-auto"
+                  className="px-4 py-2 rounded-xl border border-white/15 hover:border-cyan-400 text-slate-300 hover:text-white font-mono text-xs flex items-center justify-center gap-2 transition-all self-start sm:self-center bg-white/5"
                 >
-                  <span>{expandedIndex === idx ? 'Hide Details' : 'View Details'}</span>
+                  <span>{expandedIndex === idx ? 'Hide Highlights' : 'View Highlights'}</span>
                   {expandedIndex === idx ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                 </button>
               </div>
@@ -85,25 +97,25 @@ export default function ExperienceSection() {
               {/* Tech Tags */}
               <div className="flex flex-wrap gap-2 pt-4">
                 {exp.tags.map((t, i) => (
-                  <span key={i} className="px-3 py-1 rounded-md font-mono text-[11px] bg-white/5 border border-white/10 text-slate-300">
+                  <span key={i} className="px-3 py-1 rounded-md font-mono text-xs bg-white/5 border border-white/10 text-slate-300">
                     {t}
                   </span>
                 ))}
               </div>
 
-              {/* Expandable Details */}
+              {/* Expandable Technical Highlights */}
               <AnimatePresence>
                 {expandedIndex === idx && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="mt-4 pt-4 border-t border-white/10 space-y-2 font-mono text-xs text-slate-300"
+                    className="mt-4 pt-4 border-t border-white/10 space-y-2.5 font-mono text-xs text-slate-300"
                   >
                     {exp.highlights.map((item, i) => (
-                      <div key={i} className="flex items-start gap-2">
-                        <span className="text-cyan-400">•</span>
-                        <span>{item}</span>
+                      <div key={i} className="flex items-start gap-2.5">
+                        <span className="text-cyan-400 font-bold shrink-0">▹</span>
+                        <span className="leading-relaxed font-light">{item}</span>
                       </div>
                     ))}
                   </motion.div>

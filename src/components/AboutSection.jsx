@@ -1,82 +1,110 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Code2, Cpu, Globe } from 'lucide-react';
 import profilePhoto from '../assets/alok-profile.jpg';
 
 export default function AboutSection() {
   const techPills = [
-    { name: 'React', color: 'border-cyan-500/30 text-cyan-400 bg-cyan-500/10' },
-    { name: 'Node', color: 'border-green-500/30 text-green-400 bg-green-500/10' },
-    { name: 'Express', color: 'border-slate-500/30 text-slate-200 bg-slate-500/10' },
-    { name: 'MongoDB', color: 'border-emerald-500/30 text-emerald-400 bg-emerald-500/10' },
-    { name: 'Java', color: 'border-orange-500/30 text-orange-400 bg-orange-500/10' }
+    { name: 'React.js', color: 'border-cyan-500/30 text-cyan-400 bg-cyan-500/10' },
+    { name: 'Node.js', color: 'border-green-500/30 text-green-400 bg-green-500/10' },
+    { name: 'Express.js', color: 'border-slate-500/30 text-slate-200 bg-slate-500/10' },
+    { name: 'MongoDB Atlas', color: 'border-emerald-500/30 text-emerald-400 bg-emerald-500/10' },
+    { name: 'Java (DSA)', color: 'border-orange-500/30 text-orange-400 bg-orange-500/10' }
   ];
 
   return (
-    <section id="about" className="relative py-16 sm:py-24 px-4 md:px-8 bg-[#030712] border-t border-white/5 overflow-hidden">
+    <section id="about" className="relative py-24 sm:py-32 px-4 sm:px-8 bg-[#04060b] border-t border-white/5 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full glass-panel border border-cyan-500/30 text-cyan-400 font-mono text-[11px] sm:text-xs mb-2 sm:mb-3">
-            <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            <span>03 / ABOUT ME</span>
+        <div className="flex flex-col items-start mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 text-cyan-400 font-mono text-[11px] sm:text-xs mb-3 bg-cyan-500/5">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>03 / BACKGROUND &amp; IDENTITY</span>
           </div>
 
-          <h2 className="font-syne text-3xl sm:text-6xl font-black text-white tracking-tight">
-            Who Am <span className="text-gradient-purple">I?</span>
+          <h2 className="font-syne text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-tight">
+            WHO <span className="text-slate-500 font-serif italic font-normal">AM</span> I?
           </h2>
         </div>
 
-        {/* Content Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center max-w-5xl mx-auto">
+        {/* Editorial 2-Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 items-center">
           
-          {/* Profile Photo Frame */}
+          {/* Left Column: Portrait Frame */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-5 flex justify-center"
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-5 flex justify-center lg:justify-start"
           >
-            <div className="relative w-52 h-64 sm:w-68 sm:h-[360px] rounded-3xl overflow-hidden glass-card-purple p-2 group shadow-neon-purple">
-              <div className="w-full h-full rounded-2xl overflow-hidden relative border border-white/15 bg-slate-950">
-                <img
-                  src={profilePhoto}
-                  alt="Alok Choudhary"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent opacity-85" />
-                <div className="absolute bottom-2.5 left-2.5 right-2.5 p-2 rounded-xl glass-panel border border-white/10 text-center font-mono">
-                  <span className="font-syne font-bold text-[11px] sm:text-xs text-white block">ALOK CHOUDHARY</span>
-                  <span className="text-[9px] sm:text-[10px] text-cyan-400 font-semibold block mt-0.5">FULL STACK DEVELOPER</span>
-                </div>
+            <div className="relative w-64 sm:w-72 md:w-80 aspect-[4/5] rounded-2xl overflow-hidden border border-white/10 bg-[#0b0f19] shadow-2xl group">
+              <img
+                src={profilePhoto}
+                alt="Alok Choudhary"
+                className="w-full h-full object-cover object-center grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#04060b] via-transparent to-transparent opacity-80" />
+              
+              {/* Bottom Card Identity Strip */}
+              <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl border border-white/10 bg-[#0b0f19]/80 backdrop-blur-md font-mono text-center">
+                <span className="font-syne font-bold text-xs sm:text-sm text-white block">ALOK CHOUDHARY</span>
+                <span className="text-[10px] text-cyan-400 font-semibold block mt-0.5 uppercase tracking-wider">
+                  Full Stack Developer • Jaipur, India
+                </span>
               </div>
             </div>
           </motion.div>
 
-          {/* Single Crisp Statement & 5 Tech Pills */}
+          {/* Right Column: Editorial Narrative & Facts */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-7 flex flex-col justify-center gap-5 sm:gap-6 text-center lg:text-left"
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="lg:col-span-7 flex flex-col justify-center space-y-6 sm:space-y-8"
           >
-            <p className="text-slate-200 font-syne font-semibold text-base sm:text-2xl leading-relaxed px-2">
-              I build modern full-stack applications with React, Node.js and MongoDB — focused on clean architecture, scalable APIs and polished user experiences.
+            <p className="text-slate-200 font-syne font-medium text-lg sm:text-2xl md:text-3xl leading-relaxed">
+              I build modern full-stack applications with{' '}
+              <span className="text-cyan-400 font-bold">React</span>,{' '}
+              <span className="text-green-400 font-bold">Node.js</span>, and{' '}
+              <span className="text-emerald-400 font-bold">MongoDB</span> — focused on clean architecture, scalable APIs, and polished user experiences.
             </p>
 
-            <div className="flex flex-wrap justify-center lg:justify-start gap-2 pt-1">
-              {techPills.map((pill, idx) => (
-                <span
-                  key={idx}
-                  className={`px-3 py-1 sm:px-4 sm:py-1.5 rounded-full font-mono text-[11px] sm:text-xs font-bold border ${pill.color}`}
-                >
-                  {pill.name}
-                </span>
-              ))}
+            <p className="text-slate-400 font-mono text-xs sm:text-sm leading-relaxed font-light">
+              Specialized in engineering robust digital products from ideation to production. From real-time DOM threat scanners to full-stack food delivery ecosystems, I focus on performance, intuitive user flow, and clean code principles.
+            </p>
+
+            {/* Core Tech Pills */}
+            <div className="pt-2">
+              <span className="text-slate-400 font-mono text-[11px] uppercase tracking-wider block mb-3 font-semibold">
+                CORE TECHNICAL PILLARS:
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {techPills.map((pill, idx) => (
+                  <span
+                    key={idx}
+                    className={`px-3.5 py-1.5 rounded-lg font-mono text-xs font-semibold border ${pill.color}`}
+                  >
+                    {pill.name}
+                  </span>
+                ))}
+              </div>
             </div>
+
+            {/* Quick Spec Highlights */}
+            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10 font-mono text-xs">
+              <div>
+                <span className="text-slate-400 text-[10px] uppercase tracking-wider block">ROLE FOCUS</span>
+                <span className="text-white font-semibold mt-1 block">Full-Stack &amp; Systems</span>
+              </div>
+              <div>
+                <span className="text-slate-400 text-[10px] uppercase tracking-wider block">LOCATION / TIMEZONE</span>
+                <span className="text-cyan-400 font-semibold mt-1 block">Jaipur, India (IST)</span>
+              </div>
+            </div>
+
           </motion.div>
 
         </div>

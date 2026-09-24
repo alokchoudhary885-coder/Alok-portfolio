@@ -15,7 +15,7 @@ export default function CustomCursor() {
     const onMouseUp = () => setIsClicking(false);
 
     const onMouseOver = (e) => {
-      if (e.target.closest('a, button, input, .interactive-card, [role="button"]')) {
+      if (e.target.closest('a, button, input, textarea, .interactive-card, [role="button"]')) {
         setIsHovered(true);
       } else {
         setIsHovered(false);
@@ -61,33 +61,33 @@ export default function CustomCursor() {
     <>
       {/* Dynamic Cursor Torch Background Spotlight */}
       <div 
-        className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
+        className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 hidden md:block"
         style={{
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(168, 85, 247, 0.07), transparent 80%)`
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(0, 240, 255, 0.04), transparent 80%)`
         }}
       />
 
-      {/* Main Sharp Neon Dot */}
+      {/* Main Sharp Dot */}
       <div 
-        className="pointer-events-none fixed top-0 left-0 z-50 rounded-full bg-purple-400 transition-transform duration-75"
+        className="pointer-events-none fixed top-0 left-0 z-50 rounded-full bg-cyan-400 transition-transform duration-75 hidden md:block"
         style={{
-          transform: `translate3d(${position.x - 4}px, ${position.y - 4}px, 0) scale(${isClicking ? 0.7 : isHovered ? 1.6 : 1})`,
+          transform: `translate3d(${position.x - 4}px, ${position.y - 4}px, 0) scale(${isClicking ? 0.7 : isHovered ? 1.5 : 1})`,
           width: '8px',
           height: '8px',
-          boxShadow: '0 0 12px #c084fc, 0 0 24px #a855f7'
+          boxShadow: '0 0 10px #00f0ff, 0 0 20px rgba(0, 240, 255, 0.5)'
         }}
       />
 
       {/* Trailing Ring */}
       <div 
-        className="pointer-events-none fixed top-0 left-0 z-40 rounded-full border border-purple-400/60 transition-all duration-100 ease-out"
+        className="pointer-events-none fixed top-0 left-0 z-40 rounded-full border border-cyan-400/50 transition-all duration-100 ease-out hidden md:block"
         style={{
-          transform: `translate3d(${trailingPos.x - 18}px, ${trailingPos.y - 18}px, 0) scale(${isHovered ? 1.8 : 1})`,
+          transform: `translate3d(${trailingPos.x - 18}px, ${trailingPos.y - 18}px, 0) scale(${isHovered ? 1.7 : 1})`,
           width: '36px',
           height: '36px',
-          backgroundColor: isHovered ? 'rgba(168, 85, 247, 0.12)' : 'transparent',
-          borderColor: isHovered ? '#c084fc' : 'rgba(255, 255, 255, 0.25)',
-          boxShadow: isHovered ? '0 0 20px rgba(168, 85, 247, 0.3)' : 'none'
+          backgroundColor: isHovered ? 'rgba(0, 240, 255, 0.08)' : 'transparent',
+          borderColor: isHovered ? '#00f0ff' : 'rgba(255, 255, 255, 0.2)',
+          boxShadow: isHovered ? '0 0 16px rgba(0, 240, 255, 0.25)' : 'none'
         }}
       />
     </>

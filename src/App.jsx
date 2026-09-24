@@ -6,10 +6,9 @@ import HeaderNav from './components/HeaderNav';
 import Hero from './components/Hero';
 import DribbbleDeckNav from './components/DribbbleDeckNav';
 import AboutSection from './components/AboutSection';
-import ToolboxSection from './components/ToolboxSection';
+import TypographyStatement from './components/TypographyStatement';
 import ProjectsSection from './components/ProjectsSection';
-import FoodRushCaseStudyModal from './components/FoodRushCaseStudyModal';
-import JobGuardCaseStudyModal from './components/JobGuardCaseStudyModal';
+import ToolboxSection from './components/ToolboxSection';
 import ProcessSection from './components/ProcessSection';
 import ExperienceSection from './components/ExperienceSection';
 import DsaTerminalSection from './components/DsaTerminalSection';
@@ -17,6 +16,8 @@ import GithubSection from './components/GithubSection';
 import CertificationsSection from './components/CertificationsSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import FoodRushCaseStudyModal from './components/FoodRushCaseStudyModal';
+import JobGuardCaseStudyModal from './components/JobGuardCaseStudyModal';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -24,7 +25,7 @@ export default function App() {
   const [jobGuardModalOpen, setJobGuardModalOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-[#030712] text-slate-100 selection:bg-cyan-500 selection:text-black">
+    <div className="relative min-h-screen bg-[#03050a] text-slate-100 selection:bg-cyan-500 selection:text-black">
       {/* 01 / Preloader Boot Sequence */}
       {loading && <Preloader onComplete={() => setLoading(false)} />}
 
@@ -32,7 +33,7 @@ export default function App() {
       <CustomCursor />
       <AudioController />
 
-      {/* Syahril-Style Sticky Side Badge: Available For Opportunity */}
+      {/* Sticky Side Badge: Available For Opportunity (Desktop Only) */}
       {!loading && (
         <div className="fixed left-0 top-1/2 z-40 hidden md:flex items-center transform -translate-y-1/2 pointer-events-auto">
           <a
@@ -58,11 +59,12 @@ export default function App() {
               onOpenJobGuardModal={() => setJobGuardModalOpen(true)}
             />
             <AboutSection />
-            <ToolboxSection />
+            <TypographyStatement />
             <ProjectsSection
               onOpenFoodRushModal={() => setFoodRushModalOpen(true)}
               onOpenJobGuardModal={() => setJobGuardModalOpen(true)}
             />
+            <ToolboxSection />
             <ProcessSection />
             <ExperienceSection />
             <DsaTerminalSection />

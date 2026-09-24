@@ -43,44 +43,48 @@ export default function ProcessSection() {
   ];
 
   return (
-    <section className="relative py-24 px-4 md:px-8 bg-[#030712] border-t border-white/10 overflow-hidden">
+    <section className="relative py-24 sm:py-32 px-4 sm:px-8 bg-[#04060b] border-t border-white/5 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-cyan-500/30 text-cyan-400 font-mono text-xs mb-3">
+        <div className="flex flex-col items-start mb-16 sm:mb-20">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 text-cyan-400 font-mono text-[11px] sm:text-xs mb-3 bg-cyan-500/5">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>08 / DEVELOPMENT PROCESS</span>
+            <span>08 / DEVELOPMENT PIPELINE</span>
           </div>
 
-          <h2 className="font-syne text-4xl sm:text-6xl font-black text-white tracking-tight">
-            How I <span className="text-gradient-purple">Build & Ship</span>
+          <h2 className="font-syne text-4xl sm:text-7xl font-black text-white tracking-tight">
+            ENGINEERING <span className="text-shiny">PROCESS</span>
           </h2>
 
-          <p className="font-mono text-xs sm:text-sm text-slate-400 mt-2 max-w-xl">
+          <p className="font-mono text-xs sm:text-sm text-slate-400 mt-3 max-w-xl font-light">
             A structured 6-step engineering pipeline for delivering production-ready web products.
           </p>
         </div>
 
-        {/* 6 Steps Grid (Strict 1-Line Descriptions) */}
+        {/* 6 Steps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {steps.map((step, idx) => (
             <motion.div
               key={step.num}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.08 }}
               whileHover={{ y: -5 }}
-              className="p-6 rounded-3xl glass-panel border border-white/10 bg-[#0b0f19]/80 backdrop-blur-xl flex flex-col justify-between hover:border-cyan-500/40 transition-all duration-300"
+              className="p-6 sm:p-7 rounded-2xl border border-white/10 bg-[#090d16] flex flex-col justify-between hover:border-white/20 transition-all duration-300 shadow-xl group"
             >
               <div>
-                <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
-                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-cyan-400">
+                <div className="flex items-center justify-between mb-5 border-b border-white/10 pb-4">
+                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-cyan-400 group-hover:bg-cyan-500/20 transition-colors">
                     <step.icon className="w-5 h-5" />
                   </div>
-                  <span className="font-syne font-black text-2xl text-cyan-400/40">
+                  <span className="font-syne font-black text-2xl text-slate-600 group-hover:text-cyan-400 transition-colors">
                     {step.num}
                   </span>
                 </div>
 
-                <h3 className="font-syne font-bold text-base text-white mb-2 tracking-wide">
+                <h3 className="font-syne font-bold text-base sm:text-lg text-white mb-2 tracking-wide">
                   {step.title}
                 </h3>
                 <p className="font-mono text-xs text-slate-400 leading-relaxed font-light">
