@@ -18,6 +18,7 @@ import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import FoodRushCaseStudyModal from './components/FoodRushCaseStudyModal';
 import JobGuardCaseStudyModal from './components/JobGuardCaseStudyModal';
+import GlobalParticleUniverse from './components/GlobalParticleUniverse';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,9 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-[#090d16] text-slate-100 selection:bg-blue-500 selection:text-white">
+      {/* ── Global 3D particle universe — fixed behind all content ── */}
+      <GlobalParticleUniverse />
+
       {/* 01 / Preloader Boot Sequence */}
       {loading && <Preloader onComplete={() => setLoading(false)} />}
 
@@ -50,7 +54,7 @@ export default function App() {
 
       {/* Main Website Viewports */}
       {!loading && (
-        <div className="flex flex-col w-full overflow-x-hidden">
+        <div className="relative z-10 flex flex-col w-full overflow-x-hidden">
           <HeaderNav />
           <main>
             <Hero onOpenFoodRushModal={() => setFoodRushModalOpen(true)} />
