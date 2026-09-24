@@ -49,20 +49,7 @@ export default function App() {
       <CustomCursor />
       <AudioController />
 
-      {/* Sticky Side Badge: Available For Opportunity (Desktop Only) */}
-      {!loading && (
-        <div className="fixed left-0 top-1/2 z-40 hidden md:flex items-center transform -translate-y-1/2 pointer-events-auto">
-          <a
-            href="#contact"
-            className="bg-slate-900/90 border-y border-r border-slate-800 hover:border-blue-500/50 backdrop-blur-xl text-blue-400 py-5 px-2 text-[9px] font-mono font-semibold uppercase tracking-[0.3em] shadow-md shadow-black/20 rounded-r-xl cursor-pointer hover:bg-slate-850 transition-all duration-200 group"
-          >
-            <span className="[writing-mode:vertical-rl] rotate-180 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
-              AVAILABLE FOR HIRE
-            </span>
-          </a>
-        </div>
-      )}
+
 
       {/* Main Website Viewports — mounted immediately so Spline 3D preloads during preloader, instantly visible on Enter */}
       <div
