@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, ArrowRight, Utensils, FileText, Code2, Link as LinkIcon } from 'lucide-react';
 import Spline from '@splinetool/react-spline';
@@ -6,10 +6,40 @@ import Spline from '@splinetool/react-spline';
 const RESUME_URL = "https://drive.google.com/file/d/1A7Sh87nIZzc_rbCZIfaIYYFvXSlIInc_/view?usp=drivesdk";
 
 export default function Hero({ onOpenFoodRushModal }) {
+  const splineRef = useRef(null);
+
   const scrollToProjects = () => {
     const el = document.getElementById('projects');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
+
+  // After Spline scene loads, find and nuke the "Built with Spline" watermark DOM node
+  const onSplineLoad = useCallback(() => {
+    try {
+      const container = splineRef.current;
+      if (!container) return;
+      // Spline injects a watermark anchor after the canvas — hide it
+      const kill = () => {
+        const targets = container.querySelectorAll('a, [class*="watermark"], [class*="logo"]');
+        targets.forEach(el => {
+          el.style.cssText = 'display:none!important;visibility:hidden!important;opacity:0!important;width:0!important;height:0!important;overflow:hidden!important;';
+        });
+        // Also hide any sibling div after canvas (the badge wrapper)
+        const canvas = container.querySelector('canvas');
+        if (canvas) {
+          let sibling = canvas.nextElementSibling;
+          while (sibling) {
+            sibling.style.cssText = 'display:none!important;';
+            sibling = sibling.nextElementSibling;
+          }
+        }
+      };
+      kill();
+      // Retry a few times in case Spline adds it asynchronously
+      setTimeout(kill, 500);
+      setTimeout(kill, 1500);
+    } catch (_) {}
+  }, []);
 
   return (
     <section id="hero" className="relative min-h-[92vh] pt-28 sm:pt-36 pb-16 px-4 sm:px-8 lg:px-16 flex flex-col justify-between items-center overflow-hidden bg-[#090d16] dot-grid">
@@ -156,12 +186,13 @@ export default function Hero({ onOpenFoodRushModal }) {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="lg:col-span-5 relative w-full mt-6 lg:mt-0"
         >
-          {/* spline-wrapper class lets index.css suppress the Spline watermark badge */}
-          <div className="spline-wrapper relative w-full h-[440px] sm:h-[540px] lg:h-[580px] overflow-hidden">
+          {/* spline-wrapper: onLoad JS removes the watermark element directly */}
+          <div ref={splineRef} className="spline-wrapper relative w-full h-[440px] sm:h-[540px] lg:h-[580px] overflow-hidden">
             <Spline
               scene="https://prod.spline.design/kOb8SDOF-SGGifT2/scene.splinecode"
               className="w-full h-full scale-125 cursor-grab active:cursor-grabbing"
               style={{ transformOrigin: 'center center' }}
+              onLoad={onSplineLoad}
             />
           </div>
         </motion.div>
