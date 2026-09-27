@@ -42,7 +42,7 @@ export default function CertificationsSection() {
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
-            Learning &amp; <span className="text-shiny">Credentials</span>
+            Certifications &amp; <span className="text-shiny">Learning</span>
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2.5 font-normal leading-relaxed">
             Continuous technical learning, computer science foundations &amp; verified certifications.

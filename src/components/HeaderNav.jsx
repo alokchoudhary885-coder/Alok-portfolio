@@ -34,7 +34,8 @@ export default function HeaderNav() {
   }, []);
 
   const navLinks = [
-    { label: 'Overview', href: '#hero', id: 'hero' },
+    { label: 'Home', href: '#hero', id: 'hero' },
+    { label: 'About', href: '#about', id: 'about' },
     { label: 'Projects', href: '#projects', id: 'projects' },
     { label: 'Skills', href: '#toolbox', id: 'toolbox' },
     { label: 'Experience', href: '#experience', id: 'experience' },

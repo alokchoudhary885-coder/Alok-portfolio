@@ -29,7 +29,7 @@ export default function DsaTerminalSection() {
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
-            Java &amp; <span className="text-shiny">DSA Practice</span>
+            DSA &amp; <span className="text-shiny">Problem Solving</span>
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2.5 font-normal leading-relaxed">
             Core algorithmic foundations, time complexity optimization &amp; data structure problem solving.

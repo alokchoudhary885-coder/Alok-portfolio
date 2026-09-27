@@ -129,8 +129,7 @@ export default function ContactSection() {
           </div>
 
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight max-w-3xl">
-            Let's build <br />
-            <span className="text-shiny">something extraordinary</span> together.
+            Let's <span className="text-shiny">Work Together</span>
           </h2>
 
           <div className="flex flex-wrap items-center gap-2 mt-4 text-xs sm:text-sm text-slate-400 font-normal">

@@ -54,7 +54,7 @@ export default function ProcessSection() {
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
-            Engineering <span className="text-shiny">Process</span>
+            How I <span className="text-shiny">Work</span>
           </h2>
 
           <p className="text-slate-400 text-xs sm:text-sm mt-2.5 max-w-xl font-normal leading-relaxed">

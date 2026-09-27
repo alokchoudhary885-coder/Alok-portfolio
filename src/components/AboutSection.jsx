@@ -18,7 +18,7 @@ export default function AboutSection() {
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
-            Who Am I?
+            About Me
           </h2>
         </div>
 

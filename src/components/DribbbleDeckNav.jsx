@@ -85,7 +85,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
             02 / Interactive Portfolio Deck
           </span>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-            Featured <span className="text-shiny">Deck Highlights</span>
+            Featured <span className="text-shiny">Projects</span>
           </h2>
           <p className="text-slate-400 max-w-lg text-xs sm:text-sm font-normal">
             Navigate through flagship projects and core domains with smooth 3D perspective.

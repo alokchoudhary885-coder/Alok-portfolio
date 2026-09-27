@@ -118,7 +118,7 @@ export default function ToolboxSection() {
               <span>04 / Services &amp; Pricing</span>
             </div>
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-              Services &amp; Estimated <span className="text-shiny">Pricing</span>
+              <span className="text-shiny">Services</span>
             </h2>
           </div>
           <p className="text-slate-400 text-xs sm:text-sm max-w-md font-normal leading-relaxed">
@@ -236,7 +236,7 @@ export default function ToolboxSection() {
         <div className="flex flex-col gap-2 mb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-800 text-blue-400 font-mono text-xs self-start bg-blue-500/5">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>05 / Technical Arsenal</span>
+            <span>05 / Technical Skills</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
             Battle-tested technologies &amp; <span className="text-shiny">modern paradigms.</span>

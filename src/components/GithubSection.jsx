@@ -30,7 +30,7 @@ export default function GithubSection() {
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
-            Open Source &amp; <span className="text-shiny">Commits</span>
+            GitHub <span className="text-shiny">Activity</span>
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2.5 font-normal leading-relaxed">
             Continuous development activity, repositories &amp; open source code cadence.

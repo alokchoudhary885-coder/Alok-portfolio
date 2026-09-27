@@ -20,7 +20,7 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
-            Featured <span className="text-shiny">Projects</span>
+            <span className="text-shiny">Projects</span>
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2.5 max-w-2xl font-normal leading-relaxed">
             Production MERN applications, AI cybersecurity extensions &amp; developer telemetry platforms built with scalable architecture.
