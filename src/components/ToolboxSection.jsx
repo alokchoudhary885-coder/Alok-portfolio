@@ -10,7 +10,7 @@ export default function ToolboxSection() {
       id: 'fullstack',
       title: 'Full-Stack Web Application',
       subtitle: 'Complete MERN Stack Ecosystems',
-      startingPrice: '$150+',
+      startingPrice: '₹70,000+',
       isPopular: true,
       badge: 'BEST FOR STARTUPS',
       icon: Server,
@@ -24,7 +24,7 @@ export default function ToolboxSection() {
       id: 'portfolio-site',
       title: 'Modern Portfolio Website',
       subtitle: 'Interactive Personal & Developer Portfolios',
-      startingPrice: '$100+',
+      startingPrice: '₹50,000+',
       badge: 'AWWWARDS STYLE',
       icon: Code2,
       features: [
@@ -37,7 +37,7 @@ export default function ToolboxSection() {
       id: 'landing-page',
       title: 'Business / Landing Page',
       subtitle: 'High-Converting Corporate & Startup Sites',
-      startingPrice: '$80+',
+      startingPrice: '₹30,000+',
       badge: 'FAST DELIVERY',
       icon: Layout,
       features: [
@@ -50,7 +50,7 @@ export default function ToolboxSection() {
       id: 'maintenance',
       title: 'Website Maintenance & Bug Fixing',
       subtitle: 'Performance Optimization & Code Cleanup',
-      startingPrice: '$40+',
+      startingPrice: '₹20,000+',
       badge: 'QUICK TURNAROUND',
       icon: ShieldCheck,
       features: [
@@ -113,10 +113,6 @@ export default function ToolboxSection() {
         {/* ======================================================== */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 sm:mb-16">
           <div className="flex flex-col gap-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-800 text-blue-400 font-mono text-xs self-start bg-blue-500/5">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>04 / Services &amp; Pricing</span>
-            </div>
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
               <span className="text-shiny">Services</span>
             </h2>
@@ -234,10 +230,6 @@ export default function ToolboxSection() {
         {/* 5. TECHNICAL TOOLBOX                                     */}
         {/* ======================================================== */}
         <div className="flex flex-col gap-2 mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-800 text-blue-400 font-mono text-xs self-start bg-blue-500/5">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>05 / Technical Skills</span>
-          </div>
           <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
             Battle-tested technologies &amp; <span className="text-shiny">modern paradigms.</span>
           </h2>

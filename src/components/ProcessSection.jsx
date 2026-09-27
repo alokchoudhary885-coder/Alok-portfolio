@@ -48,11 +48,6 @@ export default function ProcessSection() {
 
         {/* Section Header */}
         <div className="flex flex-col items-start mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-800 text-blue-400 font-mono text-xs mb-3 bg-blue-500/5">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>08 / Development Pipeline</span>
-          </div>
-
           <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
             How I <span className="text-shiny">Work</span>
           </h2>

@@ -24,7 +24,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
       icon: Utensils,
       category: 'FLAGSHIP PROJECT',
       description: '25+ RESTful APIs, Razorpay checkout, Web Speech API voice search, and 6-digit OTP verification.',
-      extra: '🍔 25+ REST APIs • Razorpay • Voice Search',
+      extra: '🍔 25+ REST API Endpoints • Razorpay • Voice Search',
       isFoodRush: true,
       href: '#projects',
     },
@@ -81,9 +81,6 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
         
         {/* Section Header */}
         <div className="flex flex-col items-center text-center gap-2.5 mb-12 sm:mb-14">
-          <span className="font-mono text-xs text-blue-400 tracking-wider uppercase font-semibold">
-            02 / Interactive Portfolio Deck
-          </span>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
             Featured <span className="text-shiny">Projects</span>
           </h2>

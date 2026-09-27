@@ -9,7 +9,7 @@ export default function CertificationsSection() {
       title: 'MERN Stack / Full Stack Web Development',
       issuer: 'Web Development Certification',
       year: '2026',
-      badge: 'VERIFIED CREDENTIAL',
+      badge: 'CERTIFICATION',
       tags: ['React.js', 'Node.js', 'Express', 'MongoDB'],
     },
     {
@@ -36,11 +36,6 @@ export default function CertificationsSection() {
 
         {/* Section Header */}
         <div className="flex flex-col items-start mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-800 text-blue-400 font-mono text-xs mb-3 bg-blue-500/5">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>07 / Verified Credentials</span>
-          </div>
-
           <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
             Certifications &amp; <span className="text-shiny">Learning</span>
           </h2>
@@ -98,7 +93,7 @@ export default function CertificationsSection() {
                 >
                   <span className="flex items-center gap-1.5">
                     <CheckCircle className="w-3.5 h-3.5 text-blue-400" />
-                    <span>Accredited</span>
+                    <span>Certificate</span>
                   </span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>

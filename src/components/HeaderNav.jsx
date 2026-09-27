@@ -94,10 +94,6 @@ export default function HeaderNav() {
 
         {/* Right CTA Actions */}
         <div className="flex items-center gap-2.5 sm:gap-3">
-          <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/60 border border-slate-800 text-[11px] text-slate-300">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Available for hire</span>
-          </div>
 
           <a
             href={RESUME_URL}
