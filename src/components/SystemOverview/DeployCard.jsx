@@ -5,10 +5,11 @@ export default function DeployCard() {
   const stages = ['BUILD', 'TEST', 'DEPLOY', 'HEALTH CHECK', 'LIVE'];
   const [currentStageIdx, setCurrentStageIdx] = useState(4); // Default to LIVE
 
+  // Fast progression: advances every 850ms across pipeline stages
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentStageIdx((prev) => (prev + 1) % stages.length);
-    }, 2500);
+    }, 850);
 
     return () => clearInterval(interval);
   }, [stages.length]);
@@ -23,28 +24,36 @@ export default function DeployCard() {
   ];
 
   return (
-    <div className="group rounded-xl bg-[#090e1a]/95 border border-emerald-500/35 hover:border-emerald-400/70 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-all duration-300 p-3.5 sm:p-4 flex flex-col justify-between h-full overflow-hidden">
+    <div className="group rounded-xl bg-[#090e1a]/95 border border-emerald-500/35 hover:border-emerald-400/70 hover:shadow-[0_0_20px_rgba(16,185,129,0.18)] transition-all duration-300 p-3.5 sm:p-4 flex flex-col justify-between h-full overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-emerald-500/20 pb-2 mb-2">
         <h3 className="font-mono text-xs font-bold text-emerald-400 tracking-wider uppercase flex items-center gap-1.5 group-hover:text-emerald-300 transition-colors">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_5px_#34d399]" />
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400 shadow-[0_0_6px_#34d399]"></span>
+          </span>
           PHASE IV: DEPLOY
         </h3>
-        <span className="font-mono text-[9.5px] text-emerald-500/70 font-semibold tracking-wider">
-          SYS_04
-        </span>
+        <div className="flex items-center gap-1.5">
+          <span className="font-mono text-[8px] text-emerald-300 px-1 py-0.2 rounded bg-emerald-950/60 border border-emerald-500/30 animate-pulse">
+            CI/CD LIVE
+          </span>
+          <span className="font-mono text-[9.5px] text-emerald-500/70 font-semibold tracking-wider">
+            SYS_04
+          </span>
+        </div>
       </div>
 
       {/* Body: Status Info (Left) + Wireframe Globe (Right) */}
       <div className="grid grid-cols-1 sm:grid-cols-12 gap-2 items-center my-auto py-0.5">
-        {/* Left Column: Status Table + Progress Bar */}
+        {/* Left Column: Active Status Table + Fast Progress Bar */}
         <div className="sm:col-span-7 flex flex-col justify-between space-y-1.5">
-          {/* Key-Value Status Grid */}
+          {/* Key-Value Status Grid with Live Indicators */}
           <div className="font-mono text-[9.5px] space-y-0.5 bg-black/85 border border-emerald-500/30 group-hover:border-emerald-400/50 transition-all rounded-lg p-2">
             <div className="flex items-center justify-between">
               <span className="text-slate-300 font-medium">STATUS:</span>
               <div className="flex items-center gap-1">
-                <span className="inline-flex items-center gap-1 px-1.5 py-0.2 rounded-full bg-emerald-500/25 border border-emerald-400/60 text-emerald-300 text-[8.5px] font-bold shadow-[0_0_6px_rgba(16,185,129,0.2)]">
+                <span className="inline-flex items-center gap-1 px-1.5 py-0.2 rounded-full bg-emerald-500/25 border border-emerald-400/60 text-emerald-300 text-[8.5px] font-bold shadow-[0_0_6px_rgba(16,185,129,0.25)]">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_3px_#34d399]" />
                   LIVE
                 </span>
@@ -61,24 +70,34 @@ export default function DeployCard() {
 
             <div className="flex items-center justify-between">
               <span className="text-slate-300 font-medium">SSL:</span>
-              <span className="text-emerald-400 font-bold">TRUE</span>
+              <span className="text-emerald-400 font-bold flex items-center gap-1">
+                <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
+                TRUE
+              </span>
             </div>
 
             <div className="flex items-center justify-between">
               <span className="text-slate-300 font-medium">API:</span>
-              <span className="text-emerald-400 font-bold">ONLINE</span>
+              <span className="text-emerald-400 font-bold flex items-center gap-1">
+                <span className="w-1 h-1 rounded-full bg-emerald-400 animate-ping" />
+                ONLINE
+              </span>
             </div>
 
             <div className="flex items-center justify-between">
               <span className="text-slate-300 font-medium">DB:</span>
-              <span className="text-emerald-400 font-bold">CONNECTED</span>
+              <span className="text-emerald-400 font-bold flex items-center gap-1">
+                <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
+                CONNECTED
+              </span>
             </div>
           </div>
 
-          {/* Deployment Progress Bar */}
+          {/* Deployment Progress Bar with Fast Live Stage Advancement */}
           <div className="space-y-0.5">
             <div className="flex items-center justify-between font-mono text-[9px]">
-              <span className="text-slate-200 font-medium uppercase tracking-wider text-[8px]">
+              <span className="text-slate-200 font-medium uppercase tracking-wider text-[8px] flex items-center gap-1">
+                <span className="w-1 h-1 rounded-full bg-cyan-400 animate-pulse" />
                 DEPLOY • <span className="text-emerald-300 font-bold">{stages[currentStageIdx]}</span>
               </span>
               <span className="text-emerald-400 font-bold text-[8.5px]">{progressPercent}%</span>
@@ -88,32 +107,32 @@ export default function DeployCard() {
               <motion.div
                 className="h-full rounded-full bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 shadow-[0_0_6px_#34d399]"
                 animate={{ width: `${progressPercent}%` }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
               />
             </div>
           </div>
         </div>
 
-        {/* Right Column: Wireframe Globe */}
+        {/* Right Column: Active Orbit Wireframe Globe */}
         <div className="sm:col-span-5 relative flex items-center justify-center p-0.5">
           <svg
             viewBox="0 0 115 115"
             className="w-full max-w-[95px] h-auto select-none overflow-visible group-hover:brightness-110 transition-all"
           >
             <defs>
-              <radialGradient id="globeGradCompact2" cx="50%" cy="50%" r="50%">
+              <radialGradient id="globeGradLive2" cx="50%" cy="50%" r="50%">
                 <stop offset="0%" stopColor="#059669" stopOpacity="0.35" />
                 <stop offset="60%" stopColor="#0d9488" stopOpacity="0.18" />
                 <stop offset="100%" stopColor="#090e1a" stopOpacity="0.0" />
               </radialGradient>
-              <filter id="emeraldGlowCompact2" x="-20%" y="-20%" width="140%" height="140%">
+              <filter id="emeraldGlowLive2" x="-20%" y="-20%" width="140%" height="140%">
                 <feGaussianBlur stdDeviation="1.5" result="blur" />
                 <feComposite in="SourceGraphic" in2="blur" operator="over" />
               </filter>
             </defs>
 
             {/* Inner Globe Sphere Fill */}
-            <circle cx="57.5" cy="57.5" r="35" fill="url(#globeGradCompact2)" />
+            <circle cx="57.5" cy="57.5" r="35" fill="url(#globeGradLive2)" />
 
             {/* Outer Globe Border */}
             <circle
@@ -147,21 +166,21 @@ export default function DeployCard() {
               strokeWidth="1.2"
               strokeOpacity="0.85"
               transform="rotate(-25 57.5 57.5)"
-              filter="url(#emeraldGlowCompact2)"
+              filter="url(#emeraldGlowLive2)"
             />
 
-            {/* Orbiting Satellite Node */}
+            {/* Fast Orbiting Satellite Node (2.2s revolution) */}
             <g transform="rotate(-25 57.5 57.5)">
               <motion.circle
-                r="2.5"
+                r="2.8"
                 fill="#22d3ee"
-                filter="url(#emeraldGlowCompact2)"
+                filter="url(#emeraldGlowLive2)"
                 animate={{
                   cx: [10.5, 104.5, 10.5],
                   cy: [57.5, 57.5, 57.5],
                 }}
                 transition={{
-                  duration: 3.5,
+                  duration: 2.2,
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
