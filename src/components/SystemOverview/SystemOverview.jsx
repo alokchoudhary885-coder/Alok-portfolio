@@ -11,29 +11,29 @@ export default function SystemOverview() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.08,
       },
     },
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 12 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: 'easeOut' },
+      transition: { duration: 0.45, ease: 'easeOut' },
     },
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 mt-8 sm:mt-10">
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 mt-6 sm:mt-7">
       {/* 2x2 Unified Engineering Dashboard Grid */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-40px' }}
-        className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 items-stretch"
+        viewport={{ once: true, margin: '-30px' }}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-3.5 sm:gap-4 items-stretch"
       >
         {/* PHASE I: ARCHITECTURE */}
         <motion.div variants={cardVariants} className="h-full flex flex-col">
