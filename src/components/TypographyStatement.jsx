@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import CoreDevelopmentCard from './CoreDevelopmentCard';
 
 export default function TypographyStatement() {
   return (
@@ -42,6 +43,18 @@ export default function TypographyStatement() {
         >
           Bridging high-performance Node.js APIs &amp; MongoDB architectures with fluid, responsive React interfaces.
         </motion.p>
+
+        {/* Phase II Core Development Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="mt-10 sm:mt-12 w-full max-w-lg"
+        >
+          <CoreDevelopmentCard />
+        </motion.div>
+
       </div>
     </section>
   );
