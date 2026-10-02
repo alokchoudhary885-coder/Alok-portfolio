@@ -2,30 +2,31 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const codeLines = [
-  { isStep: true, text: '> initializing React runtime...' },
-  { isConst: true, varName: 'app', right: 'express();' },
-  { isAwait: true, func: 'connectDatabase();' },
-  { isAppUse: true, path: '/api', target: 'routes' },
-  { isStep: true, text: '> compiling TypeScript...' },
-  { isStep: true, text: '> building client assets...' },
-  { isStep: true, text: '> optimizing for production...' },
-  { isDone: true, text: '✓ build completed successfully' },
-  { isCursor: true, text: '> watching for changes...' },
-  { isConst: true, varName: 'server', right: 'createServer();' },
-  { isStep: true, text: '> connecting Express API...' },
-  { isStep: true, text: '> querying MongoDB...' },
-  { isDone: true, text: '✓ 25+ REST API endpoints ready' },
+  { type: 'step-cyan', text: '> initializing React runtime...' },
+  { type: 'const-app', varName: 'app', right: 'express();' },
+  { type: 'await-func', func: 'connectDatabase();' },
+  { type: 'app-use', path: '/api', target: 'routes' },
+  { type: 'step-emerald', text: '> compiling TypeScript assets...' },
+  { type: 'config-port', name: 'PORT', val: '3000' },
+  { type: 'step-amber', text: '> optimizing production bundle...' },
+  { type: 'success-done', text: '✓ build completed successfully' },
+  { type: 'cursor-watch', text: '> watching for changes...' },
+  { type: 'const-server', varName: 'server', right: 'createServer(app);' },
+  { type: 'step-cyan', text: '> connecting Express API...' },
+  { type: 'await-db', func: 'mongoose.connect(URI);' },
+  { type: 'success-endpoints', text: '✓ 25+ REST API endpoints live' },
+  { type: 'step-rose', text: '⚡ hot-reload daemon active' },
 ];
 
 export function CoreDevCodeStream() {
   const repeatedLines = [...codeLines, ...codeLines];
 
   return (
-    <div className="relative font-mono text-[10px] h-[105px] overflow-hidden leading-[1.65] select-none">
+    <div className="relative font-mono text-[10.5px] h-[108px] overflow-hidden leading-[1.65] select-none">
       <motion.div
-        animate={{ y: [0, -182] }}
+        animate={{ y: [0, -196] }}
         transition={{
-          duration: 8.5,
+          duration: 9,
           repeat: Infinity,
           ease: 'linear',
         }}
@@ -33,49 +34,118 @@ export function CoreDevCodeStream() {
         {repeatedLines.map((line, index) => {
           const lineNum = String((index % codeLines.length) + 1).padStart(2, '0');
           return (
-            <div key={index} className="flex items-center min-h-[16.5px] whitespace-nowrap">
-              <span className="w-5 text-slate-600 mr-2 shrink-0 select-none text-[9.5px]">
+            <div key={index} className="flex items-center min-h-[17.5px] whitespace-nowrap">
+              {/* Line Number */}
+              <span className="w-5 text-purple-400/70 mr-2 shrink-0 select-none text-[9.5px] font-semibold">
                 {lineNum}
               </span>
 
-              {line.isStep && (
-                <span className="text-emerald-400/85 font-normal">{line.text}</span>
+              {/* Cyan Step */}
+              {line.type === 'step-cyan' && (
+                <span className="text-cyan-400 font-medium">{line.text}</span>
               )}
 
-              {line.isConst && (
-                <span className="text-slate-300">
-                  <span className="text-cyan-400">const </span>
-                  <span className="text-purple-300">{line.varName} </span>= {line.right}
+              {/* Emerald Step */}
+              {line.type === 'step-emerald' && (
+                <span className="text-emerald-400 font-medium">{line.text}</span>
+              )}
+
+              {/* Amber Step */}
+              {line.type === 'step-amber' && (
+                <span className="text-amber-400 font-medium">{line.text}</span>
+              )}
+
+              {/* Rose Step */}
+              {line.type === 'step-rose' && (
+                <span className="text-rose-400 font-medium">{line.text}</span>
+              )}
+
+              {/* Const App: Blue keyword + Cyan var + Yellow function */}
+              {line.type === 'const-app' && (
+                <span>
+                  <span className="text-blue-400 font-semibold">const </span>
+                  <span className="text-cyan-300 font-medium">{line.varName} </span>
+                  <span className="text-slate-200">= </span>
+                  <span className="text-yellow-400 font-semibold">express</span>
+                  <span className="text-purple-300">()</span>
+                  <span className="text-slate-200">;</span>
                 </span>
               )}
 
-              {line.isAwait && (
-                <span className="text-slate-300">
-                  <span className="text-purple-400">await </span>
-                  <span className="text-amber-300">{line.func}</span>
+              {/* Const Server */}
+              {line.type === 'const-server' && (
+                <span>
+                  <span className="text-blue-400 font-semibold">const </span>
+                  <span className="text-cyan-300 font-medium">{line.varName} </span>
+                  <span className="text-slate-200">= </span>
+                  <span className="text-yellow-400 font-semibold">createServer</span>
+                  <span className="text-slate-200">(</span>
+                  <span className="text-orange-300">app</span>
+                  <span className="text-slate-200">);</span>
                 </span>
               )}
 
-              {line.isAppUse && (
-                <span className="text-slate-300">
-                  <span className="text-blue-400">app</span>
-                  <span className="text-slate-400">.use(</span>
-                  <span className="text-emerald-300">"{line.path}"</span>
-                  <span className="text-slate-400">, {line.target});</span>
+              {/* Await Connect: Purple keyword + Yellow function */}
+              {line.type === 'await-func' && (
+                <span>
+                  <span className="text-purple-400 font-semibold">await </span>
+                  <span className="text-yellow-400 font-semibold">{line.func}</span>
                 </span>
               )}
 
-              {line.isDone && (
-                <span className="text-cyan-300 font-medium">{line.text}</span>
+              {/* Await DB */}
+              {line.type === 'await-db' && (
+                <span>
+                  <span className="text-purple-400 font-semibold">await </span>
+                  <span className="text-sky-300 font-medium">mongoose</span>
+                  <span className="text-slate-200">.</span>
+                  <span className="text-yellow-400 font-semibold">connect</span>
+                  <span className="text-slate-200">(</span>
+                  <span className="text-orange-400 font-semibold">URI</span>
+                  <span className="text-slate-200">);</span>
+                </span>
               )}
 
-              {line.isCursor && (
-                <span className="text-slate-400 flex items-center">
+              {/* App Use: Blue app + Yellow method + Emerald path + Orange target */}
+              {line.type === 'app-use' && (
+                <span>
+                  <span className="text-cyan-300 font-medium">app</span>
+                  <span className="text-slate-200">.</span>
+                  <span className="text-yellow-400 font-semibold">use</span>
+                  <span className="text-slate-200">(</span>
+                  <span className="text-emerald-400 font-medium">"{line.path}"</span>
+                  <span className="text-slate-200">, </span>
+                  <span className="text-orange-300 font-medium">{line.target}</span>
+                  <span className="text-slate-200">);</span>
+                </span>
+              )}
+
+              {/* Config Port */}
+              {line.type === 'config-port' && (
+                <span>
+                  <span className="text-blue-400 font-semibold">const </span>
+                  <span className="text-orange-400 font-semibold">{line.name} </span>
+                  <span className="text-slate-200">= </span>
+                  <span className="text-rose-400 font-bold">{line.val}</span>
+                  <span className="text-slate-200">;</span>
+                </span>
+              )}
+
+              {/* Success */}
+              {(line.type === 'success-done' || line.type === 'success-endpoints') && (
+                <span className="text-emerald-300 font-bold tracking-tight">
+                  {line.text}
+                </span>
+              )}
+
+              {/* Blinking Cursor */}
+              {line.type === 'cursor-watch' && (
+                <span className="text-purple-300 font-medium flex items-center">
                   <span>{line.text}</span>
                   <motion.span
                     animate={{ opacity: [1, 0, 1] }}
                     transition={{ duration: 0.8, repeat: Infinity }}
-                    className="inline-block w-1.5 h-2.5 bg-slate-200 ml-1"
+                    className="inline-block w-1.5 h-3 bg-cyan-400 ml-1 shadow-[0_0_6px_#22d3ee]"
                   />
                 </span>
               )}
@@ -94,37 +164,40 @@ export default function CoreDevelopmentCard() {
   const technologies = ['React', 'Node.js', 'Express', 'MongoDB', 'TypeScript'];
 
   return (
-    <div className="rounded-xl bg-[#0a0f1d]/90 border border-purple-500/25 hover:border-purple-500/40 transition-all duration-300 p-4 sm:p-5 flex flex-col justify-between h-full overflow-hidden shadow-lg shadow-black/20">
+    <div className="group rounded-xl bg-[#090e1a]/95 border border-purple-500/35 hover:border-purple-400/70 hover:shadow-[0_0_25px_rgba(168,85,247,0.18)] transition-all duration-300 p-4 sm:p-5 flex flex-col justify-between h-full overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-800/80 pb-2.5 mb-3">
-        <h3 className="font-mono text-xs font-bold text-purple-400 tracking-wider uppercase">
+      <div className="flex items-center justify-between border-b border-purple-500/25 pb-2.5 mb-3">
+        <h3 className="font-mono text-xs font-bold text-purple-400 tracking-wider uppercase flex items-center gap-1.5 group-hover:text-purple-300 transition-colors">
+          <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_6px_#c084fc]" />
           PHASE II: CORE DEVELOPMENT
         </h3>
-        <span className="font-mono text-[10px] text-slate-500 tracking-wider">
+        <span className="font-mono text-[10px] text-purple-500/70 font-semibold tracking-wider">
           SYS_02
         </span>
       </div>
 
-      {/* Terminal Container */}
-      <div className="rounded-lg bg-black/95 border border-slate-800/90 p-2.5 my-auto shadow-inner">
+      {/* Terminal Container with Glowing Purple Outline */}
+      <div className="rounded-lg bg-black/95 border border-purple-500/30 group-hover:border-purple-400/60 group-hover:shadow-[0_0_15px_rgba(168,85,247,0.12)] transition-all p-2.5 my-auto shadow-inner">
         {/* Terminal Header */}
-        <div className="flex items-center gap-1 pb-1.5 mb-1.5 border-b border-slate-900 select-none">
-          <span className="w-1.5 h-1.5 rounded-full bg-rose-500/70" />
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-500/70" />
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/70" />
-          <span className="ml-2 font-mono text-[8.5px] text-slate-600">terminal — bash</span>
+        <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-purple-900/40 select-none">
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-rose-500 shadow-[0_0_4px_#f43f5e]" />
+            <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_4px_#fbbf24]" />
+            <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_4px_#34d399]" />
+          </div>
+          <span className="font-mono text-[9px] text-purple-300/80 font-medium">dev-worker — v18.2</span>
         </div>
 
-        {/* Live Code Stream */}
+        {/* Live Syntax-Colored Code Stream */}
         <CoreDevCodeStream />
       </div>
 
-      {/* Bottom Tech Badges */}
-      <div className="flex flex-wrap items-center gap-1.5 pt-2.5 border-t border-slate-800/80 mt-2">
+      {/* Bottom Tech Badges (Vivid Purple Glow) */}
+      <div className="flex flex-wrap items-center gap-1.5 pt-2.5 border-t border-purple-500/20 mt-2">
         {technologies.map((tech) => (
           <span
             key={tech}
-            className="font-mono text-[9px] px-2 py-0.5 rounded bg-purple-950/30 border border-purple-500/20 text-purple-300/90"
+            className="font-mono text-[9.5px] font-semibold px-2 py-0.5 rounded bg-purple-950/60 border border-purple-400/40 text-purple-300 shadow-[0_0_8px_rgba(168,85,247,0.15)] group-hover:border-purple-400/70 group-hover:text-purple-200 transition-all"
           >
             {tech}
           </span>
