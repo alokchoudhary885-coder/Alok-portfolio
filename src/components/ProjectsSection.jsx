@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Github, ArrowUpRight, Download, ExternalLink, Zap, CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react';
+import foodrushPreview from '../assets/foodrush-preview.jpg';
+import jobguardPreview from '../assets/jobguard-preview.jpg';
+import devCenterPreview from '../assets/devcommandcenter-preview.jpg';
+import portfolioPreview from '../assets/portfolio-preview.jpg';
 
 export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardModal }) {
   const [expandedDevCommand, setExpandedDevCommand] = useState(false);
@@ -91,7 +95,16 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
             </div>
 
             {/* Right Panel */}
-            <div className="lg:col-span-5 w-full">
+            <div className="lg:col-span-5 w-full flex flex-col gap-4">
+              {/* Project Preview Image */}
+              <div className="w-full rounded-xl overflow-hidden border border-slate-800/80 shadow-md bg-slate-950/80">
+                <img
+                  src={foodrushPreview}
+                  alt="FoodRush application interface preview"
+                  className="w-full h-auto object-cover object-top"
+                  loading="lazy"
+                />
+              </div>
               <div className="p-5 rounded-xl bg-slate-950/80 border border-slate-800/80 text-xs space-y-3 shadow-md">
                 <div className="flex items-center justify-between border-b border-slate-800 pb-2.5 text-slate-400">
                   <span className="text-blue-400 font-semibold tracking-wide uppercase text-[11px]">Engineering Specs</span>
@@ -217,7 +230,16 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
             </div>
 
             {/* Right Panel */}
-            <div className="lg:col-span-5 w-full">
+            <div className="lg:col-span-5 w-full flex flex-col gap-4">
+              {/* Project Preview Image */}
+              <div className="w-full rounded-xl overflow-hidden border border-slate-800/80 shadow-md bg-slate-950/80">
+                <img
+                  src={jobguardPreview}
+                  alt="JobGuard Chrome extension scam detection interface preview"
+                  className="w-full h-auto object-cover object-top"
+                  loading="lazy"
+                />
+              </div>
               <div className="p-5 rounded-xl bg-slate-950/80 border border-slate-800/80 text-xs space-y-3 shadow-md">
                 <div className="flex items-center justify-between border-b border-slate-800 pb-2.5 text-slate-400">
                   <span className="text-blue-400 font-semibold tracking-wide uppercase text-[11px]">Cybersecurity Specs</span>
@@ -331,7 +353,16 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
             </div>
 
             {/* Right Panel */}
-            <div className="lg:col-span-5 w-full">
+            <div className="lg:col-span-5 w-full flex flex-col gap-4">
+              {/* Project Preview Image */}
+              <div className="w-full rounded-xl overflow-hidden border border-slate-800/80 shadow-md bg-slate-950/80">
+                <img
+                  src={devCenterPreview}
+                  alt="Developer Command Center analytics dashboard preview"
+                  className="w-full h-auto object-cover object-top"
+                  loading="lazy"
+                />
+              </div>
               <div className="p-5 rounded-xl bg-slate-950/80 border border-slate-800/80 text-xs space-y-3 shadow-md">
                 <div className="flex items-center justify-between border-b border-slate-800 pb-2.5 text-slate-400">
                   <span className="text-blue-400 font-semibold tracking-wide uppercase text-[11px]">Telemetry &amp; AI Specs</span>
@@ -414,8 +445,8 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
             </span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-            <div className="lg:col-span-8 flex flex-col items-start space-y-3.5">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
+            <div className="lg:col-span-7 flex flex-col items-start space-y-3.5">
               <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                 Cinematic Developer Portfolio
               </h3>
@@ -433,23 +464,34 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
               </div>
             </div>
 
-            <div className="lg:col-span-4 p-4 rounded-xl bg-slate-950/80 border border-slate-800/80 text-xs text-slate-300 space-y-2">
-              <div className="text-blue-400 font-semibold mb-2 uppercase tracking-wide text-[11px]">Technical Highlights:</div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                <span>Reusable Modular Components</span>
+            <div className="lg:col-span-5 w-full flex flex-col gap-4">
+              {/* Project Preview Image */}
+              <div className="w-full rounded-xl overflow-hidden border border-slate-800/80 shadow-md bg-slate-950/80">
+                <img
+                  src={portfolioPreview}
+                  alt="Cinematic Developer Portfolio website preview"
+                  className="w-full h-auto object-cover object-top"
+                  loading="lazy"
+                />
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                <span>Web Audio Synth Feedback</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                <span>100% Responsive Design</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                <span>Optimized Vite Build</span>
+              <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800/80 text-xs text-slate-300 space-y-2">
+                <div className="text-blue-400 font-semibold mb-2 uppercase tracking-wide text-[11px]">Technical Highlights:</div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                  <span>Reusable Modular Components</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                  <span>Web Audio Synth Feedback</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                  <span>100% Responsive Design</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                  <span>Optimized Vite Build</span>
+                </div>
               </div>
             </div>
           </div>
