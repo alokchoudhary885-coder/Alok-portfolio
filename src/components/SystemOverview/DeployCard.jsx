@@ -23,13 +23,10 @@ export default function DeployCard() {
   ];
 
   return (
-    <div className="relative group rounded-2xl bg-[#090e1a]/90 border border-emerald-500/30 hover:border-emerald-400/60 transition-all duration-300 p-5 sm:p-6 flex flex-col justify-between overflow-hidden shadow-xl shadow-emerald-950/20">
-      {/* Background corner ambient glow */}
-      <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-
+    <div className="rounded-xl bg-[#0a0f1d]/90 border border-emerald-500/25 hover:border-emerald-500/40 transition-all duration-300 p-4 sm:p-5 flex flex-col justify-between h-full overflow-hidden shadow-lg shadow-black/20">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-emerald-500/20 pb-3 mb-3">
-        <h3 className="font-mono text-xs sm:text-sm font-bold text-emerald-400 tracking-wider uppercase">
+      <div className="flex items-center justify-between border-b border-slate-800/80 pb-2.5 mb-2.5">
+        <h3 className="font-mono text-xs font-bold text-emerald-400 tracking-wider uppercase">
           PHASE IV: DEPLOY
         </h3>
         <span className="font-mono text-[10px] text-slate-500 tracking-wider">
@@ -37,20 +34,20 @@ export default function DeployCard() {
         </span>
       </div>
 
-      {/* Center Layout: Status & Progress (Left) + Wireframe Globe (Right) */}
-      <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center my-auto py-1">
-        {/* Left Info Column */}
-        <div className="sm:col-span-7 flex flex-col justify-between space-y-2.5">
+      {/* Body: Status Info (Left) + Wireframe Globe (Right) */}
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5 items-center my-auto py-1">
+        {/* Left Column: Status Table + Progress Bar */}
+        <div className="sm:col-span-7 flex flex-col justify-between space-y-2">
           {/* Key-Value Status Grid */}
-          <div className="font-mono text-[11px] space-y-1.5 bg-black/60 border border-slate-800/80 rounded-xl p-3">
+          <div className="font-mono text-[10px] space-y-1 bg-black/60 border border-slate-800/70 rounded-lg p-2.5">
             <div className="flex items-center justify-between">
               <span className="text-slate-400">STATUS:</span>
-              <div className="flex items-center gap-1.5">
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold">
+              <div className="flex items-center gap-1">
+                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[9px] font-bold">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   LIVE
                 </span>
-                <span className="font-mono text-[8px] text-slate-500 px-1 py-0.5 rounded bg-slate-900 border border-slate-800">
+                <span className="font-mono text-[8px] text-slate-500 px-1 py-0.2 rounded bg-slate-900 border border-slate-800">
                   SIM
                 </span>
               </div>
@@ -58,109 +55,102 @@ export default function DeployCard() {
 
             <div className="flex items-center justify-between">
               <span className="text-slate-400">PORT:</span>
-              <span className="text-slate-200 font-semibold">3000</span>
+              <span className="text-slate-200">3000</span>
             </div>
 
             <div className="flex items-center justify-between">
               <span className="text-slate-400">SSL:</span>
-              <span className="text-emerald-400 font-semibold">TRUE</span>
+              <span className="text-emerald-400 font-medium">TRUE</span>
             </div>
 
             <div className="flex items-center justify-between">
               <span className="text-slate-400">API:</span>
-              <span className="text-emerald-400 font-semibold">ONLINE</span>
+              <span className="text-emerald-400 font-medium">ONLINE</span>
             </div>
 
             <div className="flex items-center justify-between">
               <span className="text-slate-400">DB:</span>
-              <span className="text-emerald-400 font-semibold">CONNECTED</span>
+              <span className="text-emerald-400 font-medium">CONNECTED</span>
             </div>
           </div>
 
           {/* Deployment Progress Bar */}
-          <div className="space-y-1.5 pt-0.5">
-            <div className="flex items-center justify-between font-mono text-[10px]">
-              <span className="text-slate-400 uppercase tracking-wider text-[9px]">
-                DEPLOYMENT PROGRESS • <span className="text-emerald-400 font-semibold">{stages[currentStageIdx]}</span>
+          <div className="space-y-1">
+            <div className="flex items-center justify-between font-mono text-[9px]">
+              <span className="text-slate-400 uppercase tracking-wider text-[8.5px]">
+                DEPLOYMENT • <span className="text-emerald-400 font-semibold">{stages[currentStageIdx]}</span>
               </span>
               <span className="text-emerald-400 font-bold">{progressPercent}%</span>
             </div>
 
-            <div className="h-2 w-full rounded-full bg-black/80 border border-emerald-950/60 p-0.5 overflow-hidden">
+            <div className="h-1.5 w-full rounded-full bg-black/80 border border-emerald-950/60 p-0.5 overflow-hidden">
               <motion.div
                 className="h-full rounded-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400"
                 animate={{ width: `${progressPercent}%` }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
               />
             </div>
           </div>
         </div>
 
-        {/* Right Globe Visualization */}
-        <div className="sm:col-span-5 relative flex items-center justify-center p-2">
+        {/* Right Column: Compact Wireframe Globe */}
+        <div className="sm:col-span-5 relative flex items-center justify-center p-1">
           <svg
-            viewBox="0 0 160 160"
-            className="w-full max-w-[130px] h-auto select-none overflow-visible"
+            viewBox="0 0 130 130"
+            className="w-full max-w-[105px] h-auto select-none overflow-visible"
           >
             <defs>
               <radialGradient id="globeGrad" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#059669" stopOpacity="0.25" />
-                <stop offset="70%" stopColor="#0d9488" stopOpacity="0.1" />
-                <stop offset="100%" stopColor="#090e1a" stopOpacity="0.0" />
+                <stop offset="0%" stopColor="#059669" stopOpacity="0.18" />
+                <stop offset="85%" stopColor="#090e1a" stopOpacity="0.0" />
               </radialGradient>
-              <filter id="emeraldGlow">
-                <feGaussianBlur stdDeviation="2" result="blur" />
-                <feComposite in="SourceGraphic" in2="blur" operator="over" />
-              </filter>
             </defs>
 
             {/* Inner Globe Sphere Fill */}
-            <circle cx="80" cy="80" r="50" fill="url(#globeGrad)" />
+            <circle cx="65" cy="65" r="40" fill="url(#globeGrad)" />
 
             {/* Outer Globe Border */}
             <circle
-              cx="80"
-              cy="80"
-              r="50"
+              cx="65"
+              cy="65"
+              r="40"
               fill="none"
               stroke="#10b981"
-              strokeWidth="1.2"
-              strokeOpacity="0.5"
+              strokeWidth="1"
+              strokeOpacity="0.45"
             />
 
             {/* Latitude Ellipses */}
-            <ellipse cx="80" cy="80" rx="50" ry="24" fill="none" stroke="#10b981" strokeWidth="0.8" strokeOpacity="0.3" strokeDasharray="3 2" />
-            <ellipse cx="80" cy="80" rx="50" ry="10" fill="none" stroke="#10b981" strokeWidth="0.8" strokeOpacity="0.4" />
-            <line x1="30" y1="80" x2="130" y2="80" stroke="#10b981" strokeWidth="0.8" strokeOpacity="0.5" />
+            <ellipse cx="65" cy="65" rx="40" ry="19" fill="none" stroke="#10b981" strokeWidth="0.75" strokeOpacity="0.25" strokeDasharray="2 2" />
+            <ellipse cx="65" cy="65" rx="40" ry="8" fill="none" stroke="#10b981" strokeWidth="0.75" strokeOpacity="0.35" />
+            <line x1="25" y1="65" x2="105" y2="65" stroke="#10b981" strokeWidth="0.75" strokeOpacity="0.4" />
 
             {/* Longitude Ellipses */}
-            <ellipse cx="80" cy="80" rx="24" ry="50" fill="none" stroke="#10b981" strokeWidth="0.8" strokeOpacity="0.3" strokeDasharray="3 2" />
-            <ellipse cx="80" cy="80" rx="10" ry="50" fill="none" stroke="#10b981" strokeWidth="0.8" strokeOpacity="0.4" />
-            <line x1="80" y1="30" x2="80" y2="130" stroke="#10b981" strokeWidth="0.8" strokeOpacity="0.5" />
+            <ellipse cx="65" cy="65" rx="19" ry="40" fill="none" stroke="#10b981" strokeWidth="0.75" strokeOpacity="0.25" strokeDasharray="2 2" />
+            <ellipse cx="65" cy="65" rx="8" ry="40" fill="none" stroke="#10b981" strokeWidth="0.75" strokeOpacity="0.35" />
+            <line x1="65" y1="25" x2="65" y2="105" stroke="#10b981" strokeWidth="0.75" strokeOpacity="0.4" />
 
             {/* Rotated Orbit Ring */}
-            <motion.ellipse
-              cx="80"
-              cy="80"
-              rx="68"
-              ry="16"
+            <ellipse
+              cx="65"
+              cy="65"
+              rx="54"
+              ry="13"
               fill="none"
               stroke="#06b6d4"
-              strokeWidth="1.2"
-              strokeOpacity="0.75"
-              transform="rotate(-25 80 80)"
-              filter="url(#emeraldGlow)"
+              strokeWidth="1"
+              strokeOpacity="0.6"
+              transform="rotate(-25 65 65)"
             />
 
-            {/* Orbiting Satellite Node along the Elliptical Track */}
-            <g transform="rotate(-25 80 80)">
+            {/* Orbiting Satellite Node */}
+            <g transform="rotate(-25 65 65)">
               <motion.circle
-                r="3"
+                r="2.5"
                 fill="#22d3ee"
-                filter="url(#emeraldGlow)"
                 animate={{
-                  cx: [12, 148, 12],
-                  cy: [80, 80, 80],
+                  cx: [11, 119, 11],
+                  cy: [65, 65, 65],
                 }}
                 transition={{
                   duration: 4,
@@ -170,19 +160,19 @@ export default function DeployCard() {
               />
             </g>
 
-            {/* Glowing Core Hub Point */}
-            <circle cx="80" cy="80" r="3.5" fill="#34d399" filter="url(#emeraldGlow)" />
-            <circle cx="80" cy="80" r="1.5" fill="#ffffff" />
+            {/* Center Core Dot */}
+            <circle cx="65" cy="65" r="2.5" fill="#34d399" />
+            <circle cx="65" cy="65" r="1" fill="#ffffff" />
           </svg>
         </div>
       </div>
 
       {/* Bottom Technology Badges */}
-      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-3 border-t border-slate-800/80 mt-2">
+      <div className="flex flex-wrap items-center gap-1.5 pt-2.5 border-t border-slate-800/80 mt-2">
         {deploymentPlatforms.map((plat) => (
           <span
             key={plat.name}
-            className="font-mono text-[10px] px-2 py-0.5 rounded-md bg-emerald-950/40 border border-emerald-500/20 text-emerald-300 flex items-center gap-1"
+            className="font-mono text-[9px] px-2 py-0.5 rounded bg-emerald-950/30 border border-emerald-500/20 text-emerald-300/90 flex items-center gap-1"
           >
             <span>{plat.icon}</span>
             <span>{plat.name}</span>

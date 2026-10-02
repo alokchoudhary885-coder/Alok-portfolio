@@ -4,7 +4,7 @@ import SystemOverview from './SystemOverview/SystemOverview';
 
 export default function TypographyStatement() {
   return (
-    <section id="system-overview" className="relative py-20 sm:py-28 bg-transparent border-y border-slate-800/80 overflow-hidden">
+    <section id="system-overview" className="relative py-16 sm:py-20 bg-transparent border-y border-slate-800/80 overflow-hidden">
       {/* Background ambient gradient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-blue-500/5 rounded-full blur-[160px] pointer-events-none" />
 

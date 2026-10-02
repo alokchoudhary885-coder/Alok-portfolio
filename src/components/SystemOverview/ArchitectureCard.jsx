@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 
 export default function ArchitectureCard() {
   const layers = [
-    { id: 'frontend', name: 'Frontend', yOffset: 15, delay: 0 },
-    { id: 'api', name: 'API Layer', yOffset: 55, delay: 0.1 },
-    { id: 'database', name: 'Database', yOffset: 95, delay: 0.2 },
-    { id: 'infra', name: 'Infrastructure', yOffset: 135, delay: 0.3 },
+    { id: 'frontend', name: 'Frontend', yOffset: 6, delay: 0 },
+    { id: 'api', name: 'API Layer', yOffset: 34, delay: 0.1 },
+    { id: 'database', name: 'Database', yOffset: 62, delay: 0.2 },
+    { id: 'infra', name: 'Infrastructure', yOffset: 90, delay: 0.3 },
   ];
 
   const highlights = [
@@ -19,13 +19,10 @@ export default function ArchitectureCard() {
   const badges = ['Scalable', 'Modular', 'Maintainable'];
 
   return (
-    <div className="relative group rounded-2xl bg-[#090e1a]/90 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 p-5 sm:p-6 flex flex-col justify-between overflow-hidden shadow-xl shadow-cyan-950/20">
-      {/* Background corner ambient glow */}
-      <div className="absolute -top-12 -left-12 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-
+    <div className="rounded-xl bg-[#0a0f1d]/90 border border-cyan-500/25 hover:border-cyan-500/40 transition-all duration-300 p-4 sm:p-5 flex flex-col justify-between h-full overflow-hidden shadow-lg shadow-black/20">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-cyan-500/20 pb-3 mb-4">
-        <h3 className="font-mono text-xs sm:text-sm font-bold text-cyan-400 tracking-wider uppercase">
+      <div className="flex items-center justify-between border-b border-slate-800/80 pb-2.5 mb-3">
+        <h3 className="font-mono text-xs font-bold text-cyan-400 tracking-wider uppercase">
           PHASE I: ARCHITECTURE
         </h3>
         <span className="font-mono text-[10px] text-slate-500 tracking-wider">
@@ -33,68 +30,62 @@ export default function ArchitectureCard() {
         </span>
       </div>
 
-      {/* Body Layout: 3D Stacked Layers + Checklist */}
-      <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center my-auto py-2">
-        {/* Left: Isometric Stacked Layers */}
-        <div className="sm:col-span-6 relative flex flex-col items-center justify-center">
+      {/* Body: Stacked Isometric Layers + Checklist */}
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center my-auto py-1">
+        {/* Left: Compact Isometric Layers */}
+        <div className="sm:col-span-6 relative flex items-center justify-center">
           <svg
-            viewBox="0 0 240 190"
-            className="w-full max-w-[210px] h-auto overflow-visible select-none"
+            viewBox="0 0 200 135"
+            className="w-full max-w-[175px] h-auto overflow-visible select-none"
           >
             <defs>
               <linearGradient id="cyanLayerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.35" />
-                <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.1" />
+                <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.25" />
+                <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.08" />
               </linearGradient>
               <linearGradient id="cyanStrokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.4" />
+                <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.3" />
               </linearGradient>
-              <filter id="cyanGlow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="3" result="blur" />
-                <feComposite in="SourceGraphic" in2="blur" operator="over" />
-              </filter>
             </defs>
 
-            {/* Central Vertical Data Axis Line */}
-            <motion.line
-              x1="120"
-              y1="25"
-              x2="120"
-              y2="165"
+            {/* Central Vertical Axis */}
+            <line
+              x1="125"
+              y1="14"
+              x2="125"
+              y2="114"
               stroke="#06b6d4"
-              strokeWidth="1.5"
-              strokeDasharray="3 3"
-              strokeOpacity="0.4"
+              strokeWidth="1"
+              strokeDasharray="2 2"
+              strokeOpacity="0.3"
             />
 
-            {/* Pulsing Signal Dot Travelling Down the Stack */}
+            {/* Signal Dot Pulsing Down */}
             <motion.circle
-              cx="120"
-              r="3.5"
+              cx="125"
+              r="2.5"
               fill="#22d3ee"
-              filter="url(#cyanGlow)"
-              animate={{ cy: [25, 165] }}
+              animate={{ cy: [14, 114] }}
               transition={{
-                duration: 3.5,
+                duration: 3,
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
             />
 
-            {/* 4 Isometric Floating Slabs */}
-            {layers.map((layer, index) => {
+            {/* 4 Isometric Layers */}
+            {layers.map((layer) => {
               const y = layer.yOffset;
               return (
                 <g key={layer.id}>
-                  {/* Isometric Diamond/Slab */}
+                  {/* Layer Slab */}
                   <motion.polygon
-                    points={`120,${y} 185,${y + 18} 120,${y + 36} 55,${y + 18}`}
+                    points={`125,${y} 175,${y + 14} 125,${y + 28} 75,${y + 14}`}
                     fill="url(#cyanLayerGrad)"
                     stroke="url(#cyanStrokeGrad)"
-                    strokeWidth="1.2"
-                    initial={{ y: 0 }}
-                    animate={{ y: [0, -3, 0] }}
+                    strokeWidth="1"
+                    animate={{ y: [0, -2, 0] }}
                     transition={{
                       duration: 3,
                       repeat: Infinity,
@@ -103,43 +94,24 @@ export default function ArchitectureCard() {
                     }}
                   />
 
-                  {/* Inner grid line */}
-                  <motion.line
-                    x1="88"
-                    y1={y + 18}
-                    x2="152"
-                    y2={y + 18}
-                    stroke="#22d3ee"
-                    strokeWidth="0.8"
-                    strokeOpacity="0.4"
-                    animate={{ y: [0, -3, 0] }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                      delay: layer.delay,
-                    }}
-                  />
-
-                  {/* Connecting dashed pointer line to left label */}
+                  {/* Guide line to label */}
                   <line
-                    x1="55"
-                    y1={y + 18}
-                    x2="18"
-                    y2={y + 18}
-                    stroke="#64748b"
-                    strokeWidth="0.8"
-                    strokeDasharray="2 2"
-                    strokeOpacity="0.6"
+                    x1="75"
+                    y1={y + 14}
+                    x2="64"
+                    y2={y + 14}
+                    stroke="#475569"
+                    strokeWidth="0.75"
+                    strokeDasharray="1.5 1.5"
                   />
 
-                  {/* Left Label Text */}
+                  {/* Label */}
                   <text
-                    x="15"
-                    y={y + 21}
+                    x="60"
+                    y={y + 17}
                     textAnchor="end"
                     fill="#94a3b8"
-                    fontSize="9"
+                    fontSize="8.5"
                     fontFamily="monospace"
                     className="font-medium"
                   >
@@ -151,12 +123,12 @@ export default function ArchitectureCard() {
           </svg>
         </div>
 
-        {/* Right: Architecture Highlights Checklist */}
-        <div className="sm:col-span-6 flex flex-col justify-center space-y-2.5 sm:pl-2">
+        {/* Right: Technical Checklist */}
+        <div className="sm:col-span-6 flex flex-col justify-center space-y-1.5 sm:pl-1">
           {highlights.map((item, idx) => (
-            <div key={idx} className="flex items-center gap-2">
-              <span className="text-cyan-400 font-mono font-bold text-xs">›</span>
-              <span className="text-slate-200 text-xs sm:text-sm font-medium tracking-tight">
+            <div key={idx} className="flex items-center gap-1.5">
+              <span className="text-cyan-400 font-mono text-[11px]">›</span>
+              <span className="text-slate-300 text-xs font-normal tracking-tight">
                 {item}
               </span>
             </div>
@@ -165,11 +137,11 @@ export default function ArchitectureCard() {
       </div>
 
       {/* Bottom Badges */}
-      <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-slate-800/80 mt-2">
+      <div className="flex flex-wrap items-center gap-1.5 pt-2.5 border-t border-slate-800/80 mt-2">
         {badges.map((badge) => (
           <span
             key={badge}
-            className="font-mono text-[10px] px-2.5 py-0.5 rounded-md bg-cyan-950/40 border border-cyan-500/20 text-cyan-300"
+            className="font-mono text-[9px] px-2 py-0.5 rounded bg-cyan-950/30 border border-cyan-500/20 text-cyan-300/90"
           >
             {badge}
           </span>

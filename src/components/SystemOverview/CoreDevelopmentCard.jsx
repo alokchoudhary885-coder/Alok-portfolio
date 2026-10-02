@@ -15,18 +15,17 @@ const codeLines = [
   { isStep: true, text: '> connecting Express API...' },
   { isStep: true, text: '> querying MongoDB...' },
   { isDone: true, text: '✓ 25+ REST API endpoints ready' },
-  { isStep: true, text: '> telemetry pipeline active...' },
 ];
 
 export function CoreDevCodeStream() {
   const repeatedLines = [...codeLines, ...codeLines];
 
   return (
-    <div className="relative font-mono text-[11px] h-[135px] overflow-hidden leading-relaxed select-none">
+    <div className="relative font-mono text-[10px] h-[105px] overflow-hidden leading-[1.65] select-none">
       <motion.div
-        animate={{ y: [0, -210] }}
+        animate={{ y: [0, -182] }}
         transition={{
-          duration: 9,
+          duration: 8.5,
           repeat: Infinity,
           ease: 'linear',
         }}
@@ -34,13 +33,13 @@ export function CoreDevCodeStream() {
         {repeatedLines.map((line, index) => {
           const lineNum = String((index % codeLines.length) + 1).padStart(2, '0');
           return (
-            <div key={index} className="flex items-center min-h-[19px] whitespace-nowrap">
-              <span className="w-6 text-slate-600 mr-2 shrink-0 select-none text-[10px]">
+            <div key={index} className="flex items-center min-h-[16.5px] whitespace-nowrap">
+              <span className="w-5 text-slate-600 mr-2 shrink-0 select-none text-[9.5px]">
                 {lineNum}
               </span>
 
               {line.isStep && (
-                <span className="text-emerald-400/90 font-normal">{line.text}</span>
+                <span className="text-emerald-400/85 font-normal">{line.text}</span>
               )}
 
               {line.isConst && (
@@ -67,7 +66,7 @@ export function CoreDevCodeStream() {
               )}
 
               {line.isDone && (
-                <span className="text-cyan-300 font-semibold">{line.text}</span>
+                <span className="text-cyan-300 font-medium">{line.text}</span>
               )}
 
               {line.isCursor && (
@@ -76,7 +75,7 @@ export function CoreDevCodeStream() {
                   <motion.span
                     animate={{ opacity: [1, 0, 1] }}
                     transition={{ duration: 0.8, repeat: Infinity }}
-                    className="inline-block w-1.5 h-3 bg-white ml-1"
+                    className="inline-block w-1.5 h-2.5 bg-slate-200 ml-1"
                   />
                 </span>
               )}
@@ -86,7 +85,7 @@ export function CoreDevCodeStream() {
       </motion.div>
 
       {/* Fade overlay at bottom of terminal */}
-      <div className="pointer-events-none absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-black to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 w-full h-6 bg-gradient-to-t from-black to-transparent" />
     </div>
   );
 }
@@ -95,13 +94,10 @@ export default function CoreDevelopmentCard() {
   const technologies = ['React', 'Node.js', 'Express', 'MongoDB', 'TypeScript'];
 
   return (
-    <div className="relative group rounded-2xl bg-[#090e1a]/90 border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 p-5 sm:p-6 flex flex-col justify-between overflow-hidden shadow-xl shadow-purple-950/20">
-      {/* Background corner ambient glow */}
-      <div className="absolute -top-12 -right-12 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
-
+    <div className="rounded-xl bg-[#0a0f1d]/90 border border-purple-500/25 hover:border-purple-500/40 transition-all duration-300 p-4 sm:p-5 flex flex-col justify-between h-full overflow-hidden shadow-lg shadow-black/20">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-purple-500/20 pb-3 mb-4">
-        <h3 className="font-mono text-xs sm:text-sm font-bold text-purple-400 tracking-wider uppercase">
+      <div className="flex items-center justify-between border-b border-slate-800/80 pb-2.5 mb-3">
+        <h3 className="font-mono text-xs font-bold text-purple-400 tracking-wider uppercase">
           PHASE II: CORE DEVELOPMENT
         </h3>
         <span className="font-mono text-[10px] text-slate-500 tracking-wider">
@@ -110,13 +106,13 @@ export default function CoreDevelopmentCard() {
       </div>
 
       {/* Terminal Container */}
-      <div className="relative rounded-xl bg-black/95 border border-purple-900/40 p-3 my-auto shadow-inner">
-        {/* macOS Terminal Dots */}
-        <div className="flex items-center gap-1.5 pb-2 mb-2 border-b border-slate-900">
-          <span className="w-2 h-2 rounded-full bg-rose-500/80" />
-          <span className="w-2 h-2 rounded-full bg-amber-500/80" />
-          <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
-          <span className="ml-2 font-mono text-[9px] text-slate-600">bash - dev-worker</span>
+      <div className="rounded-lg bg-black/95 border border-slate-800/90 p-2.5 my-auto shadow-inner">
+        {/* Terminal Header */}
+        <div className="flex items-center gap-1 pb-1.5 mb-1.5 border-b border-slate-900 select-none">
+          <span className="w-1.5 h-1.5 rounded-full bg-rose-500/70" />
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-500/70" />
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/70" />
+          <span className="ml-2 font-mono text-[8.5px] text-slate-600">terminal — bash</span>
         </div>
 
         {/* Live Code Stream */}
@@ -124,11 +120,11 @@ export default function CoreDevelopmentCard() {
       </div>
 
       {/* Bottom Tech Badges */}
-      <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-slate-800/80 mt-2">
+      <div className="flex flex-wrap items-center gap-1.5 pt-2.5 border-t border-slate-800/80 mt-2">
         {technologies.map((tech) => (
           <span
             key={tech}
-            className="font-mono text-[10px] px-2.5 py-0.5 rounded-md bg-purple-950/40 border border-purple-500/20 text-purple-300"
+            className="font-mono text-[9px] px-2 py-0.5 rounded bg-purple-950/30 border border-purple-500/20 text-purple-300/90"
           >
             {tech}
           </span>
