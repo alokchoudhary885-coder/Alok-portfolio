@@ -189,7 +189,7 @@ export default function ToolboxSection() {
                     className={`w-full py-2.5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all ${
                       card.isPopular
                         ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-sm'
-                        : 'bg-slate-850 hover:bg-slate-800 text-slate-200 border border-slate-800 hover:border-slate-700'
+                        : 'bg-slate-800/80 hover:bg-slate-800 text-slate-200 border border-slate-800 hover:border-slate-700'
                     }`}
                   >
                     <span>Get a Quote</span>

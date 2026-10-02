@@ -123,7 +123,7 @@ export default function ExperienceSection() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="mt-4 pt-3.5 border-t border-slate-800 space-y-2 text-xs sm:text-sm text-slate-300"
+                    className="mt-4 pt-3.5 border-t border-slate-800 space-y-2 text-xs sm:text-sm text-slate-300 overflow-hidden"
                   >
                     {exp.highlights.map((item, i) => (
                       <div key={i} className="flex items-start gap-2.5">

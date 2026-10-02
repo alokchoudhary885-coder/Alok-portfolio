@@ -371,7 +371,7 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="pt-2 border-t border-slate-800 space-y-2 text-xs text-slate-300"
+                      className="pt-2 border-t border-slate-800 space-y-2 text-xs text-slate-300 overflow-hidden"
                     >
                       <div className="flex items-start gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
