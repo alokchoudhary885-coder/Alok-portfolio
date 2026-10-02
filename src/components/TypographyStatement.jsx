@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import CoreDevelopmentCard from './CoreDevelopmentCard';
+import SystemOverview from './SystemOverview/SystemOverview';
 
 export default function TypographyStatement() {
   return (
-    <section className="relative py-16 sm:py-24 bg-transparent border-y border-slate-800/80 overflow-hidden select-none">
+    <section id="system-overview" className="relative py-20 sm:py-28 bg-transparent border-y border-slate-800/80 overflow-hidden">
       {/* Background ambient gradient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[250px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-blue-500/5 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-16 relative z-10 flex flex-col items-center text-center">
         {/* Top small kicker */}
@@ -43,19 +43,10 @@ export default function TypographyStatement() {
         >
           Bridging high-performance Node.js APIs &amp; MongoDB architectures with fluid, responsive React interfaces.
         </motion.p>
-
-        {/* Phase II Core Development Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.35 }}
-          className="mt-10 sm:mt-12 w-full max-w-lg"
-        >
-          <CoreDevelopmentCard />
-        </motion.div>
-
       </div>
+
+      {/* 2x2 System Overview Engineering Dashboard */}
+      <SystemOverview />
     </section>
   );
 }

@@ -141,7 +141,7 @@ export default function Hero({ onOpenFoodRushModal }) {
                 <Code2 className="w-4 h-4" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/alok-choudhary-545574323/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BEy2BOgx3Rg6Q0zB6sPn9zw%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn Profile"
