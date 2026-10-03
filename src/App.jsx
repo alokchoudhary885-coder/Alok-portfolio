@@ -11,7 +11,6 @@ import ProjectsSection from './components/ProjectsSection';
 import ToolboxSection from './components/ToolboxSection';
 import ProcessSection from './components/ProcessSection';
 import ExperienceSection from './components/ExperienceSection';
-import DsaTerminalSection from './components/DsaTerminalSection';
 import GithubSection from './components/GithubSection';
 import CertificationsSection from './components/CertificationsSection';
 import ContactSection from './components/ContactSection';
@@ -74,7 +73,6 @@ export default function App() {
           <ToolboxSection />
           <ProcessSection />
           <ExperienceSection />
-          <DsaTerminalSection />
           <GithubSection />
           <CertificationsSection />
           <ContactSection />

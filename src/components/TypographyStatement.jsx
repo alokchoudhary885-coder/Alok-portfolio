@@ -9,16 +9,7 @@ export default function TypographyStatement() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center text-center">
-        {/* Top small kicker */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="font-mono text-xs text-blue-400 font-semibold tracking-wider uppercase mb-2 sm:mb-2.5"
-        >
-          // Core Engineering Philosophy
-        </motion.div>
+
 
         {/* Large Clean Statement */}
         <motion.h2

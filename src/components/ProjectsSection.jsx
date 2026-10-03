@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Github, ArrowUpRight, Download, ExternalLink, Zap, CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Sparkles, Github, ArrowUpRight, Download, ExternalLink, Zap, CheckCircle2 } from 'lucide-react';
 
 export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardModal }) {
-  const [expandedDevCommand, setExpandedDevCommand] = useState(false);
 
   return (
     <section id="projects" className="relative py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-transparent border-t border-slate-800/80 overflow-hidden">
@@ -38,9 +37,6 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
               <span className="font-bold text-xl text-blue-400">01</span>
               <span className="text-slate-400 uppercase tracking-wider text-[11px] font-medium">Flagship MERN Ecosystem</span>
             </div>
-            <span className="px-3 py-0.5 rounded-full bg-blue-500/10 text-blue-300 font-medium border border-blue-500/20 text-[11px]">
-              Full-Stack Production
-            </span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
@@ -52,12 +48,24 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
               </h3>
 
               <div className="text-blue-400 font-mono text-xs font-semibold tracking-wide uppercase">
-                Full-Stack Food Delivery Platform &amp; Restaurant Ecosystem
+                FULL-STACK FOOD DELIVERY PLATFORM &amp; RESTAURANT ECOSYSTEM
               </div>
 
-              <p className="text-slate-300 text-sm leading-relaxed font-normal">
-                A full-stack food delivery web application connecting customers with local restaurant owners. Features customer &amp; restaurant owner roles, 25+ RESTful API endpoints, Razorpay online payment integration, voice search, and 6-digit OTP verification.
-              </p>
+              {/* 3 Concise Bullets */}
+              <ul className="space-y-2 text-slate-300 text-xs sm:text-sm font-normal">
+                <li className="flex items-start gap-2.5">
+                  <span className="text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span>Customer &amp; restaurant owner workflows</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span>25+ REST APIs with JWT + OTP authentication</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span>Razorpay payments &amp; voice-based food search</span>
+                </li>
+              </ul>
 
               {/* Tech Badges */}
               <div className="flex flex-wrap gap-2 pt-1 text-xs">
@@ -116,14 +124,6 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
                     <span className="text-white font-medium text-right">Cloudinary CDN</span>
                   </div>
                 </div>
-
-                <button
-                  onClick={onOpenFoodRushModal}
-                  className="w-full mt-2 py-2 px-3 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 text-blue-300 font-medium text-center flex items-center justify-center gap-1.5 transition-all text-xs"
-                >
-                  <span>View Architecture Modal</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </button>
               </div>
             </div>
           </div>
@@ -145,9 +145,6 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
               <span className="font-bold text-xl text-blue-400">02</span>
               <span className="text-slate-400 uppercase tracking-wider text-[11px] font-medium">Chrome Extension &amp; Cybersecurity</span>
             </div>
-            <span className="px-3 py-0.5 rounded-full bg-blue-500/10 text-blue-300 font-medium border border-blue-500/20 text-[11px]">
-              Manifest V3 Offline-First
-            </span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
@@ -159,12 +156,24 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
               </h3>
 
               <div className="text-blue-400 font-mono text-xs font-semibold tracking-wide uppercase">
-                Real-Time Job Risk &amp; Scam Detection Engine
+                REAL-TIME JOB RISK &amp; SCAM DETECTION ENGINE
               </div>
 
-              <p className="text-slate-300 text-sm leading-relaxed font-normal">
-                An offline-first Chrome Extension (Manifest V3) and cybersecurity risk engine that analyzes job postings in real-time on LinkedIn, Internshala, and Indeed to protect job seekers from fake offers, upfront fee extortion, and recruitment phishing.
-              </p>
+              {/* 3 Concise Bullets */}
+              <ul className="space-y-2 text-slate-300 text-xs sm:text-sm font-normal">
+                <li className="flex items-start gap-2.5">
+                  <span className="text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span>Offline-first Chrome Extension with Manifest V3</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span>Real-time job risk analysis across LinkedIn, Internshala &amp; Indeed</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span>Detects fake offers, fee scams &amp; recruitment phishing</span>
+                </li>
+              </ul>
 
               {/* Tech Badges */}
               <div className="flex flex-wrap gap-2 pt-1 text-xs">
@@ -242,14 +251,6 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
                     <span className="text-white font-medium text-right">PostgreSQL BlacklistDB</span>
                   </div>
                 </div>
-
-                <button
-                  onClick={onOpenJobGuardModal}
-                  className="w-full mt-2 py-2 px-3 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 text-blue-300 font-medium text-center flex items-center justify-center gap-1.5 transition-all text-xs"
-                >
-                  <span>View JobGuard Case Study</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </button>
               </div>
             </div>
           </div>
@@ -271,9 +272,6 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
               <span className="font-bold text-xl text-blue-400">03</span>
               <span className="text-slate-400 uppercase tracking-wider text-[11px] font-medium">Enterprise Developer Platform</span>
             </div>
-            <span className="px-3 py-0.5 rounded-full bg-blue-500/10 text-blue-300 font-medium border border-blue-500/20 text-[11px]">
-              DORA Metrics &amp; AI
-            </span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
@@ -285,12 +283,24 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
               </h3>
 
               <div className="text-blue-400 font-mono text-xs font-semibold tracking-wide uppercase">
-                Real-Time Telemetry &amp; Gemini AI Pull Request Radar
+                REAL-TIME DEVELOPER TELEMETRY &amp; AI PLATFORM
               </div>
 
-              <p className="text-slate-300 text-sm leading-relaxed font-normal">
-                An enterprise-grade developer productivity &amp; telemetry platform powered by Gemini AI. Real-time DORA metrics, automated PR bottleneck radar, CI/CD health monitoring, and hardware-grade encrypted multi-provider OAuth (Google/GitHub).
-              </p>
+              {/* 3 Concise Bullets */}
+              <ul className="space-y-2 text-slate-300 text-xs sm:text-sm font-normal">
+                <li className="flex items-start gap-2.5">
+                  <span className="text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span>Real-time DORA metrics &amp; developer productivity analytics</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span>Gemini AI code review &amp; automated PR bottleneck detection</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span>CI/CD health monitoring with secure Google/GitHub OAuth</span>
+                </li>
+              </ul>
 
               {/* Tech Badges */}
               <div className="flex flex-wrap gap-2 pt-1 text-xs">
@@ -356,38 +366,6 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
                     <span className="text-indigo-400 font-medium text-right">AES-256-GCM OAuth Token Vault</span>
                   </div>
                 </div>
-
-                <button
-                  onClick={() => setExpandedDevCommand(!expandedDevCommand)}
-                  className="w-full mt-2 py-2 px-3 rounded-lg bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 font-medium text-center flex items-center justify-center gap-1.5 transition-all text-xs"
-                >
-                  <span>{expandedDevCommand ? 'Hide Engineering Specs' : 'View Key Engineering Highlights'}</span>
-                  {expandedDevCommand ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-                </button>
-
-                <AnimatePresence>
-                  {expandedDevCommand && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="pt-2 border-t border-slate-800 space-y-2 text-xs text-slate-300 overflow-hidden"
-                    >
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
-                        <span>Autonomous AI Code Reviewer for OWASP Code Smells</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
-                        <span>Low-Latency WebSockets Streaming with Zero Polling</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
-                        <span>Enterprise Multi-Provider SSO &amp; SameSite Cookies</span>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </div>
             </div>
           </div>
@@ -409,9 +387,6 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
               <span className="font-bold text-xl text-blue-400">04</span>
               <span className="text-slate-400 uppercase tracking-wider text-[11px] font-medium">Creative Engineering &amp; UI</span>
             </div>
-            <span className="px-3 py-0.5 rounded-full bg-blue-500/10 text-blue-400 font-semibold border border-blue-500/20 text-[11px]">
-              Current View
-            </span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
@@ -420,9 +395,25 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
                 Cinematic Developer Portfolio
               </h3>
 
-              <p className="text-slate-300 text-sm leading-relaxed font-normal">
-                Interactive developer portfolio with 3D card tilt physics, custom canvas cursor spotlight, smooth scroll reveals, and Dribbble-inspired deck navigation.
-              </p>
+              <div className="text-blue-400 font-mono text-xs font-semibold tracking-wide uppercase">
+                INTERACTIVE DEVELOPER PORTFOLIO &amp; CREATIVE UI
+              </div>
+
+              {/* 3 Concise Bullets */}
+              <ul className="space-y-2 text-slate-300 text-xs sm:text-sm font-normal">
+                <li className="flex items-start gap-2.5">
+                  <span className="text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span>3D card interactions with smooth motion effects</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span>Custom cursor spotlight &amp; scroll-based animations</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span>Responsive, motion-driven developer experience</span>
+                </li>
+              </ul>
 
               <div className="flex flex-wrap gap-2 text-xs">
                 {['React.js', 'Vite', 'Tailwind CSS', 'Framer Motion', 'GSAP', 'Web Audio API'].map((t, idx) => (

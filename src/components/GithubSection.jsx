@@ -28,7 +28,7 @@ export default function GithubSection() {
             GitHub <span className="text-shiny">Activity</span>
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2.5 font-normal leading-relaxed">
-            Continuous development activity, repositories &amp; open source code cadence.
+            Consistent coding, projects &amp; open-source activity.
           </p>
         </div>
 
@@ -47,8 +47,8 @@ export default function GithubSection() {
                 <Github className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-semibold text-lg text-white">Continuous Building</h3>
-                <span className="text-xs text-slate-400 font-normal">Full-Stack MERN &amp; Open Source Projects</span>
+                <h3 className="font-semibold text-lg text-white">Development Activity</h3>
+                <span className="text-xs text-slate-400 font-normal">Full-Stack projects &amp; open-source contributions</span>
               </div>
             </div>
 

@@ -8,7 +8,8 @@ export default function CertificationsSection() {
       id: '01',
       title: 'MERN Stack / Full Stack Web Development',
       issuer: 'Web Development Certification',
-      year: '2026',
+      description: 'Comprehensive full-stack development covering React, Node.js, Express & MongoDB ecosystem.',
+      year: '2024',
       badge: 'CERTIFICATION',
       tags: ['React.js', 'Node.js', 'Express', 'MongoDB'],
     },
@@ -16,17 +17,19 @@ export default function CertificationsSection() {
       id: '02',
       title: 'Java Programming & Data Structures',
       issuer: 'Computer Science Fundamentals',
-      year: '2026',
+      description: 'Core object-oriented programming, data structures, algorithms and algorithmic problem solving.',
+      year: '2024',
       badge: 'CORE DSA',
       tags: ['Java', 'Algorithms', 'OOPs', 'Problem Solving'],
     },
     {
       id: '03',
-      title: 'Git & GitHub — Version Control',
-      issuer: 'Developer Tools & Workflows',
-      year: '2026',
-      badge: 'DEVOPS WORKFLOW',
-      tags: ['Git', 'GitHub', 'CI/CD', 'Collaboration'],
+      title: 'Smart India Hackathon',
+      issuer: 'Participant • Participated Twice',
+      description: 'Participated in Smart India Hackathon on two occasions, working on technology-driven problem solving.',
+      year: '2023 - 2024',
+      badge: 'NATIONAL HACKATHON',
+      tags: ['Hackathon', 'Problem Solving', 'Innovation'],
     }
   ];
 
@@ -40,7 +43,7 @@ export default function CertificationsSection() {
             Certifications &amp; <span className="text-shiny">Learning</span>
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2.5 font-normal leading-relaxed">
-            Continuous technical learning, computer science foundations &amp; verified certifications.
+            Certifications, technical learning &amp; hackathon participation.
           </p>
         </div>
 
@@ -70,11 +73,14 @@ export default function CertificationsSection() {
                   {item.badge}
                 </div>
 
-                <h3 className="font-semibold text-base sm:text-lg text-white mb-1.5 leading-snug">
+                <h3 className="font-semibold text-base sm:text-lg text-white mb-1 leading-snug">
                   {item.title}
                 </h3>
-                <p className="text-xs text-slate-400 mb-4 font-normal">
+                <p className="text-xs text-blue-400 mb-2 font-medium">
                   {item.issuer}
+                </p>
+                <p className="text-xs text-slate-400 mb-3.5 leading-relaxed font-normal">
+                  {item.description}
                 </p>
 
                 <div className="flex flex-wrap gap-1.5 text-[11px] font-mono">
@@ -93,7 +99,7 @@ export default function CertificationsSection() {
                 >
                   <span className="flex items-center gap-1.5">
                     <CheckCircle className="w-3.5 h-3.5 text-blue-400" />
-                    <span>Certificate</span>
+                    <span>Verified / View</span>
                   </span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>

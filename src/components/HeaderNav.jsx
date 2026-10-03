@@ -13,7 +13,7 @@ export default function HeaderNav() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-      const sections = ['hero', 'deck', 'about', 'services', 'toolbox', 'projects', 'process', 'experience', 'dsa', 'github', 'credentials', 'contact'];
+      const sections = ['hero', 'deck', 'about', 'services', 'toolbox', 'projects', 'process', 'experience', 'github', 'credentials', 'contact'];
       const scrollPosition = window.scrollY + 180;
 
       for (const section of sections) {

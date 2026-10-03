@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, ArrowRight, Utensils, FileText, Code2, Link as LinkIcon } from 'lucide-react';
+import { ArrowDown, ArrowRight, Utensils, FileText } from 'lucide-react';
 import Spline from '@splinetool/react-spline';
 
 const RESUME_URL = "https://drive.google.com/file/d/1A7Sh87nIZzc_rbCZIfaIYYFvXSlIInc_/view?usp=drivesdk";
@@ -70,27 +70,29 @@ export default function Hero({ onOpenFoodRushModal }) {
             </span>
           </motion.div>
 
-          {/* Main Title — Clean, Human, Balanced Typography */}
+          {/* Main Title & Developer Positioning */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="space-y-1"
+            className="space-y-2"
           >
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.08]">
               Alok <span className="text-shiny">Choudhary</span>
             </h1>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-slate-200 tracking-tight">
+              Full-Stack Developer <span className="text-blue-400 block sm:inline">• Building Scalable Web Products</span>
+            </h2>
           </motion.div>
 
-          {/* Sub-headline with increased line height and readability */}
+          {/* Concise supporting sentence */}
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-slate-300 text-base sm:text-lg max-w-xl leading-relaxed font-normal"
           >
-            Building high-performance web applications, scalable APIs &amp;{' '}
-            <span className="text-white font-medium">digital products</span>. Experienced in React, Node.js, and Java algorithms.
+            I build scalable full-stack applications with React, Node.js and modern web technologies.
           </motion.p>
 
           {/* Action Buttons Row */}
@@ -128,28 +130,6 @@ export default function Hero({ onOpenFoodRushModal }) {
               <Utensils className="w-3.5 h-3.5 text-blue-400" />
               <span>FoodRush Case Study</span>
             </button>
-
-            {/* External Icon Links */}
-            <div className="flex items-center gap-2 sm:ml-auto">
-              <a
-                href="https://github.com/alokchoudhary885-coder"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub Profile"
-                className="w-9 h-9 rounded-lg bg-slate-900/80 border border-slate-800 hover:border-blue-500/50 flex items-center justify-center text-slate-400 hover:text-blue-400 transition-colors"
-              >
-                <Code2 className="w-4 h-4" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/alok-choudhary-545574323/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BEy2BOgx3Rg6Q0zB6sPn9zw%3D%3D"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn Profile"
-                className="w-9 h-9 rounded-lg bg-slate-900/80 border border-slate-800 hover:border-blue-500/50 flex items-center justify-center text-slate-400 hover:text-blue-400 transition-colors"
-              >
-                <LinkIcon className="w-4 h-4" />
-              </a>
-            </div>
           </motion.div>
 
           {/* Hero Quick Stats Cards */}

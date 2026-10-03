@@ -1,21 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Mail, MapPin, Send, CheckCircle, Copy, Check, Github, Linkedin, FileText, Briefcase, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
+import { Sparkles, Mail, MapPin, Send, CheckCircle, Copy, Check, Github, Linkedin, FileText, Briefcase, ArrowRight, Loader2, AlertCircle, ShieldCheck } from 'lucide-react';
 
 const RESUME_URL = "https://drive.google.com/file/d/1A7Sh87nIZzc_rbCZIfaIYYFvXSlIInc_/view?usp=drivesdk";
 const TARGET_EMAIL = "alokkumar23574@gmail.com";
+
+const DISPOSABLE_DOMAINS = [
+  'mailinator.com', 'tempmail.com', '10minutemail.com', 'guerrillamail.com',
+  'trashmail.com', 'yopmail.com', 'getnada.com', 'dispostable.com',
+  'fakeinbox.com', 'throwawaymail.com', 'sharklasers.com', 'mohmal.com',
+  'inboxkitten.com', 'temp-mail.org', 'generator.email', 'dropmail.me'
+];
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const turnstileContainerRef = useRef(null);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
     message: ''
   });
+
+  // Cloudflare Turnstile initialization
+  useEffect(() => {
+    const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || '1x00000000000000000000AA';
+    const scriptId = 'cf-turnstile-script';
+    let script = document.getElementById(scriptId);
+
+    const initTurnstile = () => {
+      if (window.turnstile && turnstileContainerRef.current) {
+        try {
+          // Clear any previous render
+          turnstileContainerRef.current.innerHTML = '';
+          window.turnstile.render(turnstileContainerRef.current, {
+            sitekey: siteKey,
+            theme: 'dark',
+            size: 'flexible',
+            callback: (token) => setTurnstileToken(token),
+            'expired-callback': () => setTurnstileToken(''),
+            'error-callback': () => setTurnstileToken('')
+          });
+        } catch (_) {}
+      }
+    };
+
+    if (!script) {
+      script = document.createElement('script');
+      script.id = scriptId;
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        setTimeout(initTurnstile, 100);
+      };
+      document.head.appendChild(script);
+    } else {
+      setTimeout(initTurnstile, 200);
+    }
+  }, []);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(TARGET_EMAIL);
@@ -29,83 +77,111 @@ export default function ContactSection() {
       .match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
   };
 
+  const isDisposable = (email) => {
+    const domain = email.split('@')[1]?.toLowerCase();
+    return domain && DISPOSABLE_DOMAINS.includes(domain);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
     setSuccessMessage('');
 
-    // Form field validation
-    if (!formData.name.trim()) {
-      setErrorMessage('Please enter your name.');
+    // Strict Client-Side Validation
+    const cleanName = formData.name.trim();
+    const cleanEmail = formData.email.trim();
+    const cleanSubject = formData.subject.trim();
+    const cleanMessage = formData.message.trim();
+
+    if (!cleanName || cleanName.length < 2) {
+      setErrorMessage('Please enter your full name (at least 2 characters).');
       return;
     }
-    if (!formData.email.trim()) {
-      setErrorMessage('Please enter your email address.');
-      return;
-    }
-    if (!validateEmail(formData.email.trim())) {
+    if (!cleanEmail || !validateEmail(cleanEmail)) {
       setErrorMessage('Please enter a valid email address.');
       return;
     }
-    if (!formData.subject.trim()) {
-      setErrorMessage('Please enter a subject.');
+    if (isDisposable(cleanEmail)) {
+      setErrorMessage('Disposable or temporary email addresses are not accepted. Please use a valid personal or business email.');
       return;
     }
-    if (!formData.message.trim()) {
-      setErrorMessage('Please enter your message.');
+    if (!cleanSubject || cleanSubject.length < 2) {
+      setErrorMessage('Please enter a subject (at least 2 characters).');
+      return;
+    }
+    if (!cleanMessage || cleanMessage.length < 5) {
+      setErrorMessage('Please enter a message (at least 5 characters).');
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
-        method: "POST",
+      // 1. Submit to production-ready serverless backend API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          subject: formData.subject.trim(),
-          message: formData.message.trim(),
-          _subject: "New Portfolio Contact",
-          _captcha: "false",
-          _template: "table"
+          name: cleanName,
+          email: cleanEmail,
+          subject: cleanSubject,
+          message: cleanMessage,
+          turnstileToken: turnstileToken
         })
       });
 
       const data = await response.json().catch(() => null);
 
-      if (response.ok || (data && (data.success === "true" || data.success === true))) {
-        setSuccessMessage("Message sent successfully! I'll get back to you soon.");
+      if (response.ok && data?.success) {
+        setSuccessMessage(data.message || "Message sent successfully! I'll get back to you soon.");
         setFormData({ name: '', email: '', subject: '', message: '' });
+        setTurnstileToken('');
+        if (window.turnstile && turnstileContainerRef.current) {
+          try { window.turnstile.reset(turnstileContainerRef.current); } catch (_) {}
+        }
+      } else if (response.status === 404 || response.status === 405) {
+        // Fallback for static dev/preview environments where Vercel serverless /api is not local
+        throw new Error('API_ROUTE_UNAVAILABLE');
       } else {
-        throw new Error(data?.message || 'Submission failed');
+        throw new Error(data?.message || 'Submission failed. Please verify the form and try again.');
       }
     } catch (err) {
-      // Fallback submission if AJAX mode encounters CORS or ad-blocker
-      try {
-        const formDataPayload = new FormData();
-        formDataPayload.append('name', formData.name.trim());
-        formDataPayload.append('email', formData.email.trim());
-        formDataPayload.append('subject', formData.subject.trim());
-        formDataPayload.append('message', formData.message.trim());
-        formDataPayload.append('_subject', 'New Portfolio Contact');
-        formDataPayload.append('_captcha', 'false');
-        formDataPayload.append('_template', 'table');
-
-        await fetch(`https://formsubmit.co/${TARGET_EMAIL}`, {
-          method: 'POST',
-          body: formDataPayload,
-          mode: 'no-cors'
-        });
-
-        setSuccessMessage("Message sent successfully! I'll get back to you soon.");
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } catch (fallbackErr) {
-        setErrorMessage('Failed to send message. Please try again or reach out directly via email.');
+      if (err.message === 'API_ROUTE_UNAVAILABLE') {
+        // Serverless API not available in local Vite dev server — safe direct fallback
+        try {
+          const res = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              name: cleanName,
+              email: cleanEmail,
+              _replyto: cleanEmail,
+              subject: cleanSubject,
+              message: cleanMessage,
+              _subject: `New Portfolio Message: ${cleanSubject}`,
+              _captcha: 'false',
+              _template: 'table'
+            })
+          });
+          const fallbackData = await res.json().catch(() => null);
+          if (res.ok || fallbackData?.success) {
+            setSuccessMessage("Message sent successfully! I'll get back to you soon.");
+            setFormData({ name: '', email: '', subject: '', message: '' });
+            setTurnstileToken('');
+          } else {
+            throw new Error('Fallback failed');
+          }
+        } catch (_) {
+          setErrorMessage('Failed to send message. Please try again or reach out directly at alokkumar23574@gmail.com.');
+        }
+      } else {
+        setErrorMessage(err.message || 'Failed to send message. Please try again or reach out directly at alokkumar23574@gmail.com.');
       }
     } finally {
       setIsSubmitting(false);
@@ -227,6 +303,11 @@ export default function ContactSection() {
                 />
               </div>
 
+              {/* Cloudflare Turnstile Container */}
+              <div className="py-1">
+                <div ref={turnstileContainerRef} className="min-h-[65px] flex items-center" />
+              </div>
+
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -239,7 +320,7 @@ export default function ContactSection() {
                   </>
                 ) : (
                   <>
-                    <span>Submit Inquiry</span>
+                    <span>Send Message</span>
                     <Send className="w-3.5 h-3.5" />
                   </>
                 )}

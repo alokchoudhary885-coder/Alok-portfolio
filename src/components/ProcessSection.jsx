@@ -7,37 +7,37 @@ export default function ProcessSection() {
     {
       num: '01',
       title: 'Idea & Scope',
-      desc: 'Defining core architecture, target user flows, and product requirements.',
+      desc: 'Architecture, user flows & product requirements.',
       icon: Lightbulb,
     },
     {
       num: '02',
       title: 'Design System',
-      desc: 'Crafting responsive UI wireframes, color tokens, and micro-interactions.',
+      desc: 'Responsive UI, design systems & micro-interactions.',
       icon: Palette,
     },
     {
       num: '03',
       title: 'Frontend Dev',
-      desc: 'Building high-performance React & Next.js interfaces with WebGL & Tailwind.',
+      desc: 'React & Next.js interfaces with WebGL & Tailwind.',
       icon: Code,
     },
     {
       num: '04',
       title: 'Backend & APIs',
-      desc: 'Engineering Node & Express REST APIs with JWT authentication and payment gateways.',
+      desc: 'Node & Express APIs, authentication & payments.',
       icon: Server,
     },
     {
       num: '05',
       title: 'Database Optimization',
-      desc: 'Structuring MongoDB Atlas schemas, aggregation pipelines, and indexing.',
+      desc: 'MongoDB schemas, aggregation & indexing.',
       icon: Database,
     },
     {
       num: '06',
       title: 'Deploy & Ship',
-      desc: 'Shipping automated CI/CD builds to Vercel & Render with custom domain setup.',
+      desc: 'CI/CD deployment to Vercel & Render.',
       icon: Rocket,
     }
   ];
@@ -53,7 +53,7 @@ export default function ProcessSection() {
           </h2>
 
           <p className="text-slate-400 text-xs sm:text-sm mt-2.5 max-w-xl font-normal leading-relaxed">
-            A structured 6-step engineering pipeline for delivering production-ready web products.
+            From idea to production-ready product.
           </p>
         </div>
 

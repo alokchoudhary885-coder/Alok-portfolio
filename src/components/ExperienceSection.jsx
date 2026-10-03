@@ -7,29 +7,27 @@ export default function ExperienceSection() {
 
   const experiences = [
     {
-      period: 'JUN 2026 – PRESENT',
+      period: '02 MAY 2025 – PRESENT',
       role: 'Full-Stack Development Intern',
       company: 'Aurika Infotech',
       location: 'Remote',
       isCurrent: true,
-      tags: ['React.js', 'Node.js', 'Express.js', 'MongoDB'],
       highlights: [
-        'Developing MERN stack web applications using React.js, Node.js, Express.js, and MongoDB.',
-        'Building RESTful APIs, implementing authentication, and integrating databases.',
-        'Working on frontend-backend integration, debugging, and code refactoring.'
+        'Built and maintained full-stack web applications.',
+        'Developed REST APIs and implemented authentication workflows.',
+        'Worked on frontend-backend integration, debugging and optimization.'
       ]
     },
     {
-      period: '2026',
+      period: '2024',
       role: 'Web Development Intern',
       company: 'Aeonaxy Technologies Pvt. Ltd.',
       location: 'Remote',
       isCurrent: false,
-      tags: ['React.js', 'JavaScript', 'HTML5', 'CSS3'],
       highlights: [
-        'Contributed to responsive web interface development using React.js, JavaScript, HTML, and CSS.',
-        'Worked on reusable UI components, frontend functionality, and API integration.',
-        'Enhanced responsive design and cross-browser performance.'
+        'Developed responsive web interfaces and reusable components.',
+        'Implemented frontend features and improved user experience.',
+        'Collaborated on development, testing and debugging.'
       ]
     }
   ];
@@ -107,14 +105,6 @@ export default function ExperienceSection() {
                 </button>
               </div>
 
-              {/* Tech Tags */}
-              <div className="flex flex-wrap gap-1.5 pt-3.5">
-                {exp.tags.map((t, i) => (
-                  <span key={i} className="px-2.5 py-1 rounded-md text-xs bg-slate-950/80 border border-slate-800 text-slate-300 font-mono text-[11px]">
-                    {t}
-                  </span>
-                ))}
-              </div>
 
               {/* Expandable Highlights */}
               <AnimatePresence>

@@ -117,9 +117,6 @@ export default function ToolboxSection() {
               <span className="text-shiny">Services</span>
             </h2>
           </div>
-          <p className="text-slate-400 text-xs sm:text-sm max-w-md font-normal leading-relaxed">
-            High-performance web development solutions with transparent estimated starting rates.
-          </p>
         </div>
 
         {/* 4 Cards Grid */}
