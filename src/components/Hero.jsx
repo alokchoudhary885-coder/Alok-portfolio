@@ -59,13 +59,13 @@ export default function Hero({ onOpenFoodRushModal }) {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 shadow-sm"
+            className="inline-flex flex-wrap items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 shadow-sm max-w-full"
           >
-            <span className="relative flex h-2 w-2">
+            <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
             </span>
-            <span className="font-mono text-xs text-blue-400 font-medium tracking-wide uppercase">
+            <span className="font-mono text-[10px] sm:text-xs text-blue-400 font-medium tracking-wide uppercase">
               Full-Stack MERN Developer • Java + DSA
             </span>
           </motion.div>
@@ -187,7 +187,7 @@ export default function Hero({ onOpenFoodRushModal }) {
           className="lg:col-span-5 relative w-full mt-6 lg:mt-0"
         >
           {/* spline-wrapper: outer overflow-hidden container clips the bottom 70px where watermark is drawn */}
-          <div ref={splineRef} className="spline-wrapper relative w-full h-[440px] sm:h-[540px] lg:h-[580px] overflow-hidden">
+          <div ref={splineRef} className="spline-wrapper relative w-full h-[320px] sm:h-[440px] lg:h-[580px] overflow-hidden">
             <div className="w-full h-[calc(100%+70px)] -mb-[70px]">
               <Spline
                 scene="https://prod.spline.design/kOb8SDOF-SGGifT2/scene.splinecode"

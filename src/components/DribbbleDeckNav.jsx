@@ -90,7 +90,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
         </div>
 
         {/* Carousel Deck Viewport */}
-        <div className="relative w-full flex items-center justify-center min-h-[420px]">
+        <div className="relative w-full flex items-center justify-center min-h-[420px] overflow-hidden">
           
           {/* Previous Arrow */}
           <button
@@ -128,7 +128,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
                   key={card.id}
                   onClick={() => setActiveIndex(idx)}
                   animate={{
-                    x: `${offset * 58}%`,
+                    x: `${offset * 50}%`,
                     scale: isActive ? 1 : 0.85 - Math.abs(offset) * 0.08,
                     rotateY: offset * -10,
                     opacity: isActive ? 1 : 0.4 - Math.abs(offset) * 0.1,

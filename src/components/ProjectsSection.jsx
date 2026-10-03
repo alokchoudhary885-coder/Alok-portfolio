@@ -99,21 +99,21 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
                 </div>
 
                 <div className="space-y-2 text-slate-300 text-xs">
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Authentication:</span>
-                    <span className="text-white font-medium">JWT + 6-Digit Email OTP</span>
+                  <div className="flex flex-wrap justify-between gap-x-2 gap-y-1">
+                    <span className="text-slate-400 shrink-0">Authentication:</span>
+                    <span className="text-white font-medium text-right">JWT + 6-Digit Email OTP</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Payment Gateway:</span>
-                    <span className="text-emerald-400 font-medium">Razorpay SDK Integrated</span>
+                  <div className="flex flex-wrap justify-between gap-x-2 gap-y-1">
+                    <span className="text-slate-400 shrink-0">Payment Gateway:</span>
+                    <span className="text-emerald-400 font-medium text-right">Razorpay SDK Integrated</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Voice Navigation:</span>
-                    <span className="text-blue-400 font-medium">Web Speech API</span>
+                  <div className="flex flex-wrap justify-between gap-x-2 gap-y-1">
+                    <span className="text-slate-400 shrink-0">Voice Navigation:</span>
+                    <span className="text-blue-400 font-medium text-right">Web Speech API</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Image Pipeline:</span>
-                    <span className="text-white font-medium">Cloudinary CDN</span>
+                  <div className="flex flex-wrap justify-between gap-x-2 gap-y-1">
+                    <span className="text-slate-400 shrink-0">Image Pipeline:</span>
+                    <span className="text-white font-medium text-right">Cloudinary CDN</span>
                   </div>
                 </div>
 
@@ -225,21 +225,21 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
                 </div>
 
                 <div className="space-y-2 text-slate-300 text-xs">
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Supported Portals:</span>
-                    <span className="text-white font-medium">LinkedIn, Internshala, Indeed</span>
+                  <div className="flex flex-wrap justify-between gap-x-2 gap-y-1">
+                    <span className="text-slate-400 shrink-0">Supported Portals:</span>
+                    <span className="text-white font-medium text-right">LinkedIn, Internshala, Indeed</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Threat Classifier:</span>
-                    <span className="text-indigo-400 font-medium">Gemini 1.5 Flash AI</span>
+                  <div className="flex flex-wrap justify-between gap-x-2 gap-y-1">
+                    <span className="text-slate-400 shrink-0">Threat Classifier:</span>
+                    <span className="text-indigo-400 font-medium text-right">Gemini 1.5 Flash AI</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Engine Type:</span>
-                    <span className="text-emerald-400 font-medium">Offline-First DOM Parser</span>
+                  <div className="flex flex-wrap justify-between gap-x-2 gap-y-1">
+                    <span className="text-slate-400 shrink-0">Engine Type:</span>
+                    <span className="text-emerald-400 font-medium text-right">Offline-First DOM Parser</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Database:</span>
-                    <span className="text-white font-medium">PostgreSQL BlacklistDB</span>
+                  <div className="flex flex-wrap justify-between gap-x-2 gap-y-1">
+                    <span className="text-slate-400 shrink-0">Database:</span>
+                    <span className="text-white font-medium text-right">PostgreSQL BlacklistDB</span>
                   </div>
                 </div>
 
@@ -339,21 +339,21 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
                 </div>
 
                 <div className="space-y-2 text-slate-300 text-xs">
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">AI Code Reviewer:</span>
-                    <span className="text-white font-medium">Gemini 1.5 Flash</span>
+                  <div className="flex flex-wrap justify-between gap-x-2 gap-y-1">
+                    <span className="text-slate-400 shrink-0">AI Code Reviewer:</span>
+                    <span className="text-white font-medium text-right">Gemini 1.5 Flash</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">DORA Metrics:</span>
-                    <span className="text-emerald-400 font-medium">Deployment Frequency &amp; MTTR</span>
+                  <div className="flex flex-wrap justify-between gap-x-2 gap-y-1">
+                    <span className="text-slate-400 shrink-0">DORA Metrics:</span>
+                    <span className="text-emerald-400 font-medium text-right">Deployment Frequency &amp; MTTR</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Streaming Architecture:</span>
-                    <span className="text-blue-400 font-medium">WebSockets Low-Latency</span>
+                  <div className="flex flex-wrap justify-between gap-x-2 gap-y-1">
+                    <span className="text-slate-400 shrink-0">Streaming Architecture:</span>
+                    <span className="text-blue-400 font-medium text-right">WebSockets Low-Latency</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Security:</span>
-                    <span className="text-indigo-400 font-medium">AES-256-GCM OAuth Token Vault</span>
+                  <div className="flex flex-wrap justify-between gap-x-2 gap-y-1">
+                    <span className="text-slate-400 shrink-0">Security:</span>
+                    <span className="text-indigo-400 font-medium text-right">AES-256-GCM OAuth Token Vault</span>
                   </div>
                 </div>
 

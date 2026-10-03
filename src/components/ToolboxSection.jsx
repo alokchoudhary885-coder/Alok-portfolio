@@ -236,7 +236,7 @@ export default function ToolboxSection() {
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap gap-1.5 mb-8 p-1.5 rounded-xl bg-slate-900/80 border border-slate-800 self-start inline-flex">
+        <div className="flex flex-wrap gap-1.5 mb-8 p-1.5 rounded-xl bg-slate-900/80 border border-slate-800 w-full">
           {categories.map((cat) => (
             <button
               key={cat}
