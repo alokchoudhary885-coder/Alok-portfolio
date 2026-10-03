@@ -48,47 +48,21 @@ export default function ExperienceSection() {
           </p>
         </div>
 
-        {/* Timeline Items with Developer Rail */}
-        <div className="relative pl-6 sm:pl-10 space-y-8">
-          {/* Vertical Progress Rail */}
-          <div className="absolute left-2 sm:left-3.5 top-3 bottom-6 w-[2px] bg-slate-800">
-            <motion.div
-              className="w-full bg-gradient-to-b from-emerald-400 via-blue-500 to-indigo-500 rounded-full"
-              initial={{ height: 0 }}
-              whileInView={{ height: '100%' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-            />
-          </div>
-
+        {/* Timeline Items */}
+        <div className="space-y-6">
           {experiences.map((exp, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.15 }}
-              className="relative"
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className={`p-6 sm:p-7 rounded-2xl border transition-all duration-200 ${
+                exp.isCurrent
+                  ? 'bg-slate-900/60 border-blue-500/30 shadow-md'
+                  : 'bg-slate-900/40 border-slate-800/80 hover:border-slate-700'
+              }`}
             >
-              {/* Timeline Node Point */}
-              <div className="absolute -left-6 sm:-left-10 top-6 -translate-x-1/2 flex items-center justify-center">
-                <div className={`w-4 h-4 rounded-full flex items-center justify-center border-2 ${
-                  exp.isCurrent
-                    ? 'border-emerald-400 bg-slate-950 shadow-[0_0_12px_#34d399]'
-                    : 'border-blue-400 bg-slate-950'
-                }`}>
-                  <div className={`w-1.5 h-1.5 rounded-full ${exp.isCurrent ? 'bg-emerald-400 animate-ping' : 'bg-blue-400'}`} />
-                </div>
-              </div>
-
-              {/* Card Container */}
-              <div
-                className={`p-6 sm:p-7 rounded-2xl border transition-all duration-200 ${
-                  exp.isCurrent
-                    ? 'bg-slate-900/60 border-blue-500/30 shadow-md'
-                    : 'bg-slate-900/40 border-slate-800/80 hover:border-slate-700'
-                }`}
-              >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
                 <div className="flex items-start gap-3.5">
                   <div className={`p-2.5 rounded-xl border shrink-0 mt-0.5 ${
@@ -160,7 +134,6 @@ export default function ExperienceSection() {
                   </motion.div>
                 )}
               </AnimatePresence>
-              </div>
             </motion.div>
           ))}
         </div>

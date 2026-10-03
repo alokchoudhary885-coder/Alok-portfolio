@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Server, Layout, ShieldCheck, Code2, ArrowRight, Zap, Check } from 'lucide-react';
-import TechNetworkGraph from './TechNetworkGraph';
 
 export default function ToolboxSection() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -235,9 +234,6 @@ export default function ToolboxSection() {
             Battle-tested technologies &amp; <span className="text-shiny">modern paradigms.</span>
           </h2>
         </div>
-
-        {/* Interactive Technology Network Architecture */}
-        <TechNetworkGraph />
 
         {/* Filter Tabs */}
         <div className="flex flex-wrap gap-1.5 mb-8 p-1.5 rounded-xl bg-slate-900/80 border border-slate-800 self-start inline-flex">
