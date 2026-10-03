@@ -54,8 +54,11 @@ export default function CertificationsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               whileHover={{ y: -4 }}
-              className="p-6 rounded-2xl border border-slate-800/80 bg-slate-900/40 flex flex-col justify-between hover:border-blue-500/30 transition-all duration-200 shadow-sm group"
+              className="p-6 rounded-2xl border border-slate-800/80 bg-slate-900/40 flex flex-col justify-between hover:border-blue-500/40 transition-all duration-300 shadow-sm group relative overflow-hidden"
             >
+              {/* Subtle Restrained Scan/Shine Effect on Hover */}
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent pointer-events-none" />
+
               <div>
                 <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-3 font-mono">
                   <span className="font-bold text-2xl text-slate-500 group-hover:text-blue-400 transition-colors">

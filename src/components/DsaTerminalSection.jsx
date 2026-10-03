@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Terminal, Sparkles, CheckCircle2 } from 'lucide-react';
+import AlgorithmVisualizer from './AlgorithmVisualizer';
 
 export default function DsaTerminalSection() {
   const dsaSuites = [
@@ -80,6 +81,9 @@ export default function DsaTerminalSection() {
                 </div>
               ))}
             </div>
+
+            {/* Compact Educational Algorithm Visualizer */}
+            <AlgorithmVisualizer />
 
             {/* Footer Summary */}
             <div className="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs gap-3">
