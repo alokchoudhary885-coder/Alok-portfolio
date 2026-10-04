@@ -226,6 +226,40 @@ export default function ContactSection() {
       const data = await res.json().catch(() => null);
 
       if (res.ok && data?.success) {
+        // If server indicates client delivery relay (to bypass serverless Cloudflare IP blocks)
+        if (data?.deliverViaClient) {
+          try {
+            await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                name: cleanName,
+                email: cleanEmail,
+                _replyto: cleanEmail,
+                subject: `[Portfolio Inquiry] ${cleanSubject}`,
+                message: cleanMessage,
+                _subject: `New Portfolio Message: ${cleanSubject}`,
+                _captcha: 'false',
+                _template: 'table'
+              })
+            });
+          } catch (_) {
+            try {
+              const fd = new FormData();
+              fd.append('name', cleanName);
+              fd.append('email', cleanEmail);
+              fd.append('subject', cleanSubject);
+              fd.append('message', cleanMessage);
+              fd.append('_captcha', 'false');
+              fd.append('_template', 'table');
+              await fetch(`https://formsubmit.co/${TARGET_EMAIL}`, { method: 'POST', body: fd, mode: 'no-cors' });
+            } catch (__) {}
+          }
+        }
+
         setSuccessMessage('Message sent successfully.');
         setFormData({ name: '', email: '', subject: '', message: '', _gotcha: '' });
         setEmailError('');

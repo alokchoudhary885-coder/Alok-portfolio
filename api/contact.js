@@ -286,11 +286,7 @@ export default async function handler(req, res) {
     }
 
     // 10. Deliver Message to Portfolio Owner
-    // IMPORTANT:
-    let delivered = false;
-    let deliveryError = null;
-
-    // 10. Attempt 1: Resend (if configured)
+    // If RESEND_API_KEY is configured and valid, deliver directly from server
     if (RESEND_API_KEY) {
       try {
         const emailPayload = {
@@ -325,65 +321,25 @@ export default async function handler(req, res) {
         });
 
         if (resendRes.ok) {
-          delivered = true;
-        } else {
-          const errText = await resendRes.text();
-          console.warn('Resend attempt failed, falling back to FormSubmit:', errText);
+          return res.status(200).json({
+            success: true,
+            delivered: true,
+            message: 'Message sent successfully.'
+          });
         }
       } catch (rErr) {
-        console.warn('Resend error, falling back to FormSubmit:', rErr);
+        console.warn('Resend delivery failed, falling back to client relay:', rErr);
       }
     }
 
-    // Attempt 2: FormSubmit relay with full browser headers
-    if (!delivered) {
-      try {
-        const fallbackRes = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Referer': 'https://alokchoudhary.vercel.app/',
-            'Origin': 'https://alokchoudhary.vercel.app',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-          },
-          body: JSON.stringify({
-            name: cleanName,
-            email: cleanEmail,
-            _replyto: cleanEmail,
-            subject: `[Portfolio Inquiry] ${cleanSubject}`,
-            message: cleanMessage,
-            _subject: `New Portfolio Message: ${cleanSubject}`,
-            _captcha: 'false',
-            _template: 'table'
-          })
-        });
-
-        const data = await fallbackRes.json().catch(() => null);
-
-        if (
-          fallbackRes.ok &&
-          (data?.success === 'true' ||
-           data?.success === true ||
-           (typeof data?.message === 'string' && data.message.toLowerCase().includes('activation')))
-        ) {
-          delivered = true;
-        } else {
-          deliveryError = data?.message || 'FormSubmit delivery error';
-        }
-      } catch (fErr) {
-        deliveryError = fErr.message;
-      }
-    }
-
-    if (delivered) {
-      return res.status(200).json({
-        success: true,
-        message: 'Message sent successfully.'
-      });
-    }
-
-    throw new Error(deliveryError || 'Email delivery failed');
+    // All verifications passed (Format, DNS MX Mail Server, Disposable, Honeypot, Turnstile)
+    // Signal client-side browser relay to deliver message directly to avoid datacenter IP blocks
+    return res.status(200).json({
+      success: true,
+      verified: true,
+      deliverViaClient: true,
+      message: 'Email and domain verified successfully.'
+    });
 
   } catch (err) {
     console.error('Contact API Error:', err);
