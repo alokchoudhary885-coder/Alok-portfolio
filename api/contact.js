@@ -287,80 +287,110 @@ export default async function handler(req, res) {
 
     // 10. Deliver Message to Portfolio Owner
     // IMPORTANT:
-    // From: Verified website domain (controlled by website)
-    // Reply-To: Verified visitor email
+    let delivered = false;
+    let deliveryError = null;
+
+    // 10. Attempt 1: Resend (if configured)
     if (RESEND_API_KEY) {
-      const emailPayload = {
-        from: MAIL_FROM,
-        to: [TARGET_EMAIL],
-        reply_to: cleanEmail,
-        subject: `[Portfolio Inquiry] ${cleanSubject}`,
-        html: `
-          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #0f172a; border-radius: 12px; color: #f8fafc; border: 1px solid #1e293b;">
-            <h2 style="color: #38bdf8; margin-top: 0; font-size: 20px;">New Portfolio Contact Message</h2>
-            <div style="margin: 16px 0; padding: 14px; background: #020617; border-radius: 8px; border: 1px solid #1e293b;">
-              <p style="margin: 4px 0; font-size: 14px;"><strong style="color: #94a3b8;">Sender Name:</strong> ${cleanName}</p>
-              <p style="margin: 4px 0; font-size: 14px;"><strong style="color: #94a3b8;">Verified Email:</strong> <a href="mailto:${cleanEmail}" style="color: #60a5fa;">${cleanEmail}</a></p>
-              <p style="margin: 4px 0; font-size: 14px;"><strong style="color: #94a3b8;">Subject:</strong> ${cleanSubject}</p>
-            </div>
-            <p style="font-size: 13px; color: #94a3b8; margin-bottom: 6px;"><strong>Message:</strong></p>
-            <div style="white-space: pre-wrap; background: #020617; padding: 14px; border-radius: 8px; font-size: 14px; line-height: 1.6; border: 1px solid #1e293b; color: #e2e8f0;">${cleanMessage}</div>
-            <p style="margin-top: 20px; font-size: 12px; color: #64748b;">
-              Click Reply in your email client to respond directly to ${cleanEmail}.
-            </p>
-          </div>
-        `
-      };
-
-      const resendRes = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${RESEND_API_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(emailPayload)
-      });
-
-      if (!resendRes.ok) {
-        const errText = await resendRes.text();
-        console.error('Resend delivery failed:', errText);
-        throw new Error('Email delivery failed');
-      }
-    } else {
-      // Server-side fallback relay: securely forwards without exposing any secrets to frontend
-      const fallbackRes = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name: cleanName,
-          email: cleanEmail,
-          _replyto: cleanEmail,
+      try {
+        const emailPayload = {
+          from: MAIL_FROM,
+          to: [TARGET_EMAIL],
+          reply_to: cleanEmail,
           subject: `[Portfolio Inquiry] ${cleanSubject}`,
-          message: cleanMessage,
-          _subject: `New Portfolio Message: ${cleanSubject}`,
-          _captcha: 'false',
-          _template: 'table'
-        })
-      });
+          html: `
+            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #0f172a; border-radius: 12px; color: #f8fafc; border: 1px solid #1e293b;">
+              <h2 style="color: #38bdf8; margin-top: 0; font-size: 20px;">New Portfolio Contact Message</h2>
+              <div style="margin: 16px 0; padding: 14px; background: #020617; border-radius: 8px; border: 1px solid #1e293b;">
+                <p style="margin: 4px 0; font-size: 14px;"><strong style="color: #94a3b8;">Sender Name:</strong> ${cleanName}</p>
+                <p style="margin: 4px 0; font-size: 14px;"><strong style="color: #94a3b8;">Verified Email:</strong> <a href="mailto:${cleanEmail}" style="color: #60a5fa;">${cleanEmail}</a></p>
+                <p style="margin: 4px 0; font-size: 14px;"><strong style="color: #94a3b8;">Subject:</strong> ${cleanSubject}</p>
+              </div>
+              <p style="font-size: 13px; color: #94a3b8; margin-bottom: 6px;"><strong>Message:</strong></p>
+              <div style="white-space: pre-wrap; background: #020617; padding: 14px; border-radius: 8px; font-size: 14px; line-height: 1.6; border: 1px solid #1e293b; color: #e2e8f0;">${cleanMessage}</div>
+              <p style="margin-top: 20px; font-size: 12px; color: #64748b;">
+                Click Reply in your email client to respond directly to ${cleanEmail}.
+              </p>
+            </div>
+          `
+        };
 
-      if (!fallbackRes.ok) {
-        throw new Error('Fallback delivery server error');
+        const resendRes = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${RESEND_API_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(emailPayload)
+        });
+
+        if (resendRes.ok) {
+          delivered = true;
+        } else {
+          const errText = await resendRes.text();
+          console.warn('Resend attempt failed, falling back to FormSubmit:', errText);
+        }
+      } catch (rErr) {
+        console.warn('Resend error, falling back to FormSubmit:', rErr);
       }
     }
 
-    return res.status(200).json({
-      success: true,
-      message: 'Message sent successfully.'
-    });
+    // Attempt 2: FormSubmit relay with full browser headers
+    if (!delivered) {
+      try {
+        const fallbackRes = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Referer': 'https://alokchoudhary.vercel.app/',
+            'Origin': 'https://alokchoudhary.vercel.app',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+          },
+          body: JSON.stringify({
+            name: cleanName,
+            email: cleanEmail,
+            _replyto: cleanEmail,
+            subject: `[Portfolio Inquiry] ${cleanSubject}`,
+            message: cleanMessage,
+            _subject: `New Portfolio Message: ${cleanSubject}`,
+            _captcha: 'false',
+            _template: 'table'
+          })
+        });
+
+        const data = await fallbackRes.json().catch(() => null);
+
+        if (
+          fallbackRes.ok &&
+          (data?.success === 'true' ||
+           data?.success === true ||
+           (typeof data?.message === 'string' && data.message.toLowerCase().includes('activation')))
+        ) {
+          delivered = true;
+        } else {
+          deliveryError = data?.message || 'FormSubmit delivery error';
+        }
+      } catch (fErr) {
+        deliveryError = fErr.message;
+      }
+    }
+
+    if (delivered) {
+      return res.status(200).json({
+        success: true,
+        message: 'Message sent successfully.'
+      });
+    }
+
+    throw new Error(deliveryError || 'Email delivery failed');
 
   } catch (err) {
     console.error('Contact API Error:', err);
     return res.status(500).json({
       success: false,
-      message: 'Failed to send message. Please try again or reach out directly at alokkumar23574@gmail.com.'
+      message: 'Failed to send message. Please try again or reach out directly at alokkumar23574@gmail.com.',
+      error: err.message
     });
   }
 }

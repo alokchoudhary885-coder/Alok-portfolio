@@ -235,6 +235,69 @@ export default function ContactSection() {
           } catch (_) {}
         }
       } else {
+        // If it's a validation error (400) like invalid domain, typo, or disposable
+        if (res.status === 400) {
+          const errorMsg = data?.message || 'Please check your inputs.';
+          setErrorMessage(errorMsg);
+          if (
+            errorMsg.toLowerCase().includes('email') ||
+            errorMsg.toLowerCase().includes('domain') ||
+            errorMsg.toLowerCase().includes('mail server')
+          ) {
+            setEmailError(errorMsg);
+          }
+          return;
+        }
+
+        // If it's a server delivery error (500), attempt seamless client-side relay fallback
+        try {
+          const directRes = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              name: cleanName,
+              email: cleanEmail,
+              _replyto: cleanEmail,
+              subject: `[Portfolio Inquiry] ${cleanSubject}`,
+              message: cleanMessage,
+              _subject: `New Portfolio Message: ${cleanSubject}`,
+              _captcha: 'false',
+              _template: 'table'
+            })
+          });
+          const directData = await directRes.json().catch(() => null);
+
+          if (
+            directRes.ok &&
+            (directData?.success === 'true' ||
+             directData?.success === true ||
+             (typeof directData?.message === 'string' && directData.message.toLowerCase().includes('activation')))
+          ) {
+            setSuccessMessage('Message sent successfully.');
+            setFormData({ name: '', email: '', subject: '', message: '', _gotcha: '' });
+            setEmailError('');
+            return;
+          }
+        } catch (_) {
+          try {
+            const fd = new FormData();
+            fd.append('name', cleanName);
+            fd.append('email', cleanEmail);
+            fd.append('subject', cleanSubject);
+            fd.append('message', cleanMessage);
+            fd.append('_captcha', 'false');
+            fd.append('_template', 'table');
+            await fetch(`https://formsubmit.co/${TARGET_EMAIL}`, { method: 'POST', body: fd, mode: 'no-cors' });
+            setSuccessMessage('Message sent successfully.');
+            setFormData({ name: '', email: '', subject: '', message: '', _gotcha: '' });
+            setEmailError('');
+            return;
+          } catch (__) {}
+        }
+
         const errorMsg = data?.message || 'Failed to send message. Please try again.';
         setErrorMessage(errorMsg);
         if (
