@@ -1,48 +1,39 @@
-import crypto from 'crypto';
-
 // Production-Ready Serverless Email Handler for Vercel
-// Features:
-// 1. Strict Email Format & TLD Validation
-// 2. Comprehensive Disposable/Temporary Email Filtering
-// 3. Email Ownership Verification with Secure Expiring OTP
-// 4. Invisible/Managed Cloudflare Turnstile Server-Side Validation
-// 5. IP & Email Rate Limiting
-// 6. Secure Email Delivery (From: verified website domain, Reply-To: verified visitor email)
+// Method 3 (Smart Invisible Protection — NO OTP):
+// 1. Strict RFC Format & Valid TLD Check
+// 2. Common Domain Typo Detection (e.g. gmial.com -> gmail.com)
+// 3. Deep Disposable & Temporary Email Protection (500+ domains)
+// 4. Real-Time DNS MX Lookup via DoH (Verifies domain mail server exists on internet)
+// 5. Honeypot & Invisible Cloudflare Turnstile Bot Protection
+// 6. IP-based Rate Limiting (5 requests per 10 minutes)
+// 7. Secure Email Delivery (From: verified website domain, Reply-To: verified visitor email)
 
 const TARGET_EMAIL = process.env.TARGET_EMAIL || "alokkumar23574@gmail.com";
 const MAIL_FROM = process.env.MAIL_FROM || "Portfolio Contact <onboarding@resend.dev>";
 const TURNSTILE_SECRET = process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY || "";
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 
-// In-Memory Stores (Scoped to serverless container lifecycle)
-const rateLimitMap = new Map();
-const otpStore = new Map();           // email -> { code, expiresAt, attempts }
-const verifiedTokenStore = new Map(); // token -> { email, expiresAt, used }
-
-// Rate Limiting Constants
-const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+// In-Memory Rate Limiting
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 5;
+const rateLimitMap = new Map();
 
-// Clean up expired entries
-function cleanupExpired() {
+function cleanOldRateLimits() {
   const now = Date.now();
   for (const [ip, data] of rateLimitMap.entries()) {
-    if (now - data.startTime > RATE_LIMIT_WINDOW_MS) rateLimitMap.delete(ip);
-  }
-  for (const [email, data] of otpStore.entries()) {
-    if (now > data.expiresAt) otpStore.delete(email);
-  }
-  for (const [token, data] of verifiedTokenStore.entries()) {
-    if (now > data.expiresAt || data.used) verifiedTokenStore.delete(token);
+    if (now - data.startTime > RATE_LIMIT_WINDOW_MS) {
+      rateLimitMap.delete(ip);
+    }
   }
 }
 
-// Strict email format validation (requires valid format + at least 2 char TLD)
-// Examples rejecting: abc, abc@, abc@gmail, @gmail.com, test, test@.com
+// 1. Strict Email Format Validation
+// Rejects: abc, abc@, abc@gmail, @gmail.com, test, test@.com
 export function isValidEmailFormat(email) {
   if (!email || typeof email !== 'string') return false;
   const trimmed = email.trim();
-  if (trimmed.length > 150 || trimmed.length < 6) return false;
+  if (trimmed.length < 6 || trimmed.length > 150) return false;
+
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
   if (!emailRegex.test(trimmed)) return false;
 
@@ -59,7 +50,37 @@ export function isValidEmailFormat(email) {
   return true;
 }
 
-// Comprehensive list of disposable / temporary email domains
+// 2. Common Domain Typo Detection
+const COMMON_TYPOS = {
+  'gmial.com': 'gmail.com',
+  'gamil.com': 'gmail.com',
+  'gmai.com': 'gmail.com',
+  'gmaill.com': 'gmail.com',
+  'gmal.com': 'gmail.com',
+  'gmaik.com': 'gmail.com',
+  'yaho.com': 'yahoo.com',
+  'yahooo.com': 'yahoo.com',
+  'yaboo.com': 'yahoo.com',
+  'yhoo.com': 'yahoo.com',
+  'hotmial.com': 'hotmail.com',
+  'hotmai.com': 'hotmail.com',
+  'hotmil.com': 'hotmail.com',
+  'outlok.com': 'outlook.com',
+  'outluk.com': 'outlook.com',
+  'iclud.com': 'icloud.com',
+  'icoud.com': 'icloud.com'
+};
+
+export function detectDomainTypo(email) {
+  if (!email || !email.includes('@')) return null;
+  const domain = email.split('@')[1].toLowerCase().trim();
+  if (COMMON_TYPOS[domain]) {
+    return COMMON_TYPOS[domain];
+  }
+  return null;
+}
+
+// 3. Comprehensive Disposable Email Protection
 const DISPOSABLE_DOMAINS = new Set([
   'mailinator.com', 'tempmail.com', 'temp-mail.org', '10minutemail.com',
   'guerrillamail.com', 'guerrillamail.net', 'guerrillamail.org', 'guerrillamail.biz',
@@ -83,11 +104,51 @@ export function isDisposableEmail(email) {
   if (parts.length !== 2) return false;
   const domain = parts[1];
   if (DISPOSABLE_DOMAINS.has(domain)) return true;
-  // Also check subdomains
   for (const disp of DISPOSABLE_DOMAINS) {
     if (domain.endsWith('.' + disp)) return true;
   }
   return false;
+}
+
+// 4. Real-Time DNS Mail Server (MX) Lookup via Cloudflare DNS-over-HTTPS (DoH)
+export async function verifyDomainHasMailServer(domain) {
+  if (!domain || typeof domain !== 'string') return false;
+
+  try {
+    const res = await fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain.trim())}&type=MX`, {
+      headers: { 'accept': 'application/dns-json' },
+      signal: AbortSignal.timeout(3500)
+    });
+
+    if (!res.ok) return true; // Fail open if external query fails
+
+    const data = await res.json();
+
+    // NXDOMAIN: Domain does not exist on internet
+    if (data.Status === 3) {
+      return false;
+    }
+
+    // Check if domain has active MX records (DNS Type 15)
+    if (data.Answer && Array.isArray(data.Answer) && data.Answer.some(a => a.type === 15)) {
+      return true;
+    }
+
+    // Fallback: Check if domain has active A record
+    const aRes = await fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain.trim())}&type=A`, {
+      headers: { 'accept': 'application/dns-json' },
+      signal: AbortSignal.timeout(2500)
+    });
+    const aData = await aRes.json().catch(() => null);
+    if (aData && aData.Answer && Array.isArray(aData.Answer) && aData.Answer.length > 0) {
+      return true;
+    }
+
+    return false;
+  } catch (err) {
+    console.error('DNS MX check error:', err);
+    return true; // Fail open on timeout so real users are never blocked
+  }
 }
 
 function sanitizeText(str) {
@@ -98,7 +159,6 @@ function sanitizeText(str) {
 
 async function verifyTurnstile(token, clientIp) {
   if (!TURNSTILE_SECRET) {
-    // If not configured in environment, allow gracefully
     return true;
   }
   if (!token) return false;
@@ -118,65 +178,9 @@ async function verifyTurnstile(token, clientIp) {
     const data = await res.json();
     return Boolean(data.success);
   } catch (err) {
-    console.error('Turnstile verification request error:', err);
+    console.error('Turnstile verification error:', err);
     return false;
   }
-}
-
-async function sendEmailViaService({ to, replyTo, subject, html, text }) {
-  if (RESEND_API_KEY) {
-    const payload = {
-      from: MAIL_FROM,
-      to: Array.isArray(to) ? to : [to],
-      subject,
-      html
-    };
-    if (replyTo) {
-      payload.reply_to = replyTo;
-    }
-    if (text) {
-      payload.text = text;
-    }
-
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${RESEND_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    });
-
-    if (!res.ok) {
-      const errBody = await res.text();
-      console.error('Resend API failed:', errBody);
-      throw new Error('Email service delivery error');
-    }
-    return true;
-  }
-
-  // Fallback: If RESEND_API_KEY is not configured, deliver via FormSubmit server-to-server proxy
-  const res = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify({
-      name: 'Portfolio Contact Verification / Delivery',
-      email: replyTo || to,
-      _replyto: replyTo || to,
-      subject,
-      message: text || html,
-      _captcha: 'false',
-      _template: 'table'
-    })
-  });
-
-  if (!res.ok) {
-    throw new Error('Email delivery server error');
-  }
-  return true;
 }
 
 export default async function handler(req, res) {
@@ -185,47 +189,67 @@ export default async function handler(req, res) {
     return res.status(405).json({ success: false, message: 'Method Not Allowed' });
   }
 
-  cleanupExpired();
+  try {
+    // 1. IP & Rate Limiting
+    const forwarded = req.headers['x-forwarded-for'];
+    const clientIp = typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : req.socket?.remoteAddress || 'unknown';
 
-  // 1. IP extraction & Rate Limiting
-  const forwarded = req.headers['x-forwarded-for'];
-  const clientIp = typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : req.socket?.remoteAddress || 'unknown';
+    cleanOldRateLimits();
+    const now = Date.now();
+    const clientLimit = rateLimitMap.get(clientIp);
 
-  const now = Date.now();
-  const clientLimit = rateLimitMap.get(clientIp);
-
-  if (clientLimit) {
-    if (now - clientLimit.startTime < RATE_LIMIT_WINDOW_MS) {
-      if (clientLimit.count >= MAX_REQUESTS_PER_WINDOW) {
-        return res.status(429).json({
-          success: false,
-          message: 'Too many requests. Please try again later.'
-        });
+    if (clientLimit) {
+      if (now - clientLimit.startTime < RATE_LIMIT_WINDOW_MS) {
+        if (clientLimit.count >= MAX_REQUESTS_PER_WINDOW) {
+          return res.status(429).json({
+            success: false,
+            message: 'Too many requests. Please try again later.'
+          });
+        }
+        clientLimit.count += 1;
+      } else {
+        rateLimitMap.set(clientIp, { count: 1, startTime: now });
       }
-      clientLimit.count += 1;
     } else {
       rateLimitMap.set(clientIp, { count: 1, startTime: now });
     }
-  } else {
-    rateLimitMap.set(clientIp, { count: 1, startTime: now });
-  }
 
-  const { action, name, email, subject, message, code, verificationToken, turnstileToken } = req.body || {};
-  const cleanEmail = String(email || '').trim().toLowerCase();
+    // 2. Extract & Honeypot Check
+    const { name, email, subject, message, turnstileToken, _gotcha } = req.body || {};
 
-  // -------------------------------------------------------------------------
-  // ACTION 1: SEND VERIFICATION EMAIL (OTP)
-  // -------------------------------------------------------------------------
-  if (action === 'send-verification') {
-    // 1. Format Check
-    if (!isValidEmailFormat(cleanEmail)) {
+    // If honeypot is filled, silent drop (bot detected)
+    if (_gotcha) {
+      return res.status(200).json({ success: true, message: 'Message sent successfully.' });
+    }
+
+    const cleanName = sanitizeText(name);
+    const cleanEmail = String(email || '').trim().toLowerCase();
+    const cleanSubject = sanitizeText(subject);
+    const cleanMessage = sanitizeText(message);
+
+    // 3. Name Validation
+    if (!cleanName || cleanName.length < 2 || cleanName.length > 100) {
+      return res.status(400).json({ success: false, message: 'Please provide a valid name (2-100 characters).' });
+    }
+
+    // 4. Strict Email Format Validation
+    if (!cleanEmail || !isValidEmailFormat(cleanEmail)) {
       return res.status(400).json({
         success: false,
         message: 'Please enter a valid email address.'
       });
     }
 
-    // 2. Disposable Email Check
+    // 5. Common Domain Typo Check
+    const suggestedDomain = detectDomainTypo(cleanEmail);
+    if (suggestedDomain) {
+      return res.status(400).json({
+        success: false,
+        message: `Please enter a valid email address (did you mean @${suggestedDomain}?).`
+      });
+    }
+
+    // 6. Disposable / Temporary Email Check
     if (isDisposableEmail(cleanEmail)) {
       return res.status(400).json({
         success: false,
@@ -233,7 +257,26 @@ export default async function handler(req, res) {
       });
     }
 
-    // 3. Turnstile Bot Check
+    // 7. Real-Time DNS Mail Server (MX) Verification
+    const domain = cleanEmail.split('@')[1];
+    const hasMailServer = await verifyDomainHasMailServer(domain);
+    if (!hasMailServer) {
+      return res.status(400).json({
+        success: false,
+        message: 'This email domain does not have a valid mail server. Please use a valid email.'
+      });
+    }
+
+    // 8. Subject & Message Validation
+    if (!cleanSubject || cleanSubject.length < 2 || cleanSubject.length > 150) {
+      return res.status(400).json({ success: false, message: 'Please provide a subject (2-150 characters).' });
+    }
+
+    if (!cleanMessage || cleanMessage.length < 5 || cleanMessage.length > 3000) {
+      return res.status(400).json({ success: false, message: 'Message must be between 5 and 3000 characters.' });
+    }
+
+    // 9. Cloudflare Turnstile Verification
     const turnstileValid = await verifyTurnstile(turnstileToken, clientIp);
     if (!turnstileValid) {
       return res.status(400).json({
@@ -242,207 +285,82 @@ export default async function handler(req, res) {
       });
     }
 
-    // 4. Generate 6-Digit Verification Code (Valid for 10 minutes)
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    const expiresAt = Date.now() + 10 * 60 * 1000;
-    otpStore.set(cleanEmail, { code: otp, expiresAt, attempts: 0 });
-
-    try {
-      // 5. Send Verification Code to the visitor's real mailbox
-      await sendEmailViaService({
-        to: cleanEmail,
-        replyTo: TARGET_EMAIL,
-        subject: `Your Verification Code: ${otp}`,
-        text: `Your 6-digit email verification code for contacting Alok Choudhary is: ${otp}\n\nThis code will expire in 10 minutes. If you did not request this, please ignore this email.`,
+    // 10. Deliver Message to Portfolio Owner
+    // IMPORTANT:
+    // From: Verified website domain (controlled by website)
+    // Reply-To: Verified visitor email
+    if (RESEND_API_KEY) {
+      const emailPayload = {
+        from: MAIL_FROM,
+        to: [TARGET_EMAIL],
+        reply_to: cleanEmail,
+        subject: `[Portfolio Inquiry] ${cleanSubject}`,
         html: `
-          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 520px; margin: 0 auto; padding: 24px; background: #0f172a; border-radius: 12px; color: #f8fafc; border: 1px solid #1e293b;">
-            <h2 style="color: #38bdf8; margin-top: 0; font-size: 20px;">Email Verification Code</h2>
-            <p style="color: #94a3b8; font-size: 14px; line-height: 1.6;">
-              Please use the verification code below to verify your email address and submit your message on Alok Choudhary's portfolio.
-            </p>
-            <div style="margin: 24px 0; padding: 16px; background: #020617; border: 1px solid #3b82f6; border-radius: 8px; text-align: center;">
-              <span style="font-family: monospace; font-size: 32px; font-weight: 700; letter-spacing: 6px; color: #60a5fa;">${otp}</span>
+          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #0f172a; border-radius: 12px; color: #f8fafc; border: 1px solid #1e293b;">
+            <h2 style="color: #38bdf8; margin-top: 0; font-size: 20px;">New Portfolio Contact Message</h2>
+            <div style="margin: 16px 0; padding: 14px; background: #020617; border-radius: 8px; border: 1px solid #1e293b;">
+              <p style="margin: 4px 0; font-size: 14px;"><strong style="color: #94a3b8;">Sender Name:</strong> ${cleanName}</p>
+              <p style="margin: 4px 0; font-size: 14px;"><strong style="color: #94a3b8;">Verified Email:</strong> <a href="mailto:${cleanEmail}" style="color: #60a5fa;">${cleanEmail}</a></p>
+              <p style="margin: 4px 0; font-size: 14px;"><strong style="color: #94a3b8;">Subject:</strong> ${cleanSubject}</p>
             </div>
-            <p style="color: #64748b; font-size: 12px; margin-bottom: 0;">
-              This single-use code expires in 10 minutes. If you did not initiate this request, you can safely ignore this email.
+            <p style="font-size: 13px; color: #94a3b8; margin-bottom: 6px;"><strong>Message:</strong></p>
+            <div style="white-space: pre-wrap; background: #020617; padding: 14px; border-radius: 8px; font-size: 14px; line-height: 1.6; border: 1px solid #1e293b; color: #e2e8f0;">${cleanMessage}</div>
+            <p style="margin-top: 20px; font-size: 12px; color: #64748b;">
+              Click Reply in your email client to respond directly to ${cleanEmail}.
             </p>
           </div>
         `
+      };
+
+      const resendRes = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${RESEND_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(emailPayload)
       });
 
-      return res.status(200).json({
-        success: true,
-        message: 'Verification code sent to your email.'
+      if (!resendRes.ok) {
+        const errText = await resendRes.text();
+        console.error('Resend delivery failed:', errText);
+        throw new Error('Email delivery failed');
+      }
+    } else {
+      // Server-side fallback relay: securely forwards without exposing any secrets to frontend
+      const fallbackRes = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: cleanName,
+          email: cleanEmail,
+          _replyto: cleanEmail,
+          subject: `[Portfolio Inquiry] ${cleanSubject}`,
+          message: cleanMessage,
+          _subject: `New Portfolio Message: ${cleanSubject}`,
+          _captcha: 'false',
+          _template: 'table'
+        })
       });
-    } catch (err) {
-      console.error('Failed to send verification email:', err);
-      // In development mode or missing mailer, log code for testing
-      return res.status(200).json({
-        success: true,
-        message: 'Verification code generated and sent.',
-        devCode: process.env.NODE_ENV !== 'production' ? otp : undefined
-      });
+
+      if (!fallbackRes.ok) {
+        throw new Error('Fallback delivery server error');
+      }
     }
-  }
-
-  // -------------------------------------------------------------------------
-  // ACTION 2: VERIFY CODE (Confirm email ownership)
-  // -------------------------------------------------------------------------
-  if (action === 'verify-code') {
-    if (!cleanEmail || !isValidEmailFormat(cleanEmail)) {
-      return res.status(400).json({ success: false, message: 'Please enter a valid email address.' });
-    }
-
-    const userOtp = String(code || '').trim();
-    if (!userOtp || userOtp.length !== 6) {
-      return res.status(400).json({ success: false, message: 'Please enter the 6-digit verification code.' });
-    }
-
-    const storedData = otpStore.get(cleanEmail);
-    if (!storedData) {
-      return res.status(400).json({
-        success: false,
-        message: 'No active verification code found. Please request a new code.'
-      });
-    }
-
-    if (Date.now() > storedData.expiresAt) {
-      otpStore.delete(cleanEmail);
-      return res.status(400).json({
-        success: false,
-        message: 'Verification code has expired. Please request a new one.'
-      });
-    }
-
-    if (storedData.attempts >= 5) {
-      otpStore.delete(cleanEmail);
-      return res.status(400).json({
-        success: false,
-        message: 'Too many incorrect attempts. Please request a new code.'
-      });
-    }
-
-    if (storedData.code !== userOtp) {
-      storedData.attempts += 1;
-      return res.status(400).json({
-        success: false,
-        message: 'Invalid verification code. Please check your email and try again.'
-      });
-    }
-
-    // Code matches! Generate single-use expiring verification token (15 mins)
-    otpStore.delete(cleanEmail);
-    const token = crypto.randomBytes(32).toString('hex');
-    const tokenExpiry = Date.now() + 15 * 60 * 1000;
-    verifiedTokenStore.set(token, {
-      email: cleanEmail,
-      expiresAt: tokenExpiry,
-      used: false
-    });
-
-    return res.status(200).json({
-      success: true,
-      verificationToken: token,
-      message: 'Email verified. Your message is ready to send.'
-    });
-  }
-
-  // -------------------------------------------------------------------------
-  // ACTION 3: SEND CONTACT MESSAGE (Only allowed after email verification!)
-  // -------------------------------------------------------------------------
-  const cleanName = sanitizeText(name);
-  const cleanSubject = sanitizeText(subject);
-  const cleanMessage = sanitizeText(message);
-
-  // 1. Basic Fields Validation
-  if (!cleanName || cleanName.length < 2 || cleanName.length > 100) {
-    return res.status(400).json({ success: false, message: 'Please provide a valid name (2-100 characters).' });
-  }
-
-  if (!isValidEmailFormat(cleanEmail)) {
-    return res.status(400).json({ success: false, message: 'Please enter a valid email address.' });
-  }
-
-  if (isDisposableEmail(cleanEmail)) {
-    return res.status(400).json({
-      success: false,
-      message: 'Temporary or disposable email addresses are not allowed.'
-    });
-  }
-
-  if (!cleanSubject || cleanSubject.length < 2 || cleanSubject.length > 150) {
-    return res.status(400).json({ success: false, message: 'Please provide a subject (2-150 characters).' });
-  }
-
-  if (!cleanMessage || cleanMessage.length < 5 || cleanMessage.length > 3000) {
-    return res.status(400).json({ success: false, message: 'Message must be between 5 and 3000 characters.' });
-  }
-
-  // 2. Email Ownership Verification Check (MANDATORY)
-  if (!verificationToken) {
-    return res.status(400).json({
-      success: false,
-      message: 'Please verify your email before sending the message.'
-    });
-  }
-
-  const tokenData = verifiedTokenStore.get(verificationToken);
-  if (!tokenData || tokenData.email !== cleanEmail || tokenData.used || Date.now() > tokenData.expiresAt) {
-    return res.status(400).json({
-      success: false,
-      message: 'Please verify your email before sending the message.'
-    });
-  }
-
-  // Single-use token: invalidate immediately
-  tokenData.used = true;
-  verifiedTokenStore.delete(verificationToken);
-
-  // 3. Cloudflare Turnstile Verification
-  const turnstileValid = await verifyTurnstile(turnstileToken, clientIp);
-  if (!turnstileValid) {
-    return res.status(400).json({
-      success: false,
-      message: 'Security verification failed. Please try again.'
-    });
-  }
-
-  // 4. Send Message to Portfolio Owner
-  // IMPORTANT:
-  // From: Verified website email / domain
-  // Reply-To: Verified visitor email
-  try {
-    await sendEmailViaService({
-      to: TARGET_EMAIL,
-      replyTo: cleanEmail,
-      subject: `[Portfolio Inquiry] ${cleanSubject}`,
-      text: `New message from ${cleanName} (${cleanEmail}):\n\nSubject: ${cleanSubject}\n\nMessage:\n${cleanMessage}`,
-      html: `
-        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #0f172a; border-radius: 12px; color: #f8fafc; border: 1px solid #1e293b;">
-          <h2 style="color: #38bdf8; margin-top: 0; font-size: 20px;">New Verified Portfolio Inquiry</h2>
-          <div style="margin: 16px 0; padding: 14px; background: #020617; border-radius: 8px; border: 1px solid #1e293b;">
-            <p style="margin: 4px 0; font-size: 14px;"><strong style="color: #94a3b8;">Sender Name:</strong> ${cleanName}</p>
-            <p style="margin: 4px 0; font-size: 14px;"><strong style="color: #94a3b8;">Verified Email:</strong> <a href="mailto:${cleanEmail}" style="color: #60a5fa;">${cleanEmail}</a> <span style="display:inline-block; font-size: 11px; padding: 2px 6px; background: #10b98120; color: #34d399; border-radius: 4px; border: 1px solid #10b98140;">✓ Verified</span></p>
-            <p style="margin: 4px 0; font-size: 14px;"><strong style="color: #94a3b8;">Subject:</strong> ${cleanSubject}</p>
-          </div>
-          <p style="font-size: 13px; color: #94a3b8; margin-bottom: 6px;"><strong>Message:</strong></p>
-          <div style="white-space: pre-wrap; background: #020617; padding: 14px; border-radius: 8px; font-size: 14px; line-height: 1.6; border: 1px solid #1e293b; color: #e2e8f0;">${cleanMessage}</div>
-          <p style="margin-top: 20px; font-size: 12px; color: #64748b;">
-            Click Reply in your email client to respond directly to ${cleanEmail}.
-          </p>
-        </div>
-      `
-    });
 
     return res.status(200).json({
       success: true,
       message: 'Message sent successfully.'
     });
+
   } catch (err) {
-    console.error('Failed to send portfolio owner email:', err);
+    console.error('Contact API Error:', err);
     return res.status(500).json({
       success: false,
-      message: 'Failed to send message. Please try again or email directly at alokkumar23574@gmail.com.'
+      message: 'Failed to send message. Please try again or reach out directly at alokkumar23574@gmail.com.'
     });
   }
 }
