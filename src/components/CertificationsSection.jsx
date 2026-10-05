@@ -1,37 +1,84 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, CheckCircle, ExternalLink } from 'lucide-react';
+import { Award, Cloud, BarChart2, Trophy, Code2, ExternalLink } from 'lucide-react';
+
+const CERTS = [
+  {
+    id: '01',
+    icon: Cloud,
+    badge: 'CLOUD',
+    badgeColor: 'text-orange-400 bg-orange-500/10 border-orange-500/30',
+    iconColor: 'text-orange-400 bg-orange-500/10 border-orange-500/30',
+    title: 'AWS Certified Developer Associate Prep',
+    issuer: 'MindLuster',
+    date: 'Mar 2026',
+    credential: '05893ef6',
+    tags: ['AWS Lambda', 'Application Deployment', 'Cloud'],
+  },
+  {
+    id: '02',
+    icon: Code2,
+    badge: 'WEB DEV',
+    badgeColor: 'text-blue-400 bg-blue-500/10 border-blue-500/30',
+    iconColor: 'text-blue-400 bg-blue-500/10 border-blue-500/30',
+    title: 'Web Development',
+    issuer: 'MindLuster',
+    date: 'Sep 2025',
+    credential: '8bd35f5a',
+    tags: ['React.js', 'Front-End Development', 'HTML/CSS'],
+  },
+  {
+    id: '03',
+    icon: Cloud,
+    badge: 'CLOUD',
+    badgeColor: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30',
+    iconColor: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30',
+    title: 'Google Cloud Certificate',
+    issuer: 'Simplilearn Education',
+    date: 'Sep 2025',
+    credential: null,
+    tags: ['Google Cloud', 'Cloud Computing', 'GCP'],
+  },
+  {
+    id: '04',
+    icon: BarChart2,
+    badge: 'DATA & BI',
+    badgeColor: 'text-yellow-400 bg-yellow-500/10 border-yellow-500/30',
+    iconColor: 'text-yellow-400 bg-yellow-500/10 border-yellow-500/30',
+    title: 'Microsoft Power BI — Data Visualization & Business Intelligence',
+    issuer: 'Office Master by be10X',
+    date: 'Sep 2025',
+    credential: null,
+    tags: ['Power BI', 'Data Visualization', 'Business Intelligence'],
+  },
+  {
+    id: '05',
+    icon: Trophy,
+    badge: 'SPORTS FEST',
+    badgeColor: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30',
+    iconColor: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30',
+    title: 'Vanquish',
+    issuer: 'Global Institute of Technology Jaipur',
+    date: 'Nov 2024',
+    credential: null,
+    tags: ['Intra-College Sports Fest', 'Leadership', 'Competition'],
+  },
+  {
+    id: '06',
+    icon: Award,
+    badge: 'HACKATHON',
+    badgeColor: 'text-purple-400 bg-purple-500/10 border-purple-500/30',
+    iconColor: 'text-purple-400 bg-purple-500/10 border-purple-500/30',
+    title: 'CodeFiesta Hackathon 3.0',
+    issuer: 'Global Institute of Technology Jaipur',
+    date: 'Oct 2024',
+    credential: null,
+    tags: ['Hackathon', 'Problem Solving', 'Engineering'],
+  },
+];
 
 export default function CertificationsSection() {
-  const credentials = [
-    {
-      id: '01',
-      title: 'MERN Stack / Full Stack Web Development',
-      issuer: 'Web Development Certification',
-      description: 'Comprehensive full-stack development covering React, Node.js, Express & MongoDB ecosystem.',
-      year: '2024',
-      badge: 'CERTIFICATION',
-      tags: ['React.js', 'Node.js', 'Express', 'MongoDB'],
-    },
-    {
-      id: '02',
-      title: 'Java Programming & Data Structures',
-      issuer: 'Computer Science Fundamentals',
-      description: 'Core object-oriented programming, data structures, algorithms and algorithmic problem solving.',
-      year: '2024',
-      badge: 'CORE DSA',
-      tags: ['Java', 'Algorithms', 'OOPs', 'Problem Solving'],
-    },
-    {
-      id: '03',
-      title: 'Smart India Hackathon',
-      issuer: 'Participant • Participated Twice',
-      description: 'Participated in Smart India Hackathon on two occasions, working on technology-driven problem solving.',
-      year: '2023 - 2024',
-      badge: 'NATIONAL HACKATHON',
-      tags: ['Hackathon', 'Problem Solving', 'Innovation'],
-    }
-  ];
+  const [flipped, setFlipped] = useState(null);
 
   return (
     <section className="relative py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-transparent border-t border-slate-800/80 overflow-hidden">
@@ -40,72 +87,73 @@ export default function CertificationsSection() {
         {/* Section Header */}
         <div className="flex flex-col items-start mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
-            Certifications &amp; <span className="text-shiny">Learning</span>
+            Certifications &amp; <span className="text-shiny">Achievements</span>
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2.5 font-normal leading-relaxed">
-            Certifications, technical learning &amp; hackathon participation.
+            Professional certifications, technical learning &amp; competition achievements.
           </p>
         </div>
 
-        {/* 3 Credential Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {credentials.map((item, idx) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              whileHover={{ y: -4 }}
-              className="p-6 rounded-2xl border border-slate-800/80 bg-slate-900/40 flex flex-col justify-between hover:border-blue-500/30 transition-all duration-200 shadow-sm group"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-3 font-mono">
-                  <span className="font-bold text-2xl text-slate-500 group-hover:text-blue-400 transition-colors">
-                    {item.id}
-                  </span>
-                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 font-medium">
-                    [{item.year}]
-                  </span>
+        {/* 3-column cert cards grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {CERTS.map((cert, idx) => {
+            const Icon = cert.icon;
+            return (
+              <motion.div
+                key={cert.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: idx * 0.08 }}
+                whileHover={{ y: -4 }}
+                className="relative p-6 rounded-2xl border border-slate-800/80 bg-slate-900/40 flex flex-col justify-between hover:border-blue-500/30 transition-all duration-200 shadow-sm group cursor-default"
+              >
+                {/* Top row: icon + badge + number */}
+                <div>
+                  <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
+                    <div className={`p-2.5 rounded-xl border ${cert.iconColor}`}>
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className={`text-[10px] px-2.5 py-0.5 rounded-full border font-mono font-semibold uppercase tracking-wider ${cert.badgeColor}`}>
+                        {cert.badge}
+                      </span>
+                      <span className="font-mono text-sm font-bold text-slate-600 group-hover:text-slate-400 transition-colors">
+                        {cert.id}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Date */}
+                  <span className="text-[11px] font-mono text-slate-500 font-medium">{cert.date}</span>
+
+                  {/* Title */}
+                  <h3 className="font-semibold text-base text-white mt-1.5 mb-1 leading-snug">
+                    {cert.title}
+                  </h3>
+
+                  {/* Issuer */}
+                  <p className="text-xs text-blue-400 mb-3 font-medium">{cert.issuer}</p>
+
+                  {/* Credential ID */}
+                  {cert.credential && (
+                    <p className="text-[10px] font-mono text-slate-500 mb-3">
+                      ID: <span className="text-slate-400">{cert.credential}</span>
+                    </p>
+                  )}
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5 text-[11px] font-mono">
+                    {cert.tags.map((t, i) => (
+                      <span key={i} className="px-2 py-0.5 rounded-md bg-slate-950/80 border border-slate-800 text-slate-300">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-
-                <div className="inline-block px-2.5 py-0.5 rounded text-[10px] font-mono font-semibold uppercase tracking-wider mb-2.5 border border-blue-500/30 text-blue-400 bg-blue-500/10">
-                  {item.badge}
-                </div>
-
-                <h3 className="font-semibold text-base sm:text-lg text-white mb-1 leading-snug">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-blue-400 mb-2 font-medium">
-                  {item.issuer}
-                </p>
-                <p className="text-xs text-slate-400 mb-3.5 leading-relaxed font-normal">
-                  {item.description}
-                </p>
-
-                <div className="flex flex-wrap gap-1.5 text-[11px] font-mono">
-                  {item.tags.map((t, i) => (
-                    <span key={i} className="px-2 py-0.5 rounded-md bg-slate-950/80 border border-slate-800 text-slate-300">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-6 pt-3.5 border-t border-slate-800 text-xs">
-                <a
-                  href="#contact"
-                  className="text-blue-400 hover:text-blue-300 flex items-center justify-between font-medium transition-colors"
-                >
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle className="w-3.5 h-3.5 text-blue-400" />
-                    <span>Verified / View</span>
-                  </span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
       </div>

@@ -42,7 +42,7 @@ export default function Hero({ onOpenFoodRushModal }) {
   }, []);
 
   return (
-    <section id="hero" className="relative min-h-[92vh] pt-28 sm:pt-36 pb-16 px-4 sm:px-8 lg:px-16 flex flex-col justify-between items-center overflow-hidden bg-transparent dot-grid">
+    <section id="hero" className="relative min-h-[92vh] pt-20 sm:pt-28 pb-16 px-4 sm:px-8 lg:px-16 flex flex-col justify-between items-center overflow-hidden bg-transparent dot-grid">
       
       {/* Subtle Ambient Spatial Glow Blobs */}
       <div className="pointer-events-none absolute -top-40 left-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[140px]" />
@@ -52,23 +52,7 @@ export default function Hero({ onOpenFoodRushModal }) {
       <div className="max-w-6xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10 my-auto">
         
         {/* Left Column (60% ~ 7 cols): Existing Hero Content */}
-        <div className="lg:col-span-7 flex flex-col items-start gap-6">
-          
-          {/* Status Indicator Pill */}
-          <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex flex-wrap items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 shadow-sm max-w-full"
-          >
-            <span className="relative flex h-2 w-2 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-            </span>
-            <span className="font-mono text-[10px] sm:text-xs text-blue-400 font-medium tracking-wide uppercase">
-              Full-Stack MERN Developer • Java + DSA
-            </span>
-          </motion.div>
+        <div className="lg:col-span-7 flex flex-col items-start gap-5">
 
           {/* Main Title & Developer Positioning */}
           <motion.div

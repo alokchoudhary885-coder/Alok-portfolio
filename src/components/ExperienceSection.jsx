@@ -75,12 +75,6 @@ export default function ExperienceSection() {
                       <span className="font-mono text-xs text-blue-400 font-medium">
                         {exp.period}
                       </span>
-                      {exp.isCurrent && (
-                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] text-emerald-400 font-medium">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                          Current Role
-                        </span>
-                      )}
                     </div>
                     <h3 className="font-semibold text-lg sm:text-xl text-white">
                       {exp.role}
