@@ -29,21 +29,12 @@ export default function Footer() {
     <footer className="relative py-12 px-4 sm:px-8 lg:px-16 bg-transparent border-t border-slate-800/80 text-xs text-slate-400">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         
-        {/* Brand & Location Info */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-            <span className="text-white font-semibold text-sm">Alok Choudhary</span>
-          </div>
-
-          <div className="hidden sm:block text-slate-700">|</div>
-
-          <div className="flex items-center gap-2 text-slate-400 text-xs font-mono">
-            <MapPin className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-            <span>Jaipur, India</span>
-            <Clock className="w-3.5 h-3.5 text-blue-400 ml-2 shrink-0" />
-            <span className="text-blue-400 font-medium">{time || '08:00 PM'} (IST)</span>
-          </div>
+        {/* Location Info */}
+        <div className="flex items-center gap-2 text-slate-400 text-xs font-mono">
+          <MapPin className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+          <span>Jaipur, India</span>
+          <Clock className="w-3.5 h-3.5 text-blue-400 ml-2 shrink-0" />
+          <span className="text-blue-400 font-medium">{time || '08:00 PM'} (IST)</span>
         </div>
 
         {/* Copyright */}
