@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Code2 } from 'lucide-react';
+import { ArrowRight, Code2, Volume2 } from 'lucide-react';
 
 export default function Preloader({ onComplete }) {
   const [percentage, setPercentage] = useState(0);
   const [isEntering, setIsEntering] = useState(false);
+  const [isPlayingVoice, setIsPlayingVoice] = useState(false);
 
   useEffect(() => {
+    // Pre-load voices
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.getVoices();
+      if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = () => {
+          window.speechSynthesis.getVoices();
+        };
+      }
+    }
+
     const interval = setInterval(() => {
       setPercentage((prev) => {
         if (prev >= 100) {
@@ -20,9 +31,76 @@ export default function Preloader({ onComplete }) {
     return () => clearInterval(interval);
   }, []);
 
+  const playCinematicVoiceAndSwell = () => {
+    // Subtle audio swell
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) {
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(55, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(160, ctx.currentTime + 1.2);
+
+        gain.gain.setValueAtTime(0.01, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + 0.4);
+        gain.gain.linearRampToValueAtTime(0.001, ctx.currentTime + 1.8);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+        osc.stop(ctx.currentTime + 1.8);
+      }
+    } catch (err) {
+      // Ignore audio error
+    }
+
+    // Welcome voice
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(
+        "Welcome to Alok Choudhary's portfolio. Enjoy the experience."
+      );
+
+      const voices = window.speechSynthesis.getVoices();
+
+      const preferredVoice = voices.find(
+        (v) =>
+          v.lang.startsWith('en') &&
+          (v.name.includes('Female') ||
+            v.name.includes('Google UK English Female') ||
+            v.name.includes('Google US English') ||
+            v.name.includes('Zira') ||
+            v.name.includes('Samantha') ||
+            v.name.includes('Victoria') ||
+            v.name.includes('Karen') ||
+            v.name.includes('Natural'))
+      );
+
+      if (preferredVoice) utterance.voice = preferredVoice;
+
+      utterance.rate = 0.92;
+      utterance.pitch = 1.05;
+      utterance.volume = 1.0;
+
+      setIsPlayingVoice(true);
+      utterance.onend = () => setIsPlayingVoice(false);
+      utterance.onerror = () => setIsPlayingVoice(false);
+
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
   const handleEnterExperience = () => {
     if (isEntering) return;
     setIsEntering(true);
+
+    playCinematicVoiceAndSwell();
+
     setTimeout(() => {
       onComplete();
     }, 750);
@@ -42,7 +120,7 @@ export default function Preloader({ onComplete }) {
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-transparent text-white p-6 md:p-10 overflow-hidden select-none"
       >
-        {/* Top Bar Info — only Portfolio Environment label, no version */}
+        {/* Top Bar Info — Portfolio Environment label only */}
         <div className="w-full max-w-5xl flex items-center justify-start text-xs text-slate-400 border-b border-slate-800 pb-4 font-mono">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
@@ -98,7 +176,11 @@ export default function Preloader({ onComplete }) {
             className="px-8 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-md shadow-blue-500/20 hover:scale-105 active:scale-95 transition-all group cursor-pointer"
           >
             <span>Enter Portfolio</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            {isPlayingVoice ? (
+              <Volume2 className="w-4 h-4 text-blue-200 animate-pulse" />
+            ) : (
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            )}
           </button>
         </div>
       </motion.div>
