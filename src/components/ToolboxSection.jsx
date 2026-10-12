@@ -1,274 +1,203 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Sparkles, Server, Layout, ShieldCheck, Code2, ArrowRight, Zap, Check } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SiReact, SiNextdotjs, SiJavascript, SiTypescript, SiHtml5, SiCss,
+  SiTailwindcss, SiBootstrap, SiFramer, SiGreensock,
+  SiNodedotjs, SiExpress, SiJsonwebtokens, SiSocketdotio,
+  SiRazorpay, SiMongodb, SiMongoose, SiPostgresql, SiSupabase,
+  SiPrisma, SiPython, SiC, SiCplusplus,
+  SiGooglegemini, SiLangchain,
+  SiGit, SiGithub, SiPostman, SiVercel,
+  SiRender, SiNetlify, SiDocker, SiFigma,
+  SiWebrtc, SiCloudinary, SiGnubash, SiVscodium
+} from 'react-icons/si';
+import { FaDatabase, FaBrain, FaTools, FaServer, FaJava } from 'react-icons/fa';
+import { TbApi } from 'react-icons/tb';
+import { MdDataArray } from 'react-icons/md';
 
+/* ── skill data ── */
+const SKILLS = [
+  // Frontend
+  { name: 'React', Icon: SiReact,           color: '#61DAFB', category: 'Frontend' },
+  { name: 'Next.js', Icon: SiNextdotjs,     color: '#ffffff', category: 'Frontend' },
+  { name: 'JavaScript', Icon: SiJavascript, color: '#F7DF1E', category: 'Frontend' },
+  { name: 'TypeScript', Icon: SiTypescript, color: '#3178C6', category: 'Frontend' },
+  { name: 'HTML5', Icon: SiHtml5,            color: '#E34F26', category: 'Frontend' },
+  { name: 'CSS3', Icon: SiCss,              color: '#1572B6', category: 'Frontend' },
+  { name: 'Tailwind CSS', Icon: SiTailwindcss, color: '#06B6D4', category: 'Frontend' },
+  { name: 'Bootstrap', Icon: SiBootstrap,   color: '#7952B3', category: 'Frontend' },
+  { name: 'Framer Motion', Icon: SiFramer,  color: '#BB4BF8', category: 'Frontend' },
+  { name: 'GSAP', Icon: SiGreensock,        color: '#88CE02', category: 'Frontend' },
+  { name: 'Zustand', Icon: FaBrain,         color: '#F26B00', category: 'Frontend' },
+
+  // Backend
+  { name: 'Node.js', Icon: SiNodedotjs,    color: '#339933', category: 'Backend' },
+  { name: 'Express.js', Icon: SiExpress,   color: '#c0c0c0', category: 'Backend' },
+  { name: 'REST APIs', Icon: TbApi,         color: '#6EE7B7', category: 'Backend' },
+  { name: 'JWT Auth', Icon: SiJsonwebtokens, color: '#D63AFF', category: 'Backend' },
+  { name: 'Socket.IO', Icon: SiSocketdotio, color: '#c0c0c0', category: 'Backend' },
+  { name: 'Razorpay', Icon: SiRazorpay,    color: '#528FF0', category: 'Backend' },
+  { name: 'WebRTC', Icon: SiWebrtc,         color: '#6fcfed', category: 'Backend' },
+  { name: 'Cloudinary', Icon: SiCloudinary, color: '#3448C5', category: 'Backend' },
+
+  // Database
+  { name: 'MongoDB', Icon: SiMongodb,      color: '#47A248', category: 'Database' },
+  { name: 'Mongoose', Icon: SiMongoose,    color: '#aa2222', category: 'Database' },
+  { name: 'PostgreSQL', Icon: SiPostgresql, color: '#4169E1', category: 'Database' },
+  { name: 'Supabase', Icon: SiSupabase,    color: '#3ECF8E', category: 'Database' },
+  { name: 'Prisma', Icon: SiPrisma,        color: '#5A67D8', category: 'Database' },
+  { name: 'SQL', Icon: FaDatabase,         color: '#F29111', category: 'Database' },
+
+  // Languages & DSA
+  { name: 'Java', Icon: FaJava,             color: '#ED8B00', category: 'Languages' },
+  { name: 'Python', Icon: SiPython,         color: '#3776AB', category: 'Languages' },
+  { name: 'C', Icon: SiC,                   color: '#A8B9CC', category: 'Languages' },
+  { name: 'C++', Icon: SiCplusplus,         color: '#00599C', category: 'Languages' },
+  { name: 'DSA', Icon: MdDataArray,         color: '#FF6B6B', category: 'Languages' },
+
+  // AI / LLM
+  { name: 'Gemini API', Icon: SiGooglegemini, color: '#4285F4', category: 'AI' },
+  { name: 'OpenAI API', Icon: FaBrain,      color: '#10a37f', category: 'AI' },
+  { name: 'LangChain', Icon: SiLangchain,   color: '#1C8A6A', category: 'AI' },
+  { name: 'Groq API', Icon: FaServer,       color: '#F55036', category: 'AI' },
+  { name: 'RAG', Icon: FaBrain,             color: '#8B5CF6', category: 'AI' },
+  { name: 'Prompt Eng.', Icon: FaTools,     color: '#34D399', category: 'AI' },
+
+  // Tools & Deployment
+  { name: 'Git', Icon: SiGit,              color: '#F05032', category: 'Tools' },
+  { name: 'GitHub', Icon: SiGithub,        color: '#c9d1d9', category: 'Tools' },
+  { name: 'VS Code', Icon: SiVscodium,     color: '#007ACC', category: 'Tools' },
+  { name: 'Postman', Icon: SiPostman,      color: '#FF6C37', category: 'Tools' },
+  { name: 'Vercel', Icon: SiVercel,        color: '#c9d1d9', category: 'Tools' },
+  { name: 'Render', Icon: SiRender,        color: '#46E3B7', category: 'Tools' },
+  { name: 'Netlify', Icon: SiNetlify,      color: '#00C7B7', category: 'Tools' },
+  { name: 'Docker', Icon: SiDocker,        color: '#2496ED', category: 'Tools' },
+  { name: 'Figma', Icon: SiFigma,          color: '#F24E1E', category: 'Tools' },
+  { name: 'Bash/CLI', Icon: SiGnubash,     color: '#4EAA25', category: 'Tools' },
+];
+
+const CATEGORIES = [
+  { id: 'All',       label: 'All' },
+  { id: 'Frontend',  label: 'Frontend' },
+  { id: 'Backend',   label: 'Backend' },
+  { id: 'Database',  label: 'Database' },
+  { id: 'Languages', label: 'Languages & DSA' },
+  { id: 'AI',        label: 'AI / LLM' },
+  { id: 'Tools',     label: 'Tools & Deploy' },
+];
+
+/* animated floating icon — no card, no border */
+function SkillIcon({ skill, index }) {
+  const floatDuration = 3 + (index % 5) * 0.65;
+  const floatDelay    = (index % 9) * 0.18;
+  const { Icon, name, color } = skill;
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.4, y: 24 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.4, y: 24 }}
+      transition={{ duration: 0.3, delay: (index % 22) * 0.025, ease: 'easeOut' }}
+      className="flex flex-col items-center gap-2 group cursor-default select-none"
+    >
+      {/* floating motion wrapper */}
+      <motion.div
+        animate={{ y: [0, -9, 0] }}
+        transition={{ duration: floatDuration, delay: floatDelay, repeat: Infinity, ease: 'easeInOut' }}
+        className="relative flex items-center justify-center"
+        style={{ width: 64, height: 64 }}
+      >
+        {/* glow behind icon */}
+        <motion.div
+          className="absolute inset-0 rounded-full blur-xl"
+          style={{ background: color }}
+          initial={{ opacity: 0.12 }}
+          whileHover={{ opacity: 0.5 }}
+          transition={{ duration: 0.25 }}
+        />
+
+        {/* icon */}
+        <motion.div
+          whileHover={{ scale: 1.28, rotate: [-4, 4, -4, 0] }}
+          transition={{ duration: 0.4 }}
+          style={{ color }}
+          className="relative z-10 drop-shadow-lg"
+        >
+          <Icon size={38} />
+        </motion.div>
+      </motion.div>
+
+      {/* label */}
+      <span
+        className="text-[10px] sm:text-[11px] font-medium tracking-wide text-center leading-tight whitespace-nowrap"
+        style={{ color: `${color}b0` }}
+      >
+        {name}
+      </span>
+    </motion.div>
+  );
+}
+
+/* ── main section ── */
 export default function ToolboxSection() {
   const [activeCategory, setActiveCategory] = useState('All');
 
-  const workCards = [
-    {
-      id: 'fullstack',
-      title: 'Full-Stack Web Application',
-      subtitle: 'Complete MERN Stack Ecosystems',
-      startingPrice: '₹70,000+',
-      isPopular: true,
-      badge: 'BEST FOR STARTUPS',
-      icon: Server,
-      features: [
-        'MERN architecture (MongoDB, Express, React, Node)',
-        'Authentication + RESTful APIs',
-        'Cloud deployment & third-party integrations'
-      ]
-    },
-    {
-      id: 'portfolio-site',
-      title: 'Modern Portfolio Website',
-      subtitle: 'Interactive Personal & Developer Portfolios',
-      startingPrice: '₹50,000+',
-      badge: 'AWWWARDS STYLE',
-      icon: Code2,
-      features: [
-        'Custom interactive portfolio design',
-        'GSAP, Three.js 3D & smooth animations',
-        'Vercel automated deployment & SEO setup'
-      ]
-    },
-    {
-      id: 'landing-page',
-      title: 'Business / Landing Page',
-      subtitle: 'High-Converting Corporate & Startup Sites',
-      startingPrice: '₹30,000+',
-      badge: 'FAST DELIVERY',
-      icon: Layout,
-      features: [
-        'React / Next.js / Tailwind CSS design',
-        'Conversion-focused UI & lead forms',
-        'Cross-browser & mobile optimized'
-      ]
-    },
-    {
-      id: 'maintenance',
-      title: 'Website Maintenance & Bug Fixing',
-      subtitle: 'Performance Optimization & Code Cleanup',
-      startingPrice: '₹20,000+',
-      badge: 'QUICK TURNAROUND',
-      icon: ShieldCheck,
-      features: [
-        'Bug fixing & code refactoring',
-        'Core Web Vitals & speed optimization',
-        'API integration & endpoint hookup'
-      ]
-    }
-  ];
-
-  const techToolbox = [
-    // Frontend
-    { name: 'React.js', level: 'Strong', category: 'Frontend' },
-    { name: 'Next.js', level: 'Intermediate', category: 'Frontend' },
-    { name: 'JavaScript (ES6+)', level: 'Strong', category: 'Frontend' },
-    { name: 'Tailwind CSS', level: 'Strong', category: 'Frontend' },
-    { name: 'Redux / Zustand', level: 'Strong', category: 'Frontend' },
-    { name: 'Three.js / WebGL', level: 'Intermediate', category: 'Frontend' },
-    { name: 'Framer Motion / GSAP', level: 'Strong', category: 'Frontend' },
-    { name: 'HTML5 & CSS3', level: 'Strong', category: 'Frontend' },
-
-    // Backend
-    { name: 'Node.js', level: 'Strong', category: 'Backend' },
-    { name: 'Express.js', level: 'Strong', category: 'Backend' },
-    { name: 'RESTful APIs', level: 'Strong', category: 'Backend' },
-    { name: 'JWT Authentication', level: 'Strong', category: 'Backend' },
-    { name: 'Razorpay Checkout', level: 'Strong', category: 'Backend' },
-    { name: 'Gmail SMTP / OTP', level: 'Strong', category: 'Backend' },
-
-    // Database
-    { name: 'MongoDB / Mongoose', level: 'Strong', category: 'Database' },
-    { name: 'MongoDB Atlas', level: 'Strong', category: 'Database' },
-    { name: 'PostgreSQL / SQL', level: 'Intermediate', category: 'Database' },
-    { name: 'Cloudinary Media', level: 'Strong', category: 'Database' },
-
-    // Languages
-    { name: 'Java (DSA)', level: 'Intermediate', category: 'Languages' },
-    { name: 'C++', level: 'Intermediate', category: 'Languages' },
-    { name: 'SQL', level: 'Intermediate', category: 'Languages' },
-
-    // Tools
-    { name: 'Git & GitHub', level: 'Strong', category: 'Tools' },
-    { name: 'Postman API Testing', level: 'Strong', category: 'Tools' },
-    { name: 'Vercel / Render', level: 'Strong', category: 'Tools' },
-    { name: 'VS Code & Web Tools', level: 'Strong', category: 'Tools' },
-  ];
-
-  const categories = ['All', 'Frontend', 'Backend', 'Database', 'Languages', 'Tools'];
-
-  const filteredTools = activeCategory === 'All'
-    ? techToolbox
-    : techToolbox.filter(item => item.category === activeCategory);
+  const filtered = activeCategory === 'All'
+    ? SKILLS
+    : SKILLS.filter(s => s.category === activeCategory);
 
   return (
-    <section id="toolbox" className="relative py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-transparent border-t border-slate-800/80 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
-        
-        {/* ======================================================== */}
-        {/* 4. SERVICES & ESTIMATED PRICING                           */}
-        {/* ======================================================== */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 sm:mb-16">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-              <span className="text-shiny">Services</span>
-            </h2>
-          </div>
-        </div>
+    <section
+      id="toolbox"
+      className="relative py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-transparent border-t border-slate-800/80 overflow-hidden"
+    >
+      {/* background radial glow */}
+      <div
+        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] rounded-full blur-3xl"
+        style={{ background: 'radial-gradient(ellipse, rgba(59,130,246,0.07) 0%, rgba(139,92,246,0.05) 40%, transparent 70%)' }}
+      />
 
-        {/* 4 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {workCards.map((card) => {
-            const Icon = card.icon;
-            return (
-              <motion.div
-                key={card.id}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.2 }}
-                className={`relative rounded-2xl p-6 flex flex-col justify-between backdrop-blur-xl transition-all ${
-                  card.isPopular
-                    ? 'bg-slate-900/90 border border-blue-500/40 shadow-xl shadow-blue-500/10'
-                    : 'bg-slate-900/40 border border-slate-800/80 hover:border-slate-700'
-                }`}
-              >
-                {/* Popular Badge */}
-                {card.badge && (
-                  <div className={`absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full font-mono text-[9px] font-bold tracking-wider uppercase ${
-                    card.isPopular ? 'bg-blue-600 text-white shadow-sm' : 'bg-slate-800 text-slate-300 border border-slate-700'
-                  }`}>
-                    {card.badge}
-                  </div>
-                )}
+      <div className="relative max-w-6xl mx-auto">
 
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`p-3 rounded-xl border ${card.isPopular ? 'bg-blue-500/10 border-blue-500/30 text-blue-400' : 'bg-slate-800/60 border-slate-700 text-slate-300'}`}>
-                      <Icon className="w-5 h-5" />
-                    </div>
-                  </div>
-
-                  <h3 className="font-semibold text-white text-base sm:text-lg mb-1 leading-snug">
-                    {card.title}
-                  </h3>
-                  <p className="text-xs text-slate-400 mb-4 font-normal">
-                    {card.subtitle}
-                  </p>
-
-                  <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 mb-5">
-                    <span className="font-mono text-[10px] text-slate-400 uppercase tracking-wider block">
-                      Estimated Rate
-                    </span>
-                    <div className="flex items-baseline gap-1.5 mt-0.5">
-                      <span className="text-xs text-slate-400">Starting at</span>
-                      <span className="font-bold text-xl text-blue-400">
-                        {card.startingPrice}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Features List */}
-                  <div className="space-y-2 pt-3 border-t border-slate-800 text-xs text-slate-300">
-                    {card.features.map((feat, i) => (
-                      <div key={i} className="flex items-start gap-2">
-                        <Check className="w-3.5 h-3.5 text-blue-400 mt-0.5 shrink-0" />
-                        <span className="leading-relaxed">{feat}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-slate-800">
-                  <a
-                    href="#contact"
-                    className={`w-full py-2.5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all ${
-                      card.isPopular
-                        ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-sm'
-                        : 'bg-slate-800/80 hover:bg-slate-800 text-slate-200 border border-slate-800 hover:border-slate-700'
-                    }`}
-                  >
-                    <span>Get a Quote</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Bottom CTA Banner */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-5 p-6 sm:p-8 rounded-2xl bg-slate-900/60 border border-slate-800 shadow-md mb-20">
-          <div className="flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 shrink-0">
-              <Zap className="w-5 h-5" />
-            </div>
-            <div>
-              <span className="font-semibold text-white text-sm sm:text-base block">
-                Need a Custom Quote or Complex Enterprise App?
-              </span>
-              <span className="text-xs text-slate-400 mt-0.5 block font-normal leading-relaxed">
-                Advanced API architectures, custom microservices, or specific timelines available upon request.
-              </span>
-            </div>
-          </div>
-          <a
-            href="#contact"
-            className="shrink-0 px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold uppercase tracking-wider flex items-center gap-2 shadow-sm transition-all"
-          >
-            <span>Custom Inquiry</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
-
-
-        {/* ======================================================== */}
-        {/* 5. TECHNICAL TOOLBOX                                     */}
-        {/* ======================================================== */}
-        <div className="flex flex-col gap-2 mb-8">
-          <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
-            Battle-tested technologies &amp; <span className="text-shiny">modern paradigms.</span>
+        {/* heading */}
+        <div className="mb-10 sm:mb-14">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-3">
+            My <span className="text-shiny">Tech Stack</span>
           </h2>
+          <p className="text-slate-400 text-sm sm:text-base max-w-xl">
+            Technologies I work with — from frontend interfaces to AI-powered backends.
+          </p>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap gap-1.5 mb-8 p-1.5 rounded-xl bg-slate-900/80 border border-slate-800 w-full">
-          {categories.map((cat) => (
+        {/* filter tabs */}
+        <div className="flex flex-wrap gap-2 mb-14">
+          {CATEGORIES.map(cat => (
             <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
-                activeCategory === cat
-                  ? 'bg-blue-600 text-white shadow-sm'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 border cursor-pointer ${
+                activeCategory === cat.id
+                  ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-500/30'
+                  : 'bg-transparent border-slate-700/60 text-slate-400 hover:border-blue-500/50 hover:text-slate-200'
               }`}
             >
-              {cat}
+              {cat.label}
             </button>
           ))}
         </div>
 
-        {/* Filterable Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-          {filteredTools.map((tool, idx) => (
-            <motion.div
-              key={idx}
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.2 }}
-              className="p-3 rounded-xl bg-slate-900/40 border border-slate-800/80 hover:border-blue-500/30 transition-all"
-            >
-              <span className="inline-block px-2 py-0.5 rounded-md bg-blue-500/10 border border-blue-500/20 text-xs font-medium text-slate-100 mb-1.5 max-w-full break-words">
-                {tool.name}
-              </span>
-              <span className="block font-mono text-[10px] text-slate-400">
-                <span className="text-blue-400 font-semibold">•</span> {tool.level} • {tool.category}
-              </span>
-            </motion.div>
-          ))}
-        </div>
+        {/* floating logos grid — NO card containers, NO borders */}
+        <motion.div
+          layout
+          className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-x-5 gap-y-12"
+        >
+          <AnimatePresence mode="popLayout">
+            {filtered.map((skill, idx) => (
+              <SkillIcon key={skill.name} skill={skill} index={idx} />
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
       </div>
     </section>
