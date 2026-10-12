@@ -148,7 +148,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
 
   // Continuous smooth 3D rotation loop
   useEffect(() => {
-    const speed = 11; // degrees per second (~32s for full 360 rotation)
+    const speed = 24; // degrees per second (~15s for full 360 rotation)
 
     const animate = (time) => {
       if (lastTimeRef.current != null) {
