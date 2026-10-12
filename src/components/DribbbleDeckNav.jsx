@@ -221,11 +221,6 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
         
         {/* Section Header */}
         <div className="flex flex-col items-center text-center gap-2.5 mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-400 font-mono text-[11px] font-medium uppercase tracking-wider shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping" />
-            <span>Interactive 3D Carousel</span>
-          </div>
-
           <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
             Featured <span className="text-shiny">Projects</span>
           </h2>
@@ -437,15 +432,6 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
               );
             })}
           </div>
-        </div>
-
-        {/* Minimal Indicators / Instructions */}
-        <div className="flex items-center justify-center gap-4 mt-6 text-[11px] font-mono text-slate-500">
-          <span>Continuous 3D Orbit</span>
-          <span>•</span>
-          <span>Hover to Pause</span>
-          <span>•</span>
-          <span>Click to Inspect</span>
         </div>
 
       </div>
