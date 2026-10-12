@@ -63,7 +63,7 @@ export default function FoodRushCaseStudyModal({ isOpen, onClose }) {
           {/* Quick Links */}
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <a
-              href="https://github.com/alokchoudhary885-coder"
+              href="https://food-delivery-frontend-iota-seven.vercel.app/"
               target="_blank"
               rel="noreferrer"
               className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs flex items-center gap-2 shadow-sm transition-all"

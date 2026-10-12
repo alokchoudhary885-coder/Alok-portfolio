@@ -78,6 +78,16 @@ export default function ProjectsSection({ onOpenFoodRushModal, onOpenJobGuardMod
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-3 pt-2 w-full sm:w-auto">
+                <a
+                  href="https://food-delivery-frontend-iota-seven.vercel.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full sm:w-auto px-4 py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-md shadow-emerald-500/20 transition-all"
+                >
+                  <span>Live Demo</span>
+                  <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                </a>
+
                 <button
                   onClick={onOpenFoodRushModal}
                   className="w-full sm:w-auto px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-md shadow-blue-500/20 transition-all"
