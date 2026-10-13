@@ -83,7 +83,6 @@ const PROJECTS = [
 
 export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardModal }) {
   const [rotation, setRotation] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   const [dimensions, setDimensions] = useState({
@@ -93,14 +92,12 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
     cardHeight: 350,
   });
 
-  const isHoveredRef = useRef(false);
   const prefersReducedMotionRef = useRef(false);
   const animFrameRef = useRef(null);
   const lastTimeRef = useRef(null);
   const containerRef = useRef(null);
 
   // Sync refs for animation loop
-  isHoveredRef.current = isHovered;
   prefersReducedMotionRef.current = prefersReducedMotion;
 
   // Responsive dimensions
@@ -154,7 +151,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
       if (lastTimeRef.current != null) {
         const delta = (time - lastTimeRef.current) / 1000;
         // Only rotate when not hovered and user has not requested reduced motion
-        if (!isHoveredRef.current && !prefersReducedMotionRef.current) {
+        if (!prefersReducedMotionRef.current) {
           setRotation((prev) => (prev + speed * delta) % 360);
         }
       }
@@ -226,7 +223,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
           </h2>
 
           <p className="text-slate-400 max-w-lg text-xs sm:text-sm font-normal leading-relaxed">
-            Continuously rotating 3D project showcase. Hover to pause, click any card to inspect or visit.
+            Continuously rotating 3D project showcase. Click any card to inspect or visit.
           </p>
         </div>
 
@@ -235,8 +232,6 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
           ref={containerRef}
           tabIndex={0}
           onKeyDown={handleKeyDown}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
           className="relative w-full h-[400px] sm:h-[430px] flex items-center justify-center [perspective:1000px] focus:outline-none"
           role="region"
           aria-label="3D Project Cards Ring"
@@ -295,7 +290,7 @@ export default function DribbbleDeckNav({ onOpenFoodRushModal, onOpenJobGuardMod
                     transform: `translate3d(${xPos}px, 0px, ${zPos}px) rotateY(${rotY}deg) scale(${scale})`,
                     opacity,
                     zIndex,
-                    transition: isHovered ? 'transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)' : 'none',
+                    transition: 'none',
                   }}
                   className={`absolute rounded-2xl flex flex-col justify-between overflow-hidden backdrop-blur-xl transition-shadow duration-300 pointer-events-auto select-none ${
                     isFront
