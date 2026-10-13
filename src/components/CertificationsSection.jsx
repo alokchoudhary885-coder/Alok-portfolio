@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, Cloud, BarChart2, Trophy, Code2, ExternalLink } from 'lucide-react';
+import { Award, Cloud, BarChart2, Trophy, Code2 } from 'lucide-react';
+import ThreeDVisual from './ThreeDVisual';
 
 const CERTS = [
   {
@@ -14,6 +15,7 @@ const CERTS = [
     date: 'Mar 2026',
     credential: '05893ef6',
     tags: ['AWS Lambda', 'Application Deployment', 'Cloud'],
+    modelType: 'aws-cloud',
   },
   {
     id: '02',
@@ -26,6 +28,7 @@ const CERTS = [
     date: 'Sep 2025',
     credential: '8bd35f5a',
     tags: ['React.js', 'Front-End Development', 'HTML/CSS'],
+    modelType: 'web-dev',
   },
   {
     id: '03',
@@ -38,6 +41,7 @@ const CERTS = [
     date: 'Sep 2025',
     credential: null,
     tags: ['Google Cloud', 'Cloud Computing', 'GCP'],
+    modelType: 'gcp-cloud',
   },
   {
     id: '04',
@@ -50,6 +54,7 @@ const CERTS = [
     date: 'Sep 2025',
     credential: null,
     tags: ['Power BI', 'Data Visualization', 'Business Intelligence'],
+    modelType: 'power-bi',
   },
   {
     id: '05',
@@ -62,6 +67,7 @@ const CERTS = [
     date: 'Nov 2024',
     credential: null,
     tags: ['Intra-College Sports Fest', 'Leadership', 'Competition'],
+    modelType: 'trophy',
   },
   {
     id: '06',
@@ -74,12 +80,11 @@ const CERTS = [
     date: 'Oct 2024',
     credential: null,
     tags: ['Hackathon', 'Problem Solving', 'Engineering'],
+    modelType: 'hackathon',
   },
 ];
 
 export default function CertificationsSection() {
-  const [flipped, setFlipped] = useState(null);
-
   return (
     <section className="relative py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-transparent border-t border-slate-800/80 overflow-hidden">
       <div className="max-w-5xl mx-auto relative z-10">
@@ -108,8 +113,8 @@ export default function CertificationsSection() {
                 whileHover={{ y: -4 }}
                 className="relative p-6 rounded-2xl border border-slate-800/80 bg-slate-900/40 flex flex-col justify-between hover:border-blue-500/30 transition-all duration-200 shadow-sm group cursor-default"
               >
-                {/* Top row: icon + badge + number */}
                 <div>
+                  {/* Top row: icon + badge + number */}
                   <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
                     <div className={`p-2.5 rounded-xl border ${cert.iconColor}`}>
                       <Icon className="w-4 h-4" />
@@ -124,23 +129,37 @@ export default function CertificationsSection() {
                     </div>
                   </div>
 
-                  {/* Date */}
-                  <span className="text-[11px] font-mono text-slate-500 font-medium">{cert.date}</span>
+                  {/* Middle row: details on left, 3D visual on right */}
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <div className="flex-1 min-w-0 pr-1">
+                      {/* Date */}
+                      <span className="text-[11px] font-mono text-slate-500 font-medium block">
+                        {cert.date}
+                      </span>
 
-                  {/* Title */}
-                  <h3 className="font-semibold text-base text-white mt-1.5 mb-1 leading-snug">
-                    {cert.title}
-                  </h3>
+                      {/* Title */}
+                      <h3 className="font-semibold text-base text-white mt-1 mb-1 leading-snug">
+                        {cert.title}
+                      </h3>
 
-                  {/* Issuer */}
-                  <p className="text-xs text-blue-400 mb-3 font-medium">{cert.issuer}</p>
+                      {/* Issuer */}
+                      <p className="text-xs text-blue-400 mb-2 font-medium">
+                        {cert.issuer}
+                      </p>
 
-                  {/* Credential ID */}
-                  {cert.credential && (
-                    <p className="text-[10px] font-mono text-slate-500 mb-3">
-                      ID: <span className="text-slate-400">{cert.credential}</span>
-                    </p>
-                  )}
+                      {/* Credential ID */}
+                      {cert.credential && (
+                        <p className="text-[10px] font-mono text-slate-500 mb-1">
+                          ID: <span className="text-slate-400">{cert.credential}</span>
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Clean 3D Visual with soft studio lighting */}
+                    <div className="shrink-0 w-20 h-20 sm:w-22 sm:h-22 -mt-1 -mr-2">
+                      <ThreeDVisual type={cert.modelType} />
+                    </div>
+                  </div>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-1.5 text-[11px] font-mono">

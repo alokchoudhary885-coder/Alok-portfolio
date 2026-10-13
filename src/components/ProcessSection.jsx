@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Lightbulb, Palette, Code, Server, Database, Rocket } from 'lucide-react';
+import { Lightbulb, Palette, Code, Server, Database, Rocket } from 'lucide-react';
+import ThreeDVisual from './ThreeDVisual';
 
 export default function ProcessSection() {
   const steps = [
@@ -9,36 +10,42 @@ export default function ProcessSection() {
       title: 'Idea & Scope',
       desc: 'Architecture, user flows & product requirements.',
       icon: Lightbulb,
+      modelType: 'lightbulb',
     },
     {
       num: '02',
       title: 'Design System',
       desc: 'Responsive UI, design systems & micro-interactions.',
       icon: Palette,
+      modelType: 'palette',
     },
     {
       num: '03',
       title: 'Frontend Dev',
       desc: 'React & Next.js interfaces with WebGL & Tailwind.',
       icon: Code,
+      modelType: 'browser',
     },
     {
       num: '04',
       title: 'Backend & APIs',
       desc: 'Node & Express APIs, authentication & payments.',
       icon: Server,
+      modelType: 'server',
     },
     {
       num: '05',
       title: 'Database Optimization',
       desc: 'MongoDB schemas, aggregation & indexing.',
       icon: Database,
+      modelType: 'database',
     },
     {
       num: '06',
       title: 'Deploy & Ship',
       desc: 'CI/CD deployment to Vercel & Render.',
       icon: Rocket,
+      modelType: 'rocket',
     }
   ];
 
@@ -70,6 +77,7 @@ export default function ProcessSection() {
               className="p-6 rounded-2xl border border-slate-800/80 bg-slate-900/40 flex flex-col justify-between hover:border-blue-500/30 transition-all duration-200 shadow-sm group"
             >
               <div>
+                {/* Top row: icon + step number */}
                 <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-3.5">
                   <div className="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 group-hover:bg-blue-500/20 transition-colors">
                     <step.icon className="w-5 h-5" />
@@ -79,12 +87,22 @@ export default function ProcessSection() {
                   </span>
                 </div>
 
-                <h3 className="font-semibold text-base sm:text-lg text-white mb-1.5 tracking-tight">
-                  {step.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
-                  {step.desc}
-                </p>
+                {/* Content with 3D Object placed naturally on the right */}
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex-1 min-w-0 pr-1">
+                    <h3 className="font-semibold text-base sm:text-lg text-white mb-1.5 tracking-tight">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                      {step.desc}
+                    </p>
+                  </div>
+
+                  {/* Clean 3D Visual with soft studio lighting */}
+                  <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 -mt-1 -mr-2">
+                    <ThreeDVisual type={step.modelType} />
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}
